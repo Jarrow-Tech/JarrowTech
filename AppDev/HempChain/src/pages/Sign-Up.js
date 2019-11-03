@@ -34,12 +34,12 @@ export default class SignUp extends Component{
       return(
         <View style={styles.container}>
             <Logo/>
-            <LoginForm type="SignUp"/>
+            <LoginForm type="Register"/>
             <View style={styles.signupTextCont}>
                 <Text style={styles.signupText}>
                     Already Registered? </Text>
                     <TouchableOpacity onPress={this.goback}>
-                <Text style={styles.signupButton}> LOGIN</Text>
+                <Text style={styles.signupButton}> Log in Now!</Text>
                 </TouchableOpacity>
 
 

@@ -40,7 +40,7 @@ export default class Login extends Component{
                     Dont have an Account? </Text>
                     <TouchableOpacity onPress={this.signup}>
                     <Text style={styles.signupButton}>
-                 SIGN-UP</Text>
+                 Register Here!</Text>
 
                     </TouchableOpacity>
                 

@@ -1,8 +1,8 @@
+//This is the login form page
+//This is the pg that formats what the login pg will look like
 import React,{Component} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   TextInput,
@@ -11,7 +11,11 @@ import {
 
 export default class LoginForm extends Component{
 
-
+//keyboardtype allows us to specify what type to use
+//onSubmitEditing takes us straight to the passeword textinput after entering email
+//securetextentry dots out the input text
+// {this.props.type} turns the LOGIN and SIGN-UP on the bottom of the screens into props
+// allowing them to be more easily accesed in the routes folder.
     render(){
       return(
         <View style={styles.container}>
@@ -41,6 +45,7 @@ export default class LoginForm extends Component{
     }
 
 
+    //stylesheet helps us in formating the display and objects
     const styles= StyleSheet.create({
         container:{
           flexGrow:1,

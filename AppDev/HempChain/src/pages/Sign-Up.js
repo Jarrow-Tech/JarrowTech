@@ -1,14 +1,14 @@
 //This is the sign-up page
+//This page is currently using the loginform's layout but will be changed 11/2/19 Carlton O. Wilcox
 
 //This imports our tools that we need from React
+//TouchableOpacity allows use to make the specified something we can click and interact with
 import React,{Component} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
+  TouchableOpacity
 } from 'react-native';
 
 //imports the logo.js components
@@ -16,8 +16,20 @@ import Logo from '../components/Logo';
 //imports the LoginForm.js components
 import LoginForm from '../components/LoginForm';
 
+//Imports the Actions tool from router-flux to allow us to traverse pages
+// For more on actions see the Routes file with the link to the GitHub w/
+// documentation
+import { Actions } from 'react-native-router-flux';
+
+
 
 export default class SignUp extends Component{
+
+    // takes us to the previous screen
+    goback(){
+        Actions.pop();
+    }
+
     render(){
       return(
         <View style={styles.container}>
@@ -26,7 +38,9 @@ export default class SignUp extends Component{
             <View style={styles.signupTextCont}>
                 <Text style={styles.signupText}>
                     Already Registered? </Text>
+                    <TouchableOpacity onPress={this.goback}>
                 <Text style={styles.signupButton}> LOGIN</Text>
+                </TouchableOpacity>
 
 
                 

@@ -4,12 +4,10 @@
 //This imports our tools that we need from React
 import React,{Component} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
+  TouchableOpacity
 } from 'react-native';
 
 //imports the logo.js components
@@ -17,8 +15,21 @@ import Logo from '../components/Logo';
 //imports the LoginForm.js components
 import LoginForm from '../components/LoginForm';
 
+//See sign-up pg for notes
+import { Actions } from 'react-native-router-flux';
+
+
 
 export default class Login extends Component{
+
+    //this takes us to the signup pg when the action is called
+    signup(){
+        Actions.signup()
+
+    }
+
+
+
     render(){
       return(
         <View style={styles.container}>
@@ -27,8 +38,12 @@ export default class Login extends Component{
             <View style={styles.signupTextCont}>
                 <Text style={styles.signupText}>
                     Dont have an Account? </Text>
-                <Text style={styles.signupButton}>
+                    <TouchableOpacity onPress={this.signup}>
+                    <Text style={styles.signupButton}>
                  SIGN-UP</Text>
+
+                    </TouchableOpacity>
+                
 
 
                 

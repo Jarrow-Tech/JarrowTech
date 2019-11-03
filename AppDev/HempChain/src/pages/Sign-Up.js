@@ -27,7 +27,7 @@ export default class SignUp extends Component{
 
     // takes us to the previous screen
     goback(){
-        Actions.pop();
+        Actions.login();
     }
 
     render(){

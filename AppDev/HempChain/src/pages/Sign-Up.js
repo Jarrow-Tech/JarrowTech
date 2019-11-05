@@ -15,6 +15,8 @@ import {
 import Logo from '../components/Logo';
 //imports the LoginForm.js components
 import LoginForm from '../components/LoginForm';
+//import the register form and what it will look like
+import RegisterForm from '../components/RegisterHome';
 
 //Imports the Actions tool from router-flux to allow us to traverse pages
 // For more on actions see the Routes file with the link to the GitHub w/
@@ -34,7 +36,7 @@ export default class SignUp extends Component{
       return(
         <View style={styles.container}>
             <Logo/>
-            <LoginForm type="Register"/>
+            <RegisterForm type="Register"/>
             <View style={styles.signupTextCont}>
                 <Text style={styles.signupText}>
                     Already Registered? </Text>

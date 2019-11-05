@@ -23,11 +23,13 @@ import {
 //import Login from './src/pages/Login';
 //import SignUp from './src/pages/Sign-Up';
 
+
+
 //Routes allows us to navigate to different pages much easier than using the standard react-navigation tools
 // react-navigation tools are built into the react-native-router-flux github that is downloaded
 import Routes from './src/Routes';
 
-
+//11-4-19, dont forget to add <Routes/> back to where is was
 export default class App extends Component{
 render(){
   return(

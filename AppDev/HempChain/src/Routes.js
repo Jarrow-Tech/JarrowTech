@@ -12,6 +12,7 @@ import { Router, Stack, Scene } from 'react-native-router-flux';
 
 import Login from './pages/Login';
 import SignUp from './pages/Sign-Up';
+import buisRegistration from './pages/BuisRegistration';
 
 
 //The stack always stay "root" unless specifed
@@ -25,6 +26,8 @@ export default class Routes extends Component{
                 <Stack key="root" hideNavBar={true}>
                     <Scene key="login" component={Login} title="Login" initial={true}/>
                     <Scene key="signup" component={SignUp} title="Register"/>
+                    <Scene key="buisRegistration" component={buisRegistration} title="Register"/>
+
                 </Stack>
             </Router>
 

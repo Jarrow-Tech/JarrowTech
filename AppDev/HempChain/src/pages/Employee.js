@@ -1,5 +1,5 @@
 //this page needs work not done yet
-//needs to go to selected drop down page
+
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -14,33 +14,6 @@ import { Actions } from 'react-native-router-flux';
 import Logo from '../components/Logo';
 
 export default class buisRegistration extends Component{
-  
-  
-    constructor(){
-      super();
-     this. state={
-        agency : ' '
-      }
-    }
-   
-      
-    
-  
-  
-  
-  
-  goToPage(){
-    if(prop =="Regulator")
-    {
-      Actions.governmentReg();
-    }
-    else if(prop =="Farmer")
-    {
-      Actions.cultiv();
-    }
-  }
-
-
 
 //selecting company type will be a drop down box
     render(){
@@ -70,19 +43,25 @@ export default class buisRegistration extends Component{
          onSubmitEditing={()=>this.firstName.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Admin First Name"
+         placeholder="Enter Company Name"
          placeholderTextColor="#ffffff"
          ref={(input)=>this.firstName=input}
          onSubmitEditing={()=>this.lastName.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Admin Last Name"
+         placeholder="Employee First Name"
          placeholderTextColor="#ffffff"
          ref={(input)=>this.lastName=input}
          onSubmitEditing={()=>this.adminEmail.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Admin Email"
+         placeholder="Employee Last Name"
+         placeholderTextColor="#ffffff"
+         ref={(input)=>this.lastName=input}
+         onSubmitEditing={()=>this.adminEmail.focus()}
+          />
+          <TextInput style={styles.inputBox}
+         placeholder="Employee Email"
          selectionColor="#ffffff"
          keyboardType= 'email-address'
          placeholderTextColor="#ffffff"
@@ -90,7 +69,7 @@ export default class buisRegistration extends Component{
          onSubmitEditing={()=>this.password.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Admin Password"
+         placeholder="Employee Password"
          secureTextEntry= {true}
          placeholderTextColor="#ffffff"
          ref={(input)=>this.password=input}

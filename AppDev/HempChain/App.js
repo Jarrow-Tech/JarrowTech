@@ -22,6 +22,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 //import Login from './src/pages/Login';
 //import SignUp from './src/pages/Sign-Up';
+//import CultivatorReg from './src/pages/CultivatorReg'
+import GovPage from './src/pages/GovPage'
 
 
 
@@ -38,7 +40,7 @@ render(){
         backgroundColor= "#1c313a"
         barStyle="light-content"/>
 
-    <Routes/>
+    <GovPage/>
     </View>
   );
 }

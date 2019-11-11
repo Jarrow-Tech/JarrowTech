@@ -4,7 +4,7 @@
 
 -----------------
 
-**Current Project State**: Finished|  Last Updated: October 24th, 2019 - Uploaded November 11th, 2019
+**Current Project State**: Finished|  Last Updated: October 24th, 2019 
 -----------------
 ## Overview
 **JarrowTech® HempChain™ 1.0** is a cross-platform application developed in order to aid in the reliable tracking of hemp products from seed to shelf across the entirety of the United States

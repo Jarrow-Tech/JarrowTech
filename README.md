@@ -2,7 +2,7 @@
 
 -----------------
 
-**Current Project State**: Building Baseline Applications and Databases |  Last Updated: November 11th, 2019
+**Current Project State**: Building Baselines |  Last Updated: November 11th, 2019
 -----------------
 
 ## Overview

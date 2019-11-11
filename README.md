@@ -1,4 +1,4 @@
-<p align="center"><img src="doc/img/jarrow.png" width="70%" /><br><br></p>
+<p align="center"><img src="doc/img/jarrow.png" height="30%" width="30" /><br><br></p>
 
 -----------------
 

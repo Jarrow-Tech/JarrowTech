@@ -1,12 +1,12 @@
 RUN FROM VSCODE:
 
 
-cd HempChain
-npm install
-react-native start
+    cd HempChain
+    npm install
+    react-native start
 
-*wait until done*
-*open a new terminal with the + button*
+    *wait until done*
+    *open a new terminal with the + button*
 
-cd HempChain
-react-native run-android
+    cd HempChain
+    react-native run-android

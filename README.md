@@ -30,4 +30,4 @@ WebApp: *In Development*
 
 ## License
 No License
-> :pushpin: For more information please view: https://choosealicense.com/no-permission/
+> :pushpin: For more information provided by github please view: https://choosealicense.com/no-permission/

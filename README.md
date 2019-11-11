@@ -29,6 +29,5 @@ WebApp: *In Development*
 ## Ready to Track!
 
 ## License
-This project is NOT under a license and therefore noone has permission to use this besides its' creators. 
+No License
 > :pushpin: For more information please view: https://choosealicense.com/no-permission/
-> :pushpin: Copyright 2019 JarrowTech, LLC

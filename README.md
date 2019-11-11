@@ -2,7 +2,7 @@
 
 -----------------
 
-**Currnet Project State**: Building Baseline Applications and Databases | November 11th, 2019
+**Currnet Project State**: Building Baseline Applications and Databases |  Last Updated: November 11th, 2019
 -----------------
 
 ## Overview
@@ -15,12 +15,12 @@
 * **Run** - After installing the latest release you will open an emulator/browser depending on which you are testing and run the following code depending on your testing system:
 
 Android: Run from the hempchain directory of this project
-> cd HempChain
-> npm install
-> react-native start
-*open a new terminal*
->cd HempChain
->react-native run-android
+> cd HempChain |
+> npm install |
+> react-native start |
+*open a new terminal* |
+>cd HempChain |
+>react-native run-android |
 
 IOS: *In Development*
 
@@ -31,4 +31,4 @@ WebApp: *In Development*
 ## License
 This project is NOT under a license and therefore noone has permission to use this besides its' creators. 
 > :pushpin: For more information please view: https://choosealicense.com/no-permission/
-Copyright 2019 JarrowTech, LLC
+> :pushpin: Copyright 2019 JarrowTech, LLC

@@ -1,4 +1,4 @@
-<p align="center"><img src="Hempchain/doc/img/jarrow.png" height="90%" width="90" /><br><br></p>
+<p align="center"><img src="HempChain/doc/img/jarrow.png" height="90%" width="90" /><br><br></p>
 
 -----------------
 

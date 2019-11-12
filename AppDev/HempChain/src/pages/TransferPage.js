@@ -1,6 +1,5 @@
-//This page will contain the picker that once selected will direct the user to the
-//corresponding page
-
+//This page contains the picker that once selected will direct the user to the
+//corresponding page after they select a state.
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -21,7 +20,7 @@ export default class TransferPage extends Component{
 
     state={location: 'Choose a State'}
 
-    
+    //When state is changed this function is called and the user is automatically directed to the selected Agency page
     onValueChange(itemValue)
     { this.setState({agency: itemValue});
     if(itemValue == 'Regulator')

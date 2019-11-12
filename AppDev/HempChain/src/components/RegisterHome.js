@@ -1,3 +1,6 @@
+//This is the page that will direct them to sign-up/ create an account as either a buisness or an employee
+//pressing on either of the buttons will direct the user to the specific pages.
+//Currently the "Register as Employee" button dosent direct anywhere at the moment. 11/11/19 
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -10,29 +13,24 @@ import {
 import { Actions } from 'react-native-router-flux';
 
 export default class RegisterForm extends Component{
-
+//directToTransfer() takes the user to the page where they will choose their state and Agency type
 directToTransfer(){
   Actions.transfer();
 }
 
+//Routes the user to the buisness reg. page
 buisRegistration()
 {
     Actions.buisRegistration();
 }
-
+//Routes the user to the employee reg. page
 emplyRegistration()
 {
-    Actions.login();
+    Actions.employee();
 
 }
 
-
-
-//keyboardtype allows us to specify what type to use
-//onSubmitEditing takes us straight to the passeword textinput after entering email
-//securetextentry dots out the input text
-// {this.props.type} turns the LOGIN and SIGN-UP on the bottom of the screens into props
-// allowing them to be more easily accesed in the routes folder.
+//Pressing te buttons will route the users to the specified pages
     render(){
       return(
         <View style={styles.container}>
@@ -42,7 +40,7 @@ emplyRegistration()
                 </Text>                 
 
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonRegister}>
+            <TouchableOpacity style={styles.buttonRegister} onPress={this.emplyRegistration}>
                 <Text style={styles.buttonText}>
                 Register as an Employee   
                 </Text>                 

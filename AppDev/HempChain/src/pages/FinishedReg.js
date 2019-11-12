@@ -1,5 +1,4 @@
-//This is the login form page
-//This is the pg that formats what the login pg will look like
+//This is the filler FinishedReg page, this pg will only display for the Regulators after they create an account
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -15,7 +14,6 @@ export default class FinishReg extends Component{
 finishReg(){
   Actions.finish()
 }
-
     render(){
       return(
         <View style={styles.container}>

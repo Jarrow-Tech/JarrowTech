@@ -1,4 +1,5 @@
-
+//This is the page for the registration of a trucker
+//Will later add a field whre they have to provide somesort of driver ID (Drivers License??)
 
 import React,{Component} from 'react';
 import {

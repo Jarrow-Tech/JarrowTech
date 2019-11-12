@@ -1,10 +1,12 @@
 //This is the login form page
 //This is the pg that formats what the login pg will look like
 
+//Firebase is the database that will have our user accounts on it
 import * as firebase from 'firebase';
 
 //Initialize Firebase
-
+//DONT PUT THIS INITILIZATION ANY WHERE ELSE
+//IT WILL MESS THINGS UP
 const firebaseConfig={
   apiKey: "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
     authDomain: "jarrowchain.firebaseapp.com",
@@ -12,7 +14,6 @@ const firebaseConfig={
     projectId: "jarrowchain",
     storageBucket: "jarrowchain.appspot.com",
 };
-
 firebase.initializeApp(firebaseConfig); 
 
 
@@ -26,6 +27,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
+//Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class LoginForm extends Component{
   constructor(props){
     super(props)
@@ -36,7 +38,7 @@ export default class LoginForm extends Component{
   
   });
   } 
-
+  //This is the funciton to sign a user in if they have an account created else it...
   loginUser=(email,password) =>{
     try{
       firebase.auth().signInWithEmailAndPassword(email,password).then(function(user){
@@ -53,7 +55,7 @@ export default class LoginForm extends Component{
     
   }
 //keyboardtype allows us to specify what type to use
-//onSubmitEditing takes us straight to the passeword textinput after entering email
+//onSubmitEditing takes us straight to the password textinput after entering email
 //securetextentry dots out the input text
 // {this.props.type} turns the LOGIN and SIGN-UP on the bottom of the screens into props
 // allowing them to be more easily accesed in the routes folder.

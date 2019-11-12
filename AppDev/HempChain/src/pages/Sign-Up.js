@@ -32,6 +32,7 @@ export default class SignUp extends Component{
         Actions.login();
     }
 
+    //Registerform is where the buttons that the user presses are located
     render(){
       return(
         <View style={styles.container}>

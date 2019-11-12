@@ -1,8 +1,5 @@
-
+//This is where users who choose a secific agency will register their buisness/affiliation
 import * as firebase from 'firebase';
-
-//Initialize Firebase
-
 
 import React,{Component} from 'react';
 import {
@@ -15,7 +12,6 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-import Logo from '../components/Logo';
 
 export default class buisRegistration extends Component{
   constructor(props){
@@ -27,10 +23,11 @@ export default class buisRegistration extends Component{
   
   });
   } 
-
+  //takes to the user to a filler "finished" page for the moment
   finishReg(){
     Actions.finish();
   }
+  //Adds the user to the firebase db
   signUpUser=(email,password) =>{
     try{
 

@@ -30,7 +30,7 @@ export default class Login extends Component{
 
     }
 
-
+//LoginForm is the page that the user will see
     render(){
       return(
         <View style={styles.container}>

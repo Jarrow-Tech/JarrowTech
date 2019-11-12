@@ -1,5 +1,4 @@
-//this page needs work not done yet
-
+//this is the page where an employee of any agency will be able to register an account
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -17,8 +16,6 @@ export default class EmployeeReg extends Component{
   finishReg(){
     Actions.finish();
   }
-
-//selecting company type will be a drop down box
     render(){
      
       return(

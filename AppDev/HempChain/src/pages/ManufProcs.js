@@ -1,5 +1,4 @@
-
-
+//This page is for the registration of the Manuf/Processors
 import React,{Component} from 'react';
 import {
   StyleSheet,

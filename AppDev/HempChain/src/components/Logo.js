@@ -12,7 +12,7 @@ import {
   Image,
 } from 'react-native';
 
-// "../" this measn that we are steping from src to images must do for embedded folders
+// "../" this meanns that we are steping from src to images must do for embedded folders
 // must use  source={require('../Images/ENTERNAME.png')} for images
 export default class Logo extends Component{
     render(){

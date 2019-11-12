@@ -1,5 +1,5 @@
-//This is the login form page
-//This is the pg that formats what the login pg will look like
+//This is the page that a cultivator will register from
+//Will add a field in the TextInput that ask for the users/cultivators Hemp reg #
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -15,8 +15,6 @@ export default class CultivatorReg extends Component{
   finishReg(){
     Actions.finish();
   }
-
-//selecting company type will be a drop down box
     render(){
      
       return(

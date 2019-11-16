@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Logo from '../components/Logo';
+import Logo from '../../components/Logo';
 
 export default class FinishReg extends Component{
 finishReg(){

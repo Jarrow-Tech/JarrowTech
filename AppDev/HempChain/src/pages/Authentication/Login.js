@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 
 //imports the logo.js components
-import Logo from '../components/Logo';
+import Logo from '../../components/Logo';
 //imports the LoginForm.js components
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../../components/LoginForm';
 
 //See sign-up pg for notes
 import { Actions } from 'react-native-router-flux';

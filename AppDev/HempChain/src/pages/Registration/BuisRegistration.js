@@ -1,4 +1,6 @@
-//this is the page where an employee of any agency will be able to register an account
+//This is where users who choose a secific agency will register their buisness/affiliation
+import * as firebase from 'firebase';
+
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -7,21 +9,53 @@ import {
   TextInput,
   TouchableOpacity,
   Picker,
+  Alert,
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-import Logo from '../components/Logo';
 
-export default class EmployeeReg extends Component{
+export default class buisRegistration extends Component{
+  constructor(props){
+    super(props)
+
+    this.state= ({
+      email: " ",
+      password: " ",
+      confirmPassword: " "
+  
+  });
+  } 
+  //takes to the user to a filler "finished" page for the moment
   finishReg(){
     Actions.finish();
   }
-    render(){
+  //Adds the user to the firebase db
+  signUpUser=(email,password) =>{
+      if(this.state.password.length<8)
+      {
+        alert("Please enter at least 8 characters")
+        return;
+      }
+      /*if(this.state.password ! == this.state.confirmPassword)
+      {
+        Alert.alert("Passwords do not match");
+        return;
+      }*/
+      firebase.auth().createUserWithEmailAndPassword(email,password).then(()=> {
+
+      }, (error) =>{
+        Alert.alert(error.message);
+
+      });
+      this.finishReg;
      
+  }
+
+    render(){
       return(
           
-        <View style={styles.container}>          
-
+        <View style={styles.container}>
+        
           <TextInput style={styles.inputBox}
          placeholder="Enter Operating State"
          placeholderTextColor="#ffffff"
@@ -29,43 +63,42 @@ export default class EmployeeReg extends Component{
          onSubmitEditing={()=>this.firstName.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Enter Company Name"
+         placeholder="Admin First Name"
          placeholderTextColor="#ffffff"
          ref={(input)=>this.firstName=input}
          onSubmitEditing={()=>this.lastName.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Employee First Name"
+         placeholder="Admin Last Name"
          placeholderTextColor="#ffffff"
          ref={(input)=>this.lastName=input}
          onSubmitEditing={()=>this.adminEmail.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Employee Last Name"
-         placeholderTextColor="#ffffff"
-         ref={(input)=>this.lastName=input}
-         onSubmitEditing={()=>this.adminEmail.focus()}
-          />
-          <TextInput style={styles.inputBox}
-         placeholder="Employee Email"
+         placeholder="Admin Email"
          selectionColor="#ffffff"
          keyboardType= 'email-address'
          placeholderTextColor="#ffffff"
          ref={(input)=>this.adminEmail=input}
+         onChangeText={(email)=> this.setState({email})}
          onSubmitEditing={()=>this.password.focus()}
           />
           <TextInput style={styles.inputBox}
-         placeholder="Employee Password"
+         placeholder="Admin Password"
          secureTextEntry= {true}
          placeholderTextColor="#ffffff"
+         onChangeText={(password)=> this.setState({password})}
          ref={(input)=>this.password=input}
           />
-         <TouchableOpacity style={styles.buttonCont} onPress={this.finishReg}>
-                  <Text style={styles.buttonText}>
-                    Finish Registration
-                  </Text>
 
-              </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont} onPress={()=>this.signUpUser(this.state.email,this.state.password)}>
+                <Text style={styles.buttonText}>
+                Finish Registration
+                </Text>  
+                </TouchableOpacity>
+        
+
+         
     </View>
   );
 }
@@ -115,6 +148,4 @@ const styles= StyleSheet.create({
         alignContent: 'center',
 
     },
-
-
   });

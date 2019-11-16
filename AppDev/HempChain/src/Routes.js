@@ -10,14 +10,17 @@ import React, {Component} from 'react';
 //Here is where tools from react-native-router-flux can be imported
 import { Router, Stack, Scene } from 'react-native-router-flux';
 
-import Login from './pages/Login';
-import SignUp from './pages/Sign-Up';
-import buisRegistration from './pages/BuisRegistration';
-import CultivatorReg from './pages/CultivatorReg';
-import TransferPage from './pages/TransferPage';
-import ManufProcs from './pages/ManufProcs';
-import EmployeeReg from './pages/Employee'; 
-import FinishReg from './pages/FinishedReg';
+import Login from './pages/Authentication/Login';
+import SignUp from './pages/Authentication/Sign-Up';
+import buisRegistration from './pages/Registration/BuisRegistration';
+import CultivatorReg from './pages/Registration/CultivatorReg';
+import TransferPage from './pages/Displays/TransferPage';
+import ManufProcs from './pages/Registration/ManufProcs';
+import EmployeeReg from './pages/Registration/Employee'; 
+import FinishReg from './pages/Registration/FinishedReg';
+import ForgotPassword from './pages/Authentication/ForgotPassword';
+import Dashboard from './pages/Displays/Dashboard';
+
 
 
 
@@ -38,6 +41,8 @@ export default class Routes extends Component{
                     <Scene key="factory"  component={ManufProcs}/>
                     <Scene key="employee"  component={EmployeeReg}/>
                     <Scene key="finish"  component={FinishReg}/>
+                    <Scene key="forgotPass" component={ForgotPassword}/>
+                    <Scene key="dashboard" component={Dashboard}/>
 
 
 

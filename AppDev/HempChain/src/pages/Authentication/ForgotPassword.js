@@ -1,6 +1,3 @@
-//This is the login form page
-//This is the pg that formats what the login pg will look like
-
 //Firebase is the database that will have our user accounts on it
 import * as firebase from 'firebase';
 
@@ -25,47 +22,32 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert
+  Alert,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 //Setting the this.state in a constructor allows us to call and manipulate it easier
-export default class LoginForm extends Component{
+export default class ForgotPassword extends Component{
   constructor(props){
     super(props)
 
     this.state= ({
-      email: '',
-      password: ''
+      email: ''
+    
   
   });
   } 
-  //This is the funciton to sign a user in if they have an account created else it...
-  loginUser=(email,password) =>{    
-      firebase.auth().signInWithEmailAndPassword(email,password).then(()=>{       
 
-      }, (error) => {
-        Alert.alert(error.message);
-        
-      });
-     
+  onResetPasswordPress=()=>{
+    firebase.auth().sendPasswordResetEmail(this.state.email)
+    .then(()=>{
+      Alert.alert("Password reset link has been sent to email.");
+
+    }, (error)=>{
+      Alert.alert(eror.message);
+
+    });
   }
-
-forgotPassword()
-{
-  Actions.forgotPass();
-}
-
-dashBoard(){
-  Actions.dashboard();
-}
-
-
-//keyboardtype allows us to specify what type to use
-//onSubmitEditing takes us straight to the password textinput after entering email
-//securetextentry dots out the input text
-// {this.props.type} turns the LOGIN and SIGN-UP on the bottom of the screens into props
-// allowing them to be more easily accesed in the routes folder.
     render(){
       return(
         <View style={styles.container}>
@@ -77,29 +59,14 @@ dashBoard(){
              value={this.state.email}
              onChangeText={(text)=> this.setState({email: text})}
              onSubmitEditing={()=>this.password.focus()}
-             autoCapitalize="none"
-             autoCorrect={false}
               />
-              <TextInput style={styles.inputBox}
-             placeholder="Password"
-             secureTextEntry= {true}
-             placeholderTextColor="#ffffff"
-             value={this.state.password}
-             onChangeText={(text)=> this.setState({password: text})}
-             ref={(input)=>this.password=input}
-             autoCorrect={false}
-              />
-              <TouchableOpacity style={styles.button} onPress={()=>this.loginUser(this.state.email,this.state.password)}>
+              <TouchableOpacity style={styles.button} onPress={this.onResetPasswordPress}>
                   <Text style={styles.buttonText}>
-                    {this.props.type}
+                    Send Reset Link
                   </Text>
 
               </TouchableOpacity>
-              <TouchableOpacity style={styles.signupText} onPress={this.forgotPassword}>
-                <Text style={styles.buttonText}>
-                  Forgot Password?
-                  </Text>
-              </TouchableOpacity>
+              
         </View>
       );
     }
@@ -110,6 +77,7 @@ dashBoard(){
     //stylesheet helps us in formating the display and objects
     const styles= StyleSheet.create({
         container:{
+          backgroundColor:'#455a64',
           flexGrow:1,
           alignItems:'center',
           justifyContent:'center'

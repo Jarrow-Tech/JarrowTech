@@ -12,11 +12,11 @@ import {
 } from 'react-native';
 
 //imports the logo.js components
-import Logo from '../components/Logo';
+import Logo from '../../components/Logo';
 //imports the LoginForm.js components
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../../components/LoginForm';
 //import the register form and what it will look like
-import RegisterForm from '../components/RegisterHome';
+import RegisterForm from '../../components/RegisterHome';
 
 //Imports the Actions tool from router-flux to allow us to traverse pages
 // For more on actions see the Routes file with the link to the GitHub w/

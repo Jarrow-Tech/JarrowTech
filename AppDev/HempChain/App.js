@@ -11,7 +11,9 @@ const firebaseConfig={
     projectId: "jarrowchain",
     storageBucket: "jarrowchain.appspot.com",
 };
- 
+firebase.initializeApp(firebaseConfig);
+const rootRef=firebase.database().ref();
+export const userRef= rootRef.child("Users/");
 
 import React,{Component} from 'react';
 import {

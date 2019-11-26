@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+import { userRef } from '../../../App';
 
 export default class buisRegistration extends Component{
   constructor(props){
@@ -21,7 +22,10 @@ export default class buisRegistration extends Component{
     this.state= ({
       email: " ",
       password: " ",
-      confirmPassword: " "
+      firstName: " ",
+      lastName: " ",
+      operatingState: " ",
+
   
   });
   } 
@@ -41,8 +45,14 @@ export default class buisRegistration extends Component{
         Alert.alert("Passwords do not match");
         return;
       }*/
-      firebase.auth().createUserWithEmailAndPassword(email,password).then(()=> {
-
+      firebase.auth().createUserWithEmailAndPassword(email,password).then((data)=> {
+        firebase.database().ref('Users/' + data.user.uid).set({
+          email: this.state.email,
+          password: this.state.password,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          operatingState: this.state.operatingState,
+        });
       }, (error) =>{
         Alert.alert(error.message);
 
@@ -60,18 +70,21 @@ export default class buisRegistration extends Component{
          placeholder="Enter Operating State"
          placeholderTextColor="#ffffff"
          ref={(input)=>this.opState=input}
+         onChangeText={(operatingState)=> this.setState({operatingState})}
          onSubmitEditing={()=>this.firstName.focus()}
           />
           <TextInput style={styles.inputBox}
          placeholder="Admin First Name"
          placeholderTextColor="#ffffff"
          ref={(input)=>this.firstName=input}
+         onChangeText={(firstName)=> this.setState({firstName})}
          onSubmitEditing={()=>this.lastName.focus()}
           />
           <TextInput style={styles.inputBox}
          placeholder="Admin Last Name"
          placeholderTextColor="#ffffff"
          ref={(input)=>this.lastName=input}
+         onChangeText={(lastName)=> this.setState({lastName})}
          onSubmitEditing={()=>this.adminEmail.focus()}
           />
           <TextInput style={styles.inputBox}

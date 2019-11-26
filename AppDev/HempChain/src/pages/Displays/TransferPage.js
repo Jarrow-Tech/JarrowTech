@@ -1,5 +1,8 @@
 //This page contains the picker that once selected will direct the user to the
 //corresponding page after they select a state.
+
+import * as firebase from 'firebase';
+
 import React,{Component} from 'react';
 import {
   StyleSheet,
@@ -11,14 +14,28 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+import { userRef } from '../../../App';
+
 
 export default class TransferPage extends Component{
+
+  
+  onSelectionPressLocation(itemValue){
+    this.setState({location: itemValue});
+    userRef.push({ OperatingState : itemValue}); 
+
+  }
+  
+  
+  
+  
     constructor(props){
         super(props);
-        this.users={agency: 'Choose an Agency'}
+        this.users={agency: ''};
+        this.state={location: ' '};
     } 
 
-    state={location: 'Choose a State'}
+    
 
     //When state is changed this function is called and the user is automatically directed to the selected Agency page
     onValueChange(itemValue)
@@ -26,17 +43,22 @@ export default class TransferPage extends Component{
     if(itemValue == 'Regulator')
     {
         Actions.buisRegistration();
+        userRef.push({ Agency : itemValue});
     }
     if(itemValue == 'Farmer'){
-        Actions.cultivate()
+        Actions.cultivate();
+        userRef.push({ Agency : itemValue});     
+
 
     }
     if(itemValue == 'Factory'){
         Actions.factory();
+        userRef.push({ Agency : itemValue});
 
     }
     if(itemValue == 'Trucker'){
         Actions.employee();
+        userRef.push({ Agency : itemValue});
 
     }
 
@@ -53,7 +75,7 @@ export default class TransferPage extends Component{
     <Picker style={styles.buttonRegister}
         mode="dropdown"
      selectedValue={this.state.location}
-      onValueChange={itemValue => this.setState({location: itemValue})}>
+      onValueChange={itemValue => this.onSelectionPressLocation(itemValue)}>
         <Picker.Item label="Alabama" value="Alabama" />
         <Picker.Item label="Alaska" value="Alaska" />
         <Picker.Item label="Arizona" value="Arizona" />
@@ -113,7 +135,7 @@ export default class TransferPage extends Component{
         style={styles.buttonRegister}
         mode="dropdown"
         selectedValue={this.users.agency}
-        onValueChange={itemValue => this.onValueChange(itemValue)}>
+        onValueChange={(itemValue => this.onValueChange(itemValue))}>
 <Picker.Item label="Choose an Agency" value="choose"/>            
 <Picker.Item label="Government" value="Regulator" />
 <Picker.Item label="Cultivator" value="Farmer" />

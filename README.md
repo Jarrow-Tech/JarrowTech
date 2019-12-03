@@ -15,11 +15,13 @@
 * **Run** - After installing the latest release you will open an emulator/browser depending on which you are testing and run the following code depending on your testing system:
 
 Android: Run from the hempchain directory of this project
+> cd AppDev |
 > cd HempChain |
 > npm install |
 > react-native start |
 *open a new terminal* |
->cd HempChain |
+> cd AppDev |
+> cd HempChain |
 >react-native run-android |
 
 IOS: *In Development*

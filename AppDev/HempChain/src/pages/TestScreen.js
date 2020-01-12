@@ -56,14 +56,26 @@ onSetFavoriteAnimalPress= ()=>{
     render(){
       return(
         <View style={styles.container}>
-    <Text>{this.props.favoriteAnimal}</Text>
-    <TextInput style={{borderWidth:1, width: 200, height:40}}
-    value={this.state.favoriteAnimal}
-    onChangeText={(text)=> {this.setState({favoriteAnimal: text})}}/>
-    <Button title="Set Favorite Animal" onPress={this.onSetFavoriteAnimalPress}/>
+    <Prompt
+     visible={this.state.visible}
+    title="Please Enter Badge Number"
+    placeholder="Badge Number"
+    onCancel={() =>
+        this.setState({
+            visible: !this.state.visible
+        })
+    }
+    onSubmit={text =>
+        this.setState({
+            text: "Badge Number submitted",
+            visible: !this.state.visible,
+            badgeID: text,
+        })
+    }
 
-      <Text>{this.props.personData.firstName}</Text>
-      <Text>{this.props.personData.lastName}</Text>
+
+     />
+
 
             
                 

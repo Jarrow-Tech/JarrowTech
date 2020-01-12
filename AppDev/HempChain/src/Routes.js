@@ -17,9 +17,9 @@ import CultivatorReg from './pages/Registration/CultivatorReg';
 import TransferPage from './pages/Displays/TransferPage';
 import ManufProcs from './pages/Registration/ManufProcs';
 import EmployeeReg from './pages/Registration/Employee'; 
-import FinishReg from './pages/Registration/FinishedReg';
 import ForgotPassword from './pages/Authentication/ForgotPassword';
-import Dashboard from './pages/Displays/Dashboard';
+import Dashboard from './pages/Displays/FinishedReg';
+import LawEnforcement from './pages/Displays/LawEnforce';
 
 
 
@@ -33,18 +33,16 @@ export default class Routes extends Component{
         return(
             <Router>
                 <Stack key="root" hideNavBar={true}>
-                    <Scene key="login" component={Login} title="Login" initial={true}/>
+                    <Scene key="login" component={Login} initial={true} />
                     <Scene key="signup" component={SignUp} title="Register"/>
                     <Scene key="buisRegistration" component={buisRegistration} title="Register"/>
                     <Scene key="cultivate" component={CultivatorReg}/>
                     <Scene key="transfer" component={TransferPage}/>
                     <Scene key="factory"  component={ManufProcs}/>
                     <Scene key="employee"  component={EmployeeReg}/>
-                    <Scene key="finish"  component={FinishReg}/>
                     <Scene key="forgotPass" component={ForgotPassword}/>
                     <Scene key="dashboard" component={Dashboard}/>
-
-
+                    <Scene key="lawEnforcement" component={LawEnforcement}/>
 
                 </Stack>
             </Router>

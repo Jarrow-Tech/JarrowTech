@@ -35,7 +35,7 @@ export default class Login extends Component{
       return(
         <View style={styles.container}>
             <Logo/>
-            <LoginForm type="Login"/>
+            <LoginForm />
             <View style={styles.signupTextCont}>
                 <Text style={styles.signupText}>
                     Dont have an Account? </Text>

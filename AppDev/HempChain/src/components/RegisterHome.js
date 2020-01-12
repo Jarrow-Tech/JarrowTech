@@ -13,11 +13,6 @@ import {
 import { Actions } from 'react-native-router-flux';
 
 export default class RegisterForm extends Component{
-//directToTransfer() takes the user to the page where they will choose their state and Agency type
-directToTransfer(){
-  Actions.transfer();
-}
-
 //Routes the user to the buisness reg. page
 buisRegistration()
 {
@@ -34,7 +29,7 @@ emplyRegistration()
     render(){
       return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.buttonRegister} onPress={this.directToTransfer}>
+            <TouchableOpacity style={styles.buttonRegister} onPress={this.buisRegistration}>
                 <Text style={styles.buttonText}>
                 Register as a Buisness/Department   
                 </Text>                 

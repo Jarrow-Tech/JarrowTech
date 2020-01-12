@@ -28,9 +28,11 @@ import {
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
+ 
 //Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class LoginForm extends Component{
+   
+  
   constructor(props){
     super(props)
 
@@ -39,10 +41,81 @@ export default class LoginForm extends Component{
       password: ''
   
   });
+ 
   } 
+
+  beforeVerificationDisplay()
+  {
+    Actions.dashboard();
+
+  }
+
+  afterVerificationDisplay(){
+
+    Actions.lawEnforcement();
+  }
+  
+
   //This is the funciton to sign a user in if they have an account created else it...
-  loginUser=(email,password) =>{    
-      firebase.auth().signInWithEmailAndPassword(email,password).then(()=>{       
+  loginUser=(email,password) =>{ 
+    
+
+   
+  
+    /*
+    1/4/2020 TRYING TO WORK ON SIGINNG IN USER AFTER THEY CLICK THE LINK
+    var credential= firebase.auth.EmailAuthProvider.credentialWithLink(email,window.location.href)
+
+    firebase.auth().currentUser.linkWithCredential(credential).then(()=>{
+
+    }).catch((error)=>{
+      Alert.alert(error.message);
+
+    });
+    
+    ogin = (email, password) => {
+    try {
+      firebase
+         .auth()
+         .signInWithEmailAndPassword(email, password)
+         .then(res => {
+             console.log(res.user.email);
+      });} catch (error) {
+      console.log(error.toString(error));
+    }
+  };
+    
+if (emailVerified == true)
+{
+  (signin user)
+}
+else
+{
+  Alert.alert("Please Verify Email")
+}
+
+
+
+    
+    */
+
+
+
+      firebase.auth().signInWithEmailAndPassword(email,password).then(()=>{
+        if(firebase.auth().currentUser.emailVerified == false)
+        {
+          Alert.alert("Please Verify Email Address");
+         
+
+        }
+        else if(firebase.auth().currentUser.emailVerified == true){
+          Actions.lawEnforcement();
+
+        }
+         
+
+        
+        
 
       }, (error) => {
         Alert.alert(error.message);
@@ -91,7 +164,7 @@ dashBoard(){
               />
               <TouchableOpacity style={styles.button} onPress={()=>this.loginUser(this.state.email,this.state.password)}>
                   <Text style={styles.buttonText}>
-                    {this.props.type}
+                    Login
                   </Text>
 
               </TouchableOpacity>
@@ -112,7 +185,8 @@ dashBoard(){
         container:{
           flexGrow:1,
           alignItems:'center',
-          justifyContent:'center'
+          justifyContent:'center',
+          backgroundColor:'#455a64',
         },
         inputBox:{
             width:300,

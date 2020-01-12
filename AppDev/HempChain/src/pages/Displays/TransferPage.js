@@ -75,7 +75,8 @@ export default class TransferPage extends Component{
     <Picker style={styles.buttonRegister}
         mode="dropdown"
      selectedValue={this.state.location}
-      onValueChange={itemValue => this.onSelectionPressLocation(itemValue)}>
+      onValueChange={itemValue => this.onLocationChange(itemValue)}>
+        <Picker.Item label="Select a State" value="NULL"/>            
         <Picker.Item label="Alabama" value="Alabama" />
         <Picker.Item label="Alaska" value="Alaska" />
         <Picker.Item label="Arizona" value="Arizona" />

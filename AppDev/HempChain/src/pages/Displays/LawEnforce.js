@@ -10,44 +10,51 @@ import {
   Alert
 } from 'react-native';
 
+import Prompt from 'react-native-input-prompt';
 import Logo from '../../components/Logo';
 import LoginForm from '../../components/LoginForm';
 
 //See sign-up pg for notes
 import { Actions } from 'react-native-router-flux';
+import { user } from '../../../App';
 
-export default class Dashboard extends Component{
+export default class LawEnforcement extends Component{
     constructor(props){
         super(props)
     
         this.state= ({
-          email: ''
+          email: '',
+          isOpen: false,
         
       
       });
       } 
 
-    onSignoutPress = () =>{
+    onSignoutPress = () =>{ 
         firebase.auth().signOut().then(()=>{
             Alert.alert("Successfully signed out")
+            
                
 
         }, (error) => {
           Alert.alert(error.message);
           
         });
+        
         this.login  
        
     }
-
+    
 login(){
     Actions.login();
-}
-
-    
+}   
     render(){
       return(
         <View style={styles.container}>
+          <Text style={styles.buttonText}>
+              LawEnforcementPage
+            </Text>         
+            
             <TouchableOpacity style={styles.button} onPress={()=>this.onSignoutPress(this.state.email)}>
                   <Text style={styles.buttonText}>
                     Sign Out
@@ -65,7 +72,8 @@ login(){
             container:{
               flexGrow:1,
               alignItems:'center',
-              justifyContent:'center'
+              justifyContent:'center',
+              backgroundColor:'#455a64',
             },
             inputBox:{
                 width:300,

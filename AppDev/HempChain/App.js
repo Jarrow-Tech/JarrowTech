@@ -14,6 +14,8 @@ const firebaseConfig={
 firebase.initializeApp(firebaseConfig);
 const rootRef=firebase.database().ref();
 export const userRef= rootRef.child("Users/");
+export var user= firebase.auth().currentUser;
+
 
 import React,{Component} from 'react';
 import {
@@ -23,6 +25,7 @@ import {
   View,
   Text,
   StatusBar,
+  Alert,
 } from 'react-native';
 
 import {
@@ -48,10 +51,16 @@ import TestScreen from './src/pages/TestScreen'
 //Routes allows us to navigate to different pages much easier than using the standard react-navigation tools
 // react-navigation tools are built into the react-native-router-flux github that is downloaded
 import Routes from './src/Routes';
-import Dashboard from './src/pages/Displays/Dashboard';
+import Dashboard from './src/pages/Displays/FinishedReg';
+import { Actions } from 'react-native-router-flux';
+import LawEnforcement from './src/pages/Displays/LawEnforce';
+import Login from './src/pages/Authentication/Login';
+
+
 
 //11-4-19, dont forget to add <Routes/> back to where is was
 export default class App extends Component{
+  
 constructor(props){
   super(props);
   this.state={
@@ -60,18 +69,22 @@ constructor(props){
     isAuthenticated: false
   };
 
-
-  if(!firebase.apps.length){
-    firebase.initializeApp(firebaseConfig);
-  }
-
-  firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
+ 
+  
+  firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+  
+  
 }
 
-onAuthStateChanged=(user)=>{
-  this.setState({isAuthenticationReady: true});
+onAuthStateChanged=(user)=>{ 
+ this.setState({isAuthenticationReady: true});
   this.setState({isAuthenticated: !!user});
+  
+  
+  
 }
+
+
 
 
 
@@ -82,8 +95,11 @@ render(){
     <View style= {styles.container}>
       <StatusBar
         backgroundColor= "#1c313a"
-        barStyle="light-content"/>
-       {(this.state.isAuthenticated) ? <Dashboard/> : <Routes/>}
+        barStyle="light-content"/>        
+        {(this.state.isAuthenticated && firebase.auth().currentUser.emailVerified == true) ? <LawEnforcement/> : <Routes/>}
+        
+  
+       
     </View>
    
   

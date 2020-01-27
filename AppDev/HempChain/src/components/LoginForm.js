@@ -28,6 +28,7 @@ import {
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { user } from '../../App';
  
 //Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class LoginForm extends Component{
@@ -109,7 +110,9 @@ else
 
         }
         else if(firebase.auth().currentUser.emailVerified == true){
-          Actions.lawEnforcement();
+          firebase.database().ref("Users/" + "Agencey").once('value')
+        
+        
 
         }
          

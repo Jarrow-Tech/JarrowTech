@@ -15,7 +15,7 @@ import {
 import Prompt from 'react-native-input-prompt'
 import { Actions } from 'react-native-router-flux';
 import { userRef } from '../../../App';
-import LawModal from '../../components/LawEnforcePrompt';
+
 
 
 

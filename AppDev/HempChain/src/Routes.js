@@ -13,18 +13,16 @@ import { Router, Stack, Scene } from 'react-native-router-flux';
 import Login from './pages/Authentication/Login';
 import SignUp from './pages/Authentication/Sign-Up';
 import buisRegistration from './pages/Registration/BuisRegistration';
-import CultivatorReg from './pages/Registration/CultivatorReg';
 import TransferPage from './pages/Displays/TransferPage';
-import ManufProcs from './pages/Registration/ManufProcs';
+import ManufProcs from './pages/Displays/ProcessManuf';
 import EmployeeReg from './pages/Registration/Employee'; 
 import ForgotPassword from './pages/Authentication/ForgotPassword';
 import Dashboard from './pages/Displays/FinishedReg';
 import LawEnforcement from './pages/Displays/LawEnforce';
+import Regulator from './pages/Displays/RegulatorGov';
+import Cultivator from './pages/Displays/Cultivator';
 
-
-
-
-//The stack always stay "root" unless specifed
+//The stack always stay "root" unless specifeds
 //Scence's are what the user will see
 //component={class or page to be called/displayed}
 //to add other Scene's add under the previous.
@@ -36,12 +34,13 @@ export default class Routes extends Component{
                     <Scene key="login" component={Login} initial={true} />
                     <Scene key="signup" component={SignUp} title="Register"/>
                     <Scene key="buisRegistration" component={buisRegistration} title="Register"/>
-                    <Scene key="cultivate" component={CultivatorReg}/>
+                    <Scene key="cultivate" component={Cultivator}/>
                     <Scene key="transfer" component={TransferPage}/>
                     <Scene key="factory"  component={ManufProcs}/>
                     <Scene key="employee"  component={EmployeeReg}/>
                     <Scene key="forgotPass" component={ForgotPassword}/>
                     <Scene key="dashboard" component={Dashboard}/>
+                    <Scene key="regulator" component={Regulator}/>
                     <Scene key="lawEnforcement" component={LawEnforcement}/>
 
                 </Stack>

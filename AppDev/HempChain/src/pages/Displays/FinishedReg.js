@@ -1,4 +1,4 @@
-
+// this is the page that law enforcement and Regulators will see once they create an account
 import * as firebase from 'firebase';
 
 import React,{Component} from 'react';

@@ -1,18 +1,5 @@
-//Firebase is the database that will have our user accounts on it
+//This page is where the user is directed to when they presss 'forgot password'
 import * as firebase from 'firebase';
-
-//Initialize Firebase
-//DONT PUT THIS INITILIZATION ANY WHERE ELSE
-//IT WILL MESS THINGS UP
-//PUT THIS IN THE APP.JS FILE WHEN FINSHED MESSING AROUND
-/*const firebaseConfig={
-  apiKey: "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
-    authDomain: "jarrowchain.firebaseapp.com",
-    databaseURL: "https://jarrowchain.firebaseio.com",
-    projectId: "jarrowchain",
-    storageBucket: "jarrowchain.appspot.com",
-};
-firebase.initializeApp(firebaseConfig); */
 
 
 import React,{Component} from 'react';
@@ -26,7 +13,6 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-//Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class ForgotPassword extends Component{
   constructor(props){
     super(props)
@@ -37,7 +23,7 @@ export default class ForgotPassword extends Component{
   
   });
   } 
-
+//Firebase has its own reset password function which is used here
   onResetPasswordPress=()=>{
     firebase.auth().sendPasswordResetEmail(this.state.email)
     .then(()=>{

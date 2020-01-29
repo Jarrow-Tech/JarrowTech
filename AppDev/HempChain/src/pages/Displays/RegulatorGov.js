@@ -1,4 +1,4 @@
-
+// Display page for governmnet Regulators i.i Department of Agricultures 
 import * as firebase from 'firebase';
 
 import React,{Component} from 'react';

@@ -1,6 +1,8 @@
 //This page contains the picker that once selected will direct the user to the
 //corresponding page after they select a state.
 
+//THIS PAGE IS OBSOLETE AND IS ONLY HERE JUST AS A TESTING PAGE 1/29/20
+
 import * as firebase from 'firebase';
 
 import React,{Component} from 'react';

@@ -1,4 +1,5 @@
-
+//This test screen is for messing around with really anything, so feel free to delete, add, change what ever you want in here
+// NO harm will be done to the app if this page is changed.
 import React,{Component} from 'react';
 import {
   StyleSheet,

@@ -1,4 +1,4 @@
-
+//Display page for users who are 'Processors/ Manufactuers'
 import * as firebase from 'firebase';
 
 import React,{Component} from 'react';

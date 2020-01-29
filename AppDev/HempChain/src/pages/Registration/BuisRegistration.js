@@ -53,7 +53,9 @@ export default class buisRegistration extends Component{
         return;
       }
       
-      /*if(this.state.password ! == this.state.confirmPassword)
+      /*
+      might consider adding in a confirm password 
+      if(this.state.password ! == this.state.confirmPassword)
       {
         Alert.alert("Passwords do not match");
         return;
@@ -61,8 +63,6 @@ export default class buisRegistration extends Component{
      
       firebase.auth().createUserWithEmailAndPassword(email,password).then((data)=> {
         
-        
-        //1/4/2020 TRYNG TO WORK ON SENDING THE USER A VERIFICATION EMAIL
         firebase.auth().currentUser.sendEmailVerification().then(()=>{
           Alert.alert("A Link has been sent to your email for verification")
           
@@ -101,7 +101,9 @@ export default class buisRegistration extends Component{
 
   
 
-
+//this function checks to see what agencey the user picked and if it they have choosen
+// either Cultivator or Law Enforcement a prompt will appear and ask them to enter either a badge number
+// or hemp cultivator ID  
   promptChecker=(itemValue)=>{
     this.setState({agency: itemValue});
     if(itemValue == "Police/Highway")
@@ -114,8 +116,10 @@ export default class buisRegistration extends Component{
    }   
    }
 
-   //When state is changed this function is called and the user is automatically directed to the selected Agency page
-   onAgencyChange(itemValue)
+   
+   //when the user creates an account this funciton sets agencey specific feilds to be 'N/A' but 
+   // will be changes when the uer specifies the corresponding agencey
+     onAgencyChange(itemValue)
    { this.setState({agency: itemValue});
    this.setState({badgeID: "N/A"});
    this.setState({hempCultID: "N/A"});
@@ -125,6 +129,8 @@ export default class buisRegistration extends Component{
      
    } 
    }
+
+   //Makes it to where they cannot choose a null State
    onLocationChange(itemValue)
    { this.setState({operatingState: itemValue});
    if(itemValue == "NULL")

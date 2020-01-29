@@ -1,4 +1,4 @@
-
+//This will be the display page for a user whos' agencey type is Cultivator
 import * as firebase from 'firebase';
 
 import React,{Component} from 'react';
@@ -29,7 +29,7 @@ export default class Cultivator extends Component{
       
       });
       } 
-
+//Firebase signout function
     onSignoutPress = () =>{ 
         firebase.auth().signOut().then(()=>{
             Alert.alert("Successfully signed out")

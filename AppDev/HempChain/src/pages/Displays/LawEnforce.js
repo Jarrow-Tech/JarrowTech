@@ -1,4 +1,4 @@
-
+// This page is for Law Enforcement and will have the QR scanner on it as well as the serial code entry box
 import * as firebase from 'firebase';
 
 import React,{Component} from 'react';

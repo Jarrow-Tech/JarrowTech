@@ -27,8 +27,8 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+//Actions allow use to navigate pages
 import { Actions } from 'react-native-router-flux';
-import { user } from '../../App';
  
 //Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class LoginForm extends Component{
@@ -57,52 +57,10 @@ export default class LoginForm extends Component{
   }
   
 
-  //This is the funciton to sign a user in if they have an account created else it...
-  loginUser=(email,password) =>{ 
-    
+  //This is the funciton to sign a user in if they have an account created
+  loginUser=(email,password) =>{    
 
-   
-  
-    /*
-    1/4/2020 TRYING TO WORK ON SIGINNG IN USER AFTER THEY CLICK THE LINK
-    var credential= firebase.auth.EmailAuthProvider.credentialWithLink(email,window.location.href)
-
-    firebase.auth().currentUser.linkWithCredential(credential).then(()=>{
-
-    }).catch((error)=>{
-      Alert.alert(error.message);
-
-    });
-    
-    ogin = (email, password) => {
-    try {
-      firebase
-         .auth()
-         .signInWithEmailAndPassword(email, password)
-         .then(res => {
-             console.log(res.user.email);
-      });} catch (error) {
-      console.log(error.toString(error));
-    }
-  };
-    
-if (emailVerified == true)
-{
-  (signin user)
-}
-else
-{
-  Alert.alert("Please Verify Email")
-}
-
-
-
-    
-    */
-
-
-
-      firebase.auth().signInWithEmailAndPassword(email,password).then(()=>{
+     firebase.auth().signInWithEmailAndPassword(email,password).then(()=>{
         if(firebase.auth().currentUser.emailVerified == false)
         {
           Alert.alert("Please Verify Email Address");
@@ -127,6 +85,7 @@ else
      
   }
 
+  //These types of functions are used for navigation to other pages
 forgotPassword()
 {
   Actions.forgotPass();

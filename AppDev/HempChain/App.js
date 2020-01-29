@@ -1,9 +1,13 @@
-//Carlton O. Wilcox made all of the current comments on 11/2/19
+// All current code was written by Carlton O. Wilcox
+//Carlton O. Wilcox made all of the current comments on 1/29/20
+ 
 
 //This is the main file in which the app will run everything
 //Greyed out text means that its not in use/declared
 import * as firebase from 'firebase';
 
+//Here is our Firebase initilization
+//NOTHING HERE HAS TO CHANGE JUST YET S
 const firebaseConfig={
   apiKey: "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
     authDomain: "jarrowchain.firebaseapp.com",
@@ -11,6 +15,7 @@ const firebaseConfig={
     projectId: "jarrowchain",
     storageBucket: "jarrowchain.appspot.com",
 };
+//The below initilizes firebase and sets variables for the refrencing to the database 
 firebase.initializeApp(firebaseConfig);
 const rootRef=firebase.database().ref();
 export const userRef= rootRef.child("Users/");
@@ -89,7 +94,9 @@ onAuthStateChanged=(user)=>{
 
 
 
-
+//Things are a little weird right now with the direction/navigation of everything in the app
+//The below is an 'in-line' if statement that checks if the user has created an account and if their email is verified
+// then it will log them into the law enforecemnet [age which we will need to change to the specific agencey page
 render(){
   return(
     <View style= {styles.container}>

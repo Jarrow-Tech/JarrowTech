@@ -1,4 +1,6 @@
-
+//This page will be used more once we have pages that have user specific data on them
+// Using React Redux will allow us to save those states
+// The below is from a tutorial and is not implemented in the app at the moment so it can be alltered in any way
 import {createStore, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import * as firebase from 'firebase';

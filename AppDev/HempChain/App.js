@@ -71,23 +71,58 @@ export default class App extends Component {
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
   }
 
-  onAuthStateChanged=(user) => {
-    this.setState({isAuthenticationReady: true});
-    this.setState({isAuthenticated: !!user});
+  onAuthStateChanged = (user) => {
+    if (user) {
+      this.setState({isAuthenticationReady: true});
+      if (typeof user.emailVerified !== 'undefined') {
+        this.setState({isAuthenticated: user.emailVerified});
+      } else {
+        this.setState({isAuthenticated: false});
+      }
+    } else {
+      this.setState({isAuthenticationReady: false});
+      this.setState({isAuthenticated: false});
+    }
   }
 
   //Things are a little weird right now with the direction/navigation of everything in the app
   //The below is an 'in-line' if statement that checks if the user has created an account and if their email is verified
   // then it will log them into the law enforecemnet [age which we will need to change to the specific agencey page
   render() {
-    return(
-      <View style= {styles.container}>
-        <StatusBar
-          backgroundColor= "#1c313a"
-          barStyle="light-content"/>
-          {(this.state.isAuthenticated && firebase.auth().currentUser.emailVerified == true) ? <LawEnforcement/> : <Routes/>}
-      </View>
-    );
+    var isLawEnforcement = 1;
+
+    //TODO: add switching based on a property that defines what organization a user is a part of
+    if (this.state.isAuthenticated){
+      switch(isLawEnforcement){
+        case 1: return(
+          <View style= {styles.container}>
+            <StatusBar
+              backgroundColor= "#1c313a"
+              barStyle="light-content"/>
+              <LawEnforcement/>
+          </View>
+        );
+
+        default: return(
+          <View style= {styles.container}>
+            <StatusBar
+              backgroundColor= "#1c313a"
+              barStyle="light-content"/>
+              <Login/>
+          </View>
+        );
+      }
+
+    } else {
+      return(
+        <View style= {styles.container}>
+          <StatusBar
+            backgroundColor= "#1c313a"
+            barStyle="light-content"/>
+            <Login/>
+        </View>
+      );
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-// Display page for governmnet Regulators i.i Department of Agricultures 
+// Display page for governmnet Regulators i.i Department of Agricultures
 import * as firebase from 'firebase';
 
 import React,{Component} from 'react';
@@ -18,54 +18,44 @@ import LoginForm from '../../components/LoginForm';
 import { Actions } from 'react-native-router-flux';
 import { user } from '../../../App';
 
-export default class Regulator extends Component{
-    constructor(props){
-        super(props)
-    
-        this.state= ({
-          email: '',
-          isOpen: false,
-        
-      
-      });
-      } 
+export default class Regulator extends Component {
+  constructor(props) {
+    super(props)
+    this.state= ({
+      email: '',
+      isOpen: false,
+  });}
 
-    onSignoutPress = () =>{ 
-        firebase.auth().signOut().then(()=>{
-            Alert.alert("Successfully signed out")
-            
-               
+  onSignoutPress = () => {
+    firebase.auth().signOut().then(() => {
+      Alert.alert("Successfully signed out")
+    }, (error) => {
+      Alert.alert(error.message);
+    });
+    this.login
+  }
 
-        }, (error) => {
-          Alert.alert(error.message);
-          
-        });
-        
-        this.login  
-       
-    }
-    
-login(){
+  login(){
     Actions.login();
-}   
-    render(){
-      return(
-        <View style={styles.container}>
-          <Text style={styles.buttonText}>
-              Regulator/Government Page
-            </Text>         
-            
-            <TouchableOpacity style={styles.button} onPress={()=>this.onSignoutPress(this.state.email)}>
-                  <Text style={styles.buttonText}>
-                    Sign Out
-                  </Text>
+  }
 
-              </TouchableOpacity>
-        </View>
-      );
-    }
-    
-    }
+  render(){
+    return(
+      <View style={styles.container}>
+        <Text style={styles.buttonText}>
+          Regulator/Government Page
+        </Text>
+
+        <TouchableOpacity style={styles.button} onPress={()=>this.onSignoutPress(this.state.email)}>
+          <Text style={styles.buttonText}>
+            Sign Out
+          </Text>
+
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
 
 
     const styles= StyleSheet.create({
@@ -92,19 +82,18 @@ login(){
                 paddingVertical: 12,
                 alignContent: 'center',
             },
-            
+
             buttonText:{
                 fontSize: 16,
                 fontWeight: '500',
-                color: '#ffffff', 
-                textAlign: 'center'          
+                color: '#ffffff',
+                textAlign: 'center'
             },
             signupText:{
               color:'rgba(255, 255, 255, 0.6)',
               fontSize: 16
-    
+
           },
-    
-    
+
+
           });
-      

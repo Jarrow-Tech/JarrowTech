@@ -14,35 +14,31 @@ import {
 
 // "../" this meanns that we are steping from src to images must do for embedded folders
 // must use  source={require('../Images/ENTERNAME.png')} for images
-export default class Logo extends Component{
-    render(){
-      return(
-        <View style={styles.container}>
+export default class Logo extends Component {
+  render() {
+    return(
+      <View style={styles.container}>
 
-        <Image style={{width:75, height: 85}}
-        source={require('../Images/JarrowTech.png')}/>
-        <Text style={styles.logoText}>Welcome to HempChain!</Text>
-
-
-        </View>
-        
-      );
-    }
-    
-    }
+      <Image style={{width:75, height: 85}}
+      source={require('../Images/JarrowTech.png')}/>
+      <Text style={styles.logoText}>Welcome to HempChain!</Text>
 
 
-    const styles= StyleSheet.create({
-        container:{
-          flexGrow:1,
-          alignItems:'center',
-          justifyContent:'flex-end'    
-        },
-        logoText:{
-          marginVertical: 15,
-          fontSize:18,
-          color: 'rgba(255, 255, 255, 0.7)'
-        },
-      });
-      
-      
+      </View>
+    );
+  }
+}
+
+
+const styles= StyleSheet.create({
+  container: {
+    flexGrow:1,
+    alignItems:'center',
+    justifyContent:'flex-end'
+  },
+  logoText: {
+    marginVertical: 15,
+    fontSize:18,
+    color: 'rgba(255, 255, 255, 0.7)'
+  },
+});

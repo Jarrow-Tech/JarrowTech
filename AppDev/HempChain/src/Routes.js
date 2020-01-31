@@ -15,7 +15,7 @@ import SignUp from './pages/Authentication/Sign-Up';
 import buisRegistration from './pages/Registration/BuisRegistration';
 import TransferPage from './pages/Displays/TransferPage';
 import ManufProcs from './pages/Displays/ProcessManuf';
-import EmployeeReg from './pages/Registration/Employee'; 
+import EmployeeReg from './pages/Registration/Employee';
 import ForgotPassword from './pages/Authentication/ForgotPassword';
 import Dashboard from './pages/Displays/FinishedReg';
 import LawEnforcement from './pages/Displays/LawEnforce';
@@ -26,27 +26,24 @@ import Cultivator from './pages/Displays/Cultivator';
 //Scence's are what the user will see
 //component={class or page to be called/displayed}
 //to add other Scene's add under the previous.
-export default class Routes extends Component{
-    render(){
-        return(
-            <Router>
-                <Stack key="root" hideNavBar={true}>
-                    <Scene key="login" component={Login} initial={true} />
-                    <Scene key="signup" component={SignUp} title="Register"/>
-                    <Scene key="buisRegistration" component={buisRegistration} title="Register"/>
-                    <Scene key="cultivate" component={Cultivator}/>
-                    <Scene key="transfer" component={TransferPage}/>
-                    <Scene key="factory"  component={ManufProcs}/>
-                    <Scene key="employee"  component={EmployeeReg}/>
-                    <Scene key="forgotPass" component={ForgotPassword}/>
-                    <Scene key="dashboard" component={Dashboard}/>
-                    <Scene key="regulator" component={Regulator}/>
-                    <Scene key="lawEnforcement" component={LawEnforcement}/>
-
-                </Stack>
-            </Router>
-
-        );
-    }
-
+export default class Routes extends Component {
+  render() {
+    return(
+      <Router>
+        <Stack key="root" hideNavBar={true}>
+          <Scene key="login" component={Login} initial={true} />
+          <Scene key="signup" component={SignUp} title="Register"/>
+          <Scene key="buisRegistration" component={buisRegistration} title="Register"/>
+          <Scene key="cultivate" component={Cultivator}/>
+          <Scene key="transfer" component={TransferPage}/>
+          <Scene key="factory"  component={ManufProcs}/>
+          <Scene key="employee"  component={EmployeeReg}/>
+          <Scene key="forgotPass" component={ForgotPassword}/>
+          <Scene key="dashboard" component={Dashboard}/>
+          <Scene key="regulator" component={Regulator}/>
+          <Scene key="lawEnforcement" component={LawEnforcement}/>
+        </Stack>
+      </Router>
+    );
+  }
 }

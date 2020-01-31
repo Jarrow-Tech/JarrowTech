@@ -23,60 +23,55 @@ import RegisterForm from '../../components/RegisterHome';
 // documentation
 import { Actions } from 'react-native-router-flux';
 
+export default class SignUp extends Component {
 
+  // takes us to the previous screen
+  goback() {
+      Actions.login();
+  }
 
-export default class SignUp extends Component{
-
-    // takes us to the previous screen
-    goback(){
-        Actions.login();
-    }
-
-    //Registerform is where the buttons that the user presses are located
-    render(){
-      return(
-        <View style={styles.container}>
-            <Logo/>
-            <RegisterForm type="Register"/>
-            <View style={styles.signupTextCont}>
-                <Text style={styles.signupText}>
-                    Already Registered? </Text>
-                    <TouchableOpacity onPress={this.goback}>
+  //Registerform is where the buttons that the user presses are located
+  render() {
+    return(
+      <View style={styles.container}>
+          <Logo/>
+          <RegisterForm type="Register"/>
+          <View style={styles.signupTextCont}>
+            <Text style={styles.signupText}>
+              Already Registered? </Text>
+              <TouchableOpacity onPress={this.goback}>
                 <Text style={styles.signupButton}> Log in Now!</Text>
-                </TouchableOpacity>
+              </TouchableOpacity>
 
 
-                
-            </View>   
+
         </View>
-      );
-    }
-    
-    }
+      </View>
+    );
+  }
+}
 
-
-    const styles= StyleSheet.create({
-        container:{
-          backgroundColor:'#455a64',
-          flexGrow:1,
-          alignItems:'center',
-          justifyContent:'center'    
-        },
-        signupTextCont:{
-          flexGrow:1,
-          alignItems:'flex-end',
-          justifyContent:'center',
-          paddingVertical: 16,
-          flexDirection: 'row',
-        },
-        signupText:{
-            color:'rgba(255, 255, 255, 0.6)',
-            fontSize: 16
-
-        },
-        signupButton:{
-            color:'#ffffff',
-            fontSize: 16,
-            fontWeight:'500'
-        },
-      });
+const styles= StyleSheet.create({
+  container: {
+    backgroundColor:'#455a64',
+    flexGrow:1,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  signupTextCont: {
+    flexGrow:1,
+    alignItems:'flex-end',
+    justifyContent:'center',
+    paddingVertical: 16,
+    flexDirection: 'row',
+  },
+  signupText: {
+      color:'rgba(255, 255, 255, 0.6)',
+      fontSize: 16
+  },
+  signupButton: {
+      color:'#ffffff',
+      fontSize: 16,
+      fontWeight:'500'
+  },
+});

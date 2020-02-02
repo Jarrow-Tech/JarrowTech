@@ -121,7 +121,7 @@ export default class App extends Component {
                     <StatusBar
                       backgroundColor= "#1c313a"
                       barStyle="light-content"/>
-                      <Login/>
+                      <Routes/>
                   </View>
                 );
       }
@@ -132,7 +132,7 @@ export default class App extends Component {
           <StatusBar
             backgroundColor= "#1c313a"
             barStyle="light-content"/>
-            <Login/>
+            <Routes/>
         </View>
       );
     }

@@ -65,7 +65,8 @@ export default class App extends Component {
     this.state = {
       isLoadingComplete: false,
       isAuthenticationReady: false,
-      isAuthenticated: false
+      isAuthenticated: false,
+      rank: 'none'
     };
 
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
@@ -76,6 +77,10 @@ export default class App extends Component {
       this.setState({isAuthenticationReady: true});
       if (typeof user.emailVerified !== 'undefined') {
         this.setState({isAuthenticated: user.emailVerified});
+        firebase.database().ref("Users/" + user.uid + "/agency").on('value', snapshot => {
+          let data = snapshot.val();
+          this.setState({rank: data});
+        })
       } else {
         this.setState({isAuthenticated: false});
       }
@@ -89,28 +94,36 @@ export default class App extends Component {
   //The below is an 'in-line' if statement that checks if the user has created an account and if their email is verified
   // then it will log them into the law enforecemnet [age which we will need to change to the specific agencey page
   render() {
-    var isLawEnforcement = 1;
-
     //TODO: add switching based on a property that defines what organization a user is a part of
     if (this.state.isAuthenticated){
-      switch(isLawEnforcement){
-        case 1: return(
-          <View style= {styles.container}>
-            <StatusBar
-              backgroundColor= "#1c313a"
-              barStyle="light-content"/>
-              <LawEnforcement/>
-          </View>
-        );
+      console.log(this.state.rank);
+      switch(this.state.rank){
+        case 'Police/Highway': return(
+                                <View style= {styles.container}>
+                                  <StatusBar
+                                    backgroundColor= "#1c313a"
+                                    barStyle="light-content"/>
+                                    <LawEnforcement/>
+                                </View>
+                              );
+
+        case 'Regulator': return(
+                                <View style= {styles.container}>
+                                  <StatusBar
+                                    backgroundColor= "#1c313a"
+                                    barStyle="light-content"/>
+                                    <Regulator/>
+                                </View>
+                              );
 
         default: return(
-          <View style= {styles.container}>
-            <StatusBar
-              backgroundColor= "#1c313a"
-              barStyle="light-content"/>
-              <Login/>
-          </View>
-        );
+                  <View style= {styles.container}>
+                    <StatusBar
+                      backgroundColor= "#1c313a"
+                      barStyle="light-content"/>
+                      <Login/>
+                  </View>
+                );
       }
 
     } else {

@@ -7,6 +7,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  TextInput,
   Alert
 } from 'react-native';
 
@@ -24,6 +25,7 @@ export default class LawEnforcement extends Component {
     this.state= ({
       email: '',
       isOpen: false,
+      serial: ''
   });}
 
   onSignoutPress = () => {
@@ -33,6 +35,14 @@ export default class LawEnforcement extends Component {
       Alert.alert(error.message);
     });
     this.login
+  }
+
+  onQrPress = () => {
+    console.log("QR pressed");
+  }
+
+  submitSerial = () => {
+    console.log("Searching for serial: " + this.state.serial);
   }
 
   login(){
@@ -46,11 +56,29 @@ export default class LawEnforcement extends Component {
           LawEnforcementPage
         </Text>
 
+        <TouchableOpacity style={styles.button} onPress={() => this.onQrPress()}>
+          <Text style={styles.buttonText}>
+            Scan QR Code
+          </Text>
+        </TouchableOpacity>
+
+        <TextInput style={styles.inputBox}
+         placeholder="Serial Number"
+         placeholderTextColor='#ffffff'
+         ref={(input) => this.serial = input}
+         onChangeText={(serial) => this.setState({serial})}
+        />
+
+        <TouchableOpacity style={styles.button} onPress={() => this.submitSerial()}>
+          <Text style={styles.buttonText}>
+            Search Serial
+          </Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.button} onPress={()=>this.onSignoutPress(this.state.email)}>
           <Text style={styles.buttonText}>
             Sign Out
           </Text>
-
         </TouchableOpacity>
       </View>
     );

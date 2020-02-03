@@ -66,21 +66,26 @@ export default class App extends Component {
       isLoadingComplete: false,
       isAuthenticationReady: false,
       isAuthenticated: false,
-      rank: 'none'
+      agency: 'none'
     };
 
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
   }
 
+  // triggers whenever the authentication state for the database changes
   onAuthStateChanged = (user) => {
+
+    // true if a valid user object has been gathered from firebase
     if (user) {
       this.setState({isAuthenticationReady: true});
       if (typeof user.emailVerified !== 'undefined') {
         this.setState({isAuthenticated: user.emailVerified});
+
         firebase.database().ref("Users/" + user.uid + "/agency").on('value', snapshot => {
           let data = snapshot.val();
-          this.setState({rank: data});
+          this.setState({agency: data});
         })
+
       } else {
         this.setState({isAuthenticated: false});
       }
@@ -90,14 +95,13 @@ export default class App extends Component {
     }
   }
 
-  //Things are a little weird right now with the direction/navigation of everything in the app
-  //The below is an 'in-line' if statement that checks if the user has created an account and if their email is verified
-  // then it will log them into the law enforecemnet [age which we will need to change to the specific agencey page
+  // if a user is logged in and has verified their email, this will re-direct them based on their organization
+  // and their privelege level. if they haven't authenticated, then they will be directed to the login page/other router
+  // pages accessible without logging in
   render() {
-    //TODO: add switching based on a property that defines what organization a user is a part of
+    //Switch based on agency
     if (this.state.isAuthenticated){
-      console.log(this.state.rank);
-      switch(this.state.rank){
+      switch(this.state.agency){
         case 'Police/Highway': return(
                                 <View style= {styles.container}>
                                   <StatusBar
@@ -107,15 +111,21 @@ export default class App extends Component {
                                 </View>
                               );
 
-        case 'Regulator': return(
+        case 'Cultivator': return(
                                 <View style= {styles.container}>
                                   <StatusBar
                                     backgroundColor= "#1c313a"
                                     barStyle="light-content"/>
-                                    <Regulator/>
+                                    <Cultivator/> // currently an unaccessible page
                                 </View>
                               );
 
+        // once all other agency pages are exposed/finished they get a case statement based on what thier
+        // agency is within the firebase database. those cases go here.
+
+        // default case that falls back on routes
+        // QUESTION: should this point to some sort of help page? users will be authenticated at this point, just with
+        // an unexpected agency
         default: return(
                   <View style= {styles.container}>
                     <StatusBar
@@ -126,6 +136,7 @@ export default class App extends Component {
                 );
       }
 
+    // case where use is un-authenticated/un-verified
     } else {
       return(
         <View style= {styles.container}>

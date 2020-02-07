@@ -10,6 +10,7 @@ import {
   TextInput,
   Alert
 } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 
 import Prompt from 'react-native-input-prompt';
 import Logo from '../../components/Logo';
@@ -25,7 +26,7 @@ export default class LawEnforcement extends Component {
     this.state= ({
       email: '',
       isOpen: false,
-      serial: ''
+      serial: '',
   });}
 
   onSignoutPress = () => {
@@ -37,12 +38,12 @@ export default class LawEnforcement extends Component {
     this.login
   }
 
-  onQrPress = () => {
-    console.log("QR pressed");
-  }
-
   submitSerial = () => {
     console.log("Searching for serial: " + this.state.serial);
+  }
+
+  barcodeRecognized = e => {
+    this.setState({serial: e.data})
   }
 
   login(){
@@ -56,17 +57,26 @@ export default class LawEnforcement extends Component {
           LawEnforcementPage
         </Text>
 
-        <TouchableOpacity style={styles.button} onPress={() => this.onQrPress()}>
-          <Text style={styles.buttonText}>
-            Scan QR Code
-          </Text>
-        </TouchableOpacity>
+        <RNCamera
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style={{
+            flex: 1,
+            width: '50%',
+          }}
+          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          flashMode={RNCamera.Constants.FlashMode.on}
+          onBarCodeRead={this.barcodeRecognized}
+          >
+        </RNCamera>
 
         <TextInput style={styles.inputBox}
          placeholder="Serial Number"
          placeholderTextColor='#ffffff'
          ref={(input) => this.serial = input}
          onChangeText={(serial) => this.setState({serial})}
+         value={this.state.serial}
         />
 
         <TouchableOpacity style={styles.button} onPress={() => this.submitSerial()}>

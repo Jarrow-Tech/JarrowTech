@@ -17,7 +17,7 @@ import Prompt from 'react-native-input-prompt';
 import { Actions } from 'react-native-router-flux';
 import { user } from '../../../../App';
 
-export default class Cultivator extends Component{
+export default class HarvestInformation extends Component{
   constructor(props) {
     super(props)
     this.state= ({

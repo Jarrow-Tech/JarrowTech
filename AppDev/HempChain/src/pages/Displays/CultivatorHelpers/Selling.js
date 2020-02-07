@@ -17,19 +17,18 @@ import Prompt from 'react-native-input-prompt';
 import { Actions } from 'react-native-router-flux';
 import { user } from '../../../../App';
 
-export default class HarvestInformation extends Component{
+export default class Selling extends Component{
   constructor(props) {
     super(props)
     this.state= ({
-      cropSize: 0,
-      cropType: '',
+
     });
-    this.harvest = this.harvest.bind(this);
+    this.sell = this.sell.bind(this);
     this.back = this.back.bind(this);
   }
 
-  harvest() {
-    this.props.harvest(this.state);
+  sell() {
+    this.props.sell(this.state);
   }
 
   back() {
@@ -40,29 +39,11 @@ export default class HarvestInformation extends Component{
     return(
       <View style={styles.container}>
         <Text style={styles.buttonText}>
-          Enter Harvest Details Below
+          Selling Page
         </Text>
-        <TextInput style={styles.inputBox}
-         placeholder="Crop Size"
-         placeholderTextColor="#ffffff"
-         selectionColor="#ffffff"
-         value={this.state.cropSize}
-         onChangeText={(text)=> this.setState({cropSize: text})}
-         autoCapitalize="none"
-         autoCorrect={false}
-          />
-        <TextInput style={styles.inputBox}
-         placeholder="Crop Type"
-         placeholderTextColor="#ffffff"
-         selectionColor="#ffffff"
-         value={this.state.cropType}
-         onChangeText={(text)=> this.setState({cropType: text})}
-         autoCapitalize="none"
-         autoCorrect={false}
-          />
-        <TouchableOpacity style={styles.button} onPress={()=>this.harvest()}>
+        <TouchableOpacity style={styles.button} onPress={()=>this.sell()}>
           <Text style={styles.buttonText}>
-            Log Harvest Details
+            Sell Stuff
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={()=>this.back()}>

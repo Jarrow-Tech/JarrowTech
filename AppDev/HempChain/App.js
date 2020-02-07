@@ -55,6 +55,7 @@ import Routes from './src/Routes';
 import Dashboard from './src/pages/Displays/FinishedReg';
 import { Actions } from 'react-native-router-flux';
 import LawEnforcement from './src/pages/Displays/LawEnforce';
+import Cultivator from './src/pages/Displays/Cultivator';
 import Login from './src/pages/Authentication/Login';
 
 //11-4-19, dont forget to add <Routes/> back to where is was
@@ -111,12 +112,12 @@ export default class App extends Component {
                                 </View>
                               );
 
-        case 'Cultivator': return(
+        case 'Farmer': return(
                                 <View style= {styles.container}>
                                   <StatusBar
                                     backgroundColor= "#1c313a"
                                     barStyle="light-content"/>
-                                    <Cultivator/> // currently an unaccessible page
+                                    <Cultivator/>
                                 </View>
                               );
 

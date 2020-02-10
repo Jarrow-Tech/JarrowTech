@@ -56,6 +56,7 @@ import Dashboard from './src/pages/Displays/FinishedReg';
 import { Actions } from 'react-native-router-flux';
 import LawEnforcement from './src/pages/Displays/LawEnforce';
 import Cultivator from './src/pages/Displays/Cultivator';
+import ManufProcs from './src/pages/Displays/ProcessManuf';
 import Login from './src/pages/Authentication/Login';
 
 //11-4-19, dont forget to add <Routes/> back to where is was
@@ -108,7 +109,7 @@ export default class App extends Component {
                                   <StatusBar
                                     backgroundColor= "#1c313a"
                                     barStyle="light-content"/>
-                                    <LawEnforcement/>
+                                    <LawEnforcement />
                                 </View>
                               );
 
@@ -117,7 +118,16 @@ export default class App extends Component {
                                   <StatusBar
                                     backgroundColor= "#1c313a"
                                     barStyle="light-content"/>
-                                    <Cultivator/>
+                                    <Cultivator />
+                                </View>
+                              );
+
+        case 'Factory': return(
+                                <View style= {styles.container}>
+                                  <StatusBar
+                                    backgroundColor= "#1c313a"
+                                    barStyle="light-content"/>
+                                    <ManufProcs />
                                 </View>
                               );
 

@@ -7,8 +7,10 @@ import {
   View,
   Text,
   TouchableOpacity,
+  TextInput,
   Alert
 } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 
 import Prompt from 'react-native-input-prompt';
 import Logo from '../../components/Logo';
@@ -35,6 +37,13 @@ export default class ManufProcs extends Component {
       this.login
   }
 
+    submitSerial = () => {
+      console.log("[ProcessManuf] Searching for serial: " + this.state.serial);
+    }
+
+    barcodeRecognized = e => {
+      this.setState({serial: e.data})
+    }
 
   login(){
     Actions.login();
@@ -47,12 +56,41 @@ export default class ManufProcs extends Component {
           Process/Manufacturer Page
         </Text>
 
-          <TouchableOpacity style={styles.button} onPress={() => this.onSignoutPress(this.state.email)}>
-            <Text style={styles.buttonText}>
-              Sign Out
-            </Text>
+        <RNCamera
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style={{
+            flex: 1,
+            width: '50%',
+            transform: [{ rotate: '180deg'}],
+          }}
+          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          flashMode={RNCamera.Constants.FlashMode.on}
+          onBarCodeRead={this.barcodeRecognized}
+          >
+        </RNCamera>
 
-          </TouchableOpacity>
+        <TextInput style={styles.inputBox}
+         placeholder="Serial Number"
+         placeholderTextColor='#ffffff'
+         ref={(input) => this.serial = input}
+         onChangeText={(serial) => this.setState({serial})}
+         value={this.state.serial}
+        />
+
+        <TouchableOpacity style={styles.button} onPress={() => this.submitSerial()}>
+          <Text style={styles.buttonText}>
+            Search Serial
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={() => this.onSignoutPress(this.state.email)}>
+          <Text style={styles.buttonText}>
+            Sign Out
+          </Text>
+
+        </TouchableOpacity>
       </View>
     );
   }

@@ -14,20 +14,22 @@ import Logo from '../../components/Logo';
 import LoginForm from '../../components/LoginForm';
 import RegisterForm from '../../components/RegisterHome';
 
+import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+
 export default class SignUp extends Component {
 
   //RegisterForm is where the buttons that the user presses are located
     render() {
         return(
-            <View style={styles.container}>
+            <View style={Spacing.colorContainer}>
                 <Logo />
                 <RegisterForm type="Register" navigation={this.props.navigation} />
-                <View style={styles.signupTextCont}>
-                    <Text style={styles.signupText}>
+                <View style={Spacing.signupTextContainer}>
+                    <Text style={Typography.signupText}>
                         Already Registered?
                     </Text>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                        <Text style={styles.signupButton}>
+                        <Text style={Buttons.signupButton}>
                             Log in Now!
                         </Text>
                     </TouchableOpacity>
@@ -36,28 +38,3 @@ export default class SignUp extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#455a64',
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    signupTextCont: {
-        flexGrow: 1,
-        alignItems: 'flex-end',
-        justifyContent: 'center',
-        paddingVertical: 16,
-        flexDirection: 'row',
-    },
-    signupText: {
-        color: 'rgba(255, 255, 255, 0.6)',
-        fontSize: 16
-    },
-    signupButton: {
-        color: '#ffffff',
-        fontSize: 16,
-        fontWeight: '500'
-    },
-});

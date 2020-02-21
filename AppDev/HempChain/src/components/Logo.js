@@ -12,29 +12,18 @@ import {
     Image,
 } from 'react-native';
 
+import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
+
 export default class Logo extends Component {
     render() {
         return(
-            <View style={styles.container}>
+            <View style={Spacing.logoContainer}>
                 <Image style={{width: 75, height: 85}}
                 source={require('../Images/JarrowTech.png')} />
-                <Text style={styles.logoText}>
+                <Text style={Typography.logoText}>
                     Welcome to HempChain!
                 </Text>
             </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    },
-    logoText: {
-        marginVertical: 15,
-        fontSize: 18,
-        color: 'rgba(255, 255, 255, 0.7)'
-    },
-});

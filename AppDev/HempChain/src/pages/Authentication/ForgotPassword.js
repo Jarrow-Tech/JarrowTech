@@ -11,6 +11,8 @@ import {
     Alert,
 } from 'react-native';
 
+import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+
 export default class ForgotPassword extends Component {
 
     constructor(props) {
@@ -30,8 +32,8 @@ export default class ForgotPassword extends Component {
 
     render() {
         return(
-            <View style={styles.container}>
-                <TextInput style={styles.inputBox}
+            <View style={Spacing.colorContainer}>
+                <TextInput style={UserInterface.inputBox}
                  placeholder="Email"
                  placeholderTextColor="#ffffff"
                  selectionColor="#ffffff"
@@ -40,8 +42,8 @@ export default class ForgotPassword extends Component {
                  onChangeText={(text) => this.setState({email: text})}
                  onSubmitEditing={() => this.password.focus()}
                   />
-                <TouchableOpacity style={styles.button} onPress={this.onResetPasswordPress}>
-                    <Text style={styles.buttonText}>
+                <TouchableOpacity style={Buttons.button} onPress={this.onResetPasswordPress}>
+                    <Text style={Typography.buttonText}>
                         Send Reset Link
                     </Text>
                 </TouchableOpacity>
@@ -49,40 +51,3 @@ export default class ForgotPassword extends Component {
         );
     }
 }
-
-//stylesheet helps us in formating the display and objects
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#455a64',
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    inputBox: {
-        width: 300,
-        backgroundColor: 'rgba(255,255,255,0.3)',
-        borderRadius: 25,
-        paddingHorizontal: 16,
-        fontSize: 16,
-        color: '#ffffff',
-        marginVertical: 10,
-    },
-    button: {
-        width: 300,
-        backgroundColor: '#1c313a',
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 12,
-        alignContent: 'center',
-    },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#ffffff',
-        textAlign: 'center'
-    },
-    signupText: {
-        color: 'rgba(255, 255, 255, 0.6)',
-        fontSize: 16
-    },
-});

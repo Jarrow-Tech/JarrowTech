@@ -15,6 +15,8 @@ import {
 import Prompt from 'react-native-input-prompt'
 import { userRef } from '../../../App';
 
+import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+
 export default class buisRegistration extends Component {
 
     constructor(props) {
@@ -99,8 +101,8 @@ export default class buisRegistration extends Component {
 
     render(){
         return(
-            <View style={styles.container}>
-                <Picker style={styles.inputBox}
+            <View style={Spacing.colorContainer}>
+                <Picker style={UserInterface.inputBox}
                     mode="dropdown"
                     selectedValue={this.state.operatingState}
                     onValueChange={itemValue => this.onLocationChange(itemValue)}>
@@ -158,7 +160,7 @@ export default class buisRegistration extends Component {
                     <Picker.Item label="Wyoming" value="Wyoming" />
                 </Picker>
                 <Picker
-                    style={styles.inputBox}
+                    style={UserInterface.inputBox}
                     mode="dropdown"
                     selectedValue={this.state.agency}
                     onValueChange={(itemValue) => {this.onAgencyChange(itemValue); this.promptChecker(itemValue)}}>
@@ -197,28 +199,28 @@ export default class buisRegistration extends Component {
                             hempCultID: text,
                         })
                     }/>
-                  <TextInput style={styles.inputBox}
+                  <TextInput style={UserInterface.inputBox}
                    placeholder="City"
                    placeholderTextColor="#ffffff"
                    ref={(input) => this.city = input}
                    onChangeText={(city) => this.setState({city})}
                    onSubmitEditing={() => this.firstName.focus()}
                   />
-                  <TextInput style={styles.inputBox}
+                  <TextInput style={UserInterface.inputBox}
                    placeholder="Admin First Name"
                    placeholderTextColor="#ffffff"
                    ref={(input) => this.firstName = input}
                    onChangeText={(firstName) => this.setState({firstName})}
                    onSubmitEditing={() => this.lastName.focus()}
                   />
-                  <TextInput style={styles.inputBox}
+                  <TextInput style={UserInterface.inputBox}
                    placeholder="Admin Last Name"
                    placeholderTextColor="#ffffff"
                    ref={(input) => this.lastName = input}
                    onChangeText={(lastName) => this.setState({lastName})}
                    onSubmitEditing={() => this.adminEmail.focus()}
                   />
-                  <TextInput style={styles.inputBox}
+                  <TextInput style={UserInterface.inputBox}
                    placeholder="Admin Email"
                    selectionColor="#ffffff"
                    keyboardType= 'email-address'
@@ -227,15 +229,15 @@ export default class buisRegistration extends Component {
                    onChangeText={(email) => this.setState({email})}
                    onSubmitEditing={() => this.password.focus()}
                   />
-                  <TextInput style={styles.inputBox}
+                  <TextInput style={UserInterface.inputBox}
                    placeholder="Admin Password"
                    secureTextEntry= {true}
                    placeholderTextColor="#ffffff"
                    onChangeText={(password) => this.setState({password})}
                    ref={(input) => this.password = input}
                   />
-                  <TouchableOpacity style={styles.buttonCont} onPress={() => {this.signUpUser(this.state.email,this.state.password)}}>
-                        <Text style={styles.buttonText}>
+                  <TouchableOpacity style={Spacing.buttonContainer} onPress={() => {this.signUpUser(this.state.email,this.state.password)}}>
+                        <Text style={Typography.buttonText}>
                             Finish Registration
                         </Text>
                   </TouchableOpacity>
@@ -243,45 +245,3 @@ export default class buisRegistration extends Component {
         );
     }
 }
-
-
-//stylesheet helps us in formating the display and objects
-const styles= StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#455a64'
-    },
-    inputBox: {
-        width: 300,
-        backgroundColor: 'rgba(255,255,255,0.3)',
-        borderRadius: 25,
-        paddingHorizontal: 16,
-        fontSize: 16,
-        color: '#ffffff',
-        marginVertical: 10,
-    },
-    button: {
-        width: 300,
-        backgroundColor: '#1c313a',
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 12,
-        alignContent: 'center',
-    },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#ffffff',
-        textAlign: 'center'
-    },
-    buttonCont: {
-        width: 300,
-        backgroundColor: '#1c313a',
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 12,
-        alignContent: 'center',
-    },
-});

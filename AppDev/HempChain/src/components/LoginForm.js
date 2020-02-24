@@ -20,6 +20,8 @@ import { CommonActions } from '@react-navigation/native';
 
 import { user } from '../../App';
 
+import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
+
 //Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class LoginForm extends Component {
 
@@ -70,8 +72,8 @@ export default class LoginForm extends Component {
     // allowing them to be more easily accesed in the routes folder.
     render() {
         return(
-            <View style={styles.container}>
-                <TextInput style={styles.inputBox}
+            <View style={Spacing.container}>
+                <TextInput style={UserInterface.inputBox}
                 placeholder="Email"
                 placeholderTextColor="#ffffff"
                 selectionColor="#ffffff"
@@ -82,7 +84,7 @@ export default class LoginForm extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 />
-                <TextInput style={styles.inputBox}
+                <TextInput style={UserInterface.inputBox}
                 placeholder="Password"
                 secureTextEntry= {true}
                 placeholderTextColor="#ffffff"
@@ -91,13 +93,13 @@ export default class LoginForm extends Component {
                 ref={(input) => this.password=input}
                 autoCorrect={false}
                 />
-                <TouchableOpacity style={styles.button} onPress={() => this.loginUser(this.state.email, this.state.password)}>
-                    <Text style={styles.buttonText}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.loginUser(this.state.email, this.state.password)}>
+                    <Text style={Typography.buttonText}>
                         Login
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.signupText} onPress={() => this.props.navigation.navigate('ForgotPassword')}>
-                    <Text style={styles.buttonText}>
+                <TouchableOpacity style={Typography.signupText} onPress={() => this.props.navigation.navigate('ForgotPassword')}>
+                    <Text style={Typography.buttonText}>
                         Forgot Password?
                     </Text>
                 </TouchableOpacity>
@@ -105,41 +107,3 @@ export default class LoginForm extends Component {
         );
     }
 }
-
-
-//stylesheet helps us in formating the display and objects
-const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#455a64',
-    },
-    inputBox: {
-        width: 300,
-        backgroundColor: 'rgba(255,255,255,0.3)',
-        borderRadius: 25,
-        paddingHorizontal: 16,
-        fontSize: 16,
-        color: '#ffffff',
-        marginVertical: 10,
-    },
-    button: {
-        width:300,
-        backgroundColor: '#1c313a',
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 12,
-        alignContent: 'center',
-    },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#ffffff',
-        textAlign: 'center'
-    },
-    signupText: {
-        color: 'rgba(255, 255, 255, 0.6)',
-        fontSize: 16
-    },
-});

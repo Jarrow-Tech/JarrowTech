@@ -11,19 +11,21 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
+import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
+
 export default class RegisterForm extends Component {
 
     //Pressing te buttons will route the users to the specified pages
     render() {
         return(
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.buttonRegister} onPress={() => this.props.navigation.navigate('BusinessRegistration')}>
-                    <Text style={styles.buttonText}>
+            <View style={Spacing.container}>
+                <TouchableOpacity style={Buttons.buttonRegister} onPress={() => this.props.navigation.navigate('BusinessRegistration')}>
+                    <Text style={Typography.buttonText}>
                         Register as a Buisness/Department
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonRegister} onPress={() => this.props.navigation.navigate('EmployeeRegistration')}>
-                    <Text style={styles.buttonText}>
+                <TouchableOpacity style={Buttons.buttonRegister} onPress={() => this.props.navigation.navigate('EmployeeRegistration')}>
+                    <Text style={Typography.buttonText}>
                         Register as an Employee
                     </Text>
                 </TouchableOpacity>
@@ -31,35 +33,3 @@ export default class RegisterForm extends Component {
         );
     }
 }
-
-
-//stylesheet helps us in formating the display and objects
-const styles = StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    buttonRegister: {
-        width: 300,
-        backgroundColor: 'rgba(255,255,255,0.3)',
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 12,
-        alignContent: 'center',
-    },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#ffffff',
-        textAlign: 'center'
-    },
-    buttonCont: {
-        width: 300,
-        backgroundColor: '#1c313a',
-        borderRadius: 25,
-        marginVertical: 10,
-        paddingVertical: 12,
-        alignContent: 'center',
-    },
-});

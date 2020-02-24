@@ -122,11 +122,3 @@ export default class App extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#455a64',
-        flex: 1,
-        justifyContent: 'center'
-    }
-});

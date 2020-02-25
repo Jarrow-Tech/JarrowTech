@@ -30,6 +30,7 @@ import {
   Text,
   StatusBar,
   Alert,
+  YellowBox,
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -61,6 +62,11 @@ import EmployeeRegistration from './src/pages/Registration/Employee';
 import HarvestInformation from './src/pages/Displays/CultivatorHelpers/HarvestInformation';
 import Selling from './src/pages/Displays/CultivatorHelpers/Selling';
 import Buying from './src/pages/Displays/CultivatorHelpers/Buying';
+
+// this line supresses the firebase timer warning.
+// it is addressed at https://github.com/facebook/react-native/issues/12981
+// do not add any other warnings to this space.
+YellowBox.ignoreWarnings([ 'Setting a timer' ]);
 
 export default class App extends Component {
 

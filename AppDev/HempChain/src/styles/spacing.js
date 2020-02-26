@@ -32,6 +32,6 @@ export const signupTextContainer = {
     flexGrow: 1,
     alignItems: 'flex-end',
     justifyContent: 'center',
-    paddingVertical: 16,
+    paddingVertical: Platform.OS === 'ios' ? 55 : 26,
     flexDirection: 'row'
 };

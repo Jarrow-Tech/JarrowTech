@@ -23,3 +23,12 @@ export const signupButton = {
     fontSize: 16,
     fontWeight: '500'
 };
+
+export const iosPickerButton = {
+    width: 300,
+    backgroundColor: 'rgba(255,255,255,0.3)',
+    borderRadius: 25,
+    marginVertical: 10,
+    paddingVertical: 12,
+    alignContent: 'center'
+}

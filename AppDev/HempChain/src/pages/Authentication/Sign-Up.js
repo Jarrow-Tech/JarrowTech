@@ -26,7 +26,7 @@ export default class SignUp extends Component {
                 <RegisterForm type="Register" navigation={this.props.navigation} />
                 <View style={Spacing.signupTextContainer}>
                     <Text style={Typography.signupText}>
-                        Already Registered?
+                        Already Registered?{"  "}
                     </Text>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
                         <Text style={Buttons.signupButton}>

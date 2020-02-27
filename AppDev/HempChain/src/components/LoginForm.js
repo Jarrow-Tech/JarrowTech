@@ -47,8 +47,14 @@ export default class LoginForm extends Component {
                     //     case 'Farmer': { console.log('hit'); temp = 'Cultivator' };
                     //     case 'Factory': { temp = 'ManufacturingProcess' };
                     //     default: temp = 'SignUp';
-                    // }
-                    if (snapshot.val() == 'Police/Highway') {
+                    // } LabTester, Lab
+                    if(snapshot.val() == 'LabTester'){
+                        this.props.navigation.navigate('Lab');
+                    } else if(snapshot.val() == 'Trucker'){
+                        this.props.navigation.navigate('Transporter');
+                    } else if(snapshot.val() == 'Regulator'){
+                        this.props.navigation.navigate('Regulator');
+                    } else if (snapshot.val() == 'Police/Highway') {
                         this.props.navigation.navigate('LawEnforcement');
                     } else if (snapshot.val() == 'Farmer') {
                         this.props.navigation.navigate('Cultivator');
@@ -88,6 +94,7 @@ export default class LoginForm extends Component {
                 placeholder="Password"
                 secureTextEntry= {true}
                 placeholderTextColor="#ffffff"
+                selectionColor="#ffffff"
                 value={this.state.password}
                 onChangeText={(text) => this.setState({password: text})}
                 ref={(input) => this.password=input}

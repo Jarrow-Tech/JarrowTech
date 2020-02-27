@@ -62,6 +62,18 @@ import EmployeeRegistration from './src/pages/Registration/Employee';
 import HarvestInformation from './src/pages/Displays/CultivatorHelpers/HarvestInformation';
 import Selling from './src/pages/Displays/CultivatorHelpers/Selling';
 import Buying from './src/pages/Displays/CultivatorHelpers/Buying';
+import Regulator from './src/pages/Displays/RegulatorGov';
+import SearchTransaction from './src/pages/Displays/RegulatorHelpers/TransactionSearch';
+import Hempmap from './src/pages/Displays/RegulatorHelpers/RegulatorMap'
+import Transporter from './src/pages/Displays/Transporter';
+import CheckDestination from './src/pages/Displays/TransporterHelpers/CheckDestination';
+import QRGenerator from './src/pages/Displays/TransporterHelpers/GenerateQRCode';
+import LogTransaction from './src/pages/Displays/ProcessManufHelpers/LogTransactions';
+import Lab from './src/pages/Displays/Lab';
+import LogReport from './src/pages/Displays/LabPageHelpers/LogReport';
+import CultTransaction from './src/pages/Displays/CultivatorHelpers/Transaction';
+
+
 
 // this line supresses the firebase timer warning.
 // it is addressed at https://github.com/facebook/react-native/issues/12981
@@ -117,12 +129,28 @@ export default class App extends Component {
                     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
                     <Stack.Screen name="BusinessRegistration" component={BusinessRegistration} />
                     <Stack.Screen name="EmployeeRegistration" component={EmployeeRegistration} />
+                    <Stack.Screen name="Regulator" component={Regulator} />
                     <Stack.Screen name="LawEnforcement" component={LawEnforcement} />
                     <Stack.Screen name="Cultivator" component={Cultivator} />
                     <Stack.Screen name="HarvestInformation" component={HarvestInformation} />
                     <Stack.Screen name="Selling" component={Selling} />
                     <Stack.Screen name="Buying" component={Buying} />
+                    <Stack.Screen name="SearchTransaction" component={SearchTransaction} />
+                    <Stack.Screen name="LogTransaction" component={LogTransaction} />
+                    <Stack.Screen name="Hempmap" component={Hempmap} />
                     <Stack.Screen name="ManufacturingProcess" component={ManufacturingProcess} />
+                    <Stack.Screen name="Transporter" component={Transporter} />
+                    <Stack.Screen name="CheckDestination" component={CheckDestination} />
+                    <Stack.Screen name="QRGenerator" component={QRGenerator} />
+                    <Stack.Screen name="Lab" component={Lab} />
+                    <Stack.Screen name="LogReport" component={LogReport} />
+                    <Stack.Screen name="CultTransaction" component={CultTransaction} />
+
+
+
+
+
+
                 </Stack.Navigator>
             </NavigationContainer>
         )

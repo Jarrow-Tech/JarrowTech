@@ -35,6 +35,7 @@ export default class Regulator extends Component {
         });
         this.props.navigation.navigate('Login');
     }
+   
 
     render(){
         return(
@@ -42,6 +43,16 @@ export default class Regulator extends Component {
                 <Text style={Typography.buttonText}>
                     Regulator/Government Page
                 </Text>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('SearchTransaction')}>
+                    <Text style={Typography.buttonText}>
+                        Search Transaction
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('Hempmap')}>
+                    <Text style={Typography.buttonText}>
+                        Map
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={Buttons.button} onPress={()=>this.onSignoutPress(this.state.email)}>
                     <Text style={Typography.buttonText}>
                         Sign Out

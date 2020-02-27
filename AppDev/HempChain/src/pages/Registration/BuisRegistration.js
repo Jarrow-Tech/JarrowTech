@@ -170,6 +170,8 @@ export default class buisRegistration extends Component {
                     <Picker.Item label="Cultivator" value="Farmer" />
                     <Picker.Item label="Processor/Manufacturer" value="Factory" />
                     <Picker.Item label="Transporter" value="Trucker" />
+                    <Picker.Item label="Lab" value="LabTester" />
+
                 </Picker>
                 <Prompt
                     visible={this.state.isDialogVisibleLaw}

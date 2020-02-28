@@ -24,8 +24,7 @@ export default class Lab extends Component {
     constructor(props) {
         super(props)
         this.state= ({
-            email: '',
-            isOpen: false,
+            
     });}
 
     onSignoutPress = () => {

@@ -51,7 +51,7 @@ export default class LogTransaction extends Component{
                    Log Transaction Page
                 </Text>
                 <Text style={Typography.buttonText}>
-                Enter Serial ID
+                    Enter Serial ID
                 </Text>
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Serial Number"
@@ -63,7 +63,7 @@ export default class LogTransaction extends Component{
                  autoCorrect={false}
                   /> 
                   <Text style={Typography.buttonText}>
-                Enter Product
+                    Enter Product
                 </Text>
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Poduct"

@@ -52,7 +52,7 @@ export default class LogReport extends Component {
                    Lab Report Page
                 </Text>
                 <Text style={Typography.buttonText}>
-                Enter Serial ID
+                    Enter Serial ID
                 </Text>
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Serial Number"
@@ -64,7 +64,7 @@ export default class LogReport extends Component {
                  autoCorrect={false}
                   /> 
                   <Text style={Typography.buttonText}>
-                Enter THC Levels
+                    Enter THC Levels
                 </Text>
                 <TextInput style={UserInterface.inputBox}
                  placeholder="THC Levels "

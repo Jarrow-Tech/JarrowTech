@@ -58,7 +58,7 @@ export default class CultTransaction extends Component{
                    Cultivator Transaction Page
                 </Text>
                 <Text style={Typography.buttonText}>
-                Cultivator will enter following info pertaining to transaction
+                    Cultivator will enter following info pertaining to transaction
                 </Text>
                 <TextInput style={UserInterface.inputBox}
                  placeholder=" Enter JarrowTech/Hemp Cultivator ID"

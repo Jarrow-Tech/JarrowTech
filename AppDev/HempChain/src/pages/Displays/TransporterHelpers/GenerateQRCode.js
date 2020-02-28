@@ -42,9 +42,7 @@ export default class QRGenerator extends Component{
         console.log("Creating QR Code for serial #: "+this.state.serial)
     }
 
-    barcodeRecognized = e => {
-        this.setState({serial: e.data})
-    }
+    
 
     render(){
         return(

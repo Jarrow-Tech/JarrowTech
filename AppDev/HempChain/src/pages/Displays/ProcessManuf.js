@@ -78,6 +78,11 @@ export default class ManufProcs extends Component {
                         Search Serial
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('LogTransaction')}>
+                    <Text style={Typography.buttonText}>
+                        Log Transactions
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.onSignoutPress(this.state.email)}>
                     <Text style={Typography.buttonText}>
                         Sign Out

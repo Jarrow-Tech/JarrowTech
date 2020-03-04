@@ -72,6 +72,11 @@ export default class Cultivator extends Component{
                         Log Harvest
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('CultTransaction')}>
+                    <Text style={Typography.buttonText}>
+                        Log Transaction
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('Buying', {buy: this.buy})}>
                     <Text style={Typography.buttonText}>
                         Buy Product

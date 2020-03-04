@@ -19,6 +19,7 @@
 		BDCB776DC6F86DF03F120E7B /* libPods-HempChain-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D17F42003D9D06E5DBA1C6 /* libPods-HempChain-tvOS.a */; };
 		CF6EF357CFB7E3E2C670A463 /* libPods-HempChain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 670FC975C4641D45F3C4BEC6 /* libPods-HempChain.a */; };
 		DE9750BF7D3FE53119574719 /* libPods-HempChainTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19112953563E14B1533A68BB /* libPods-HempChainTests.a */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HempChainTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HempChainTests.m; sourceTree = "<group>"; };
 		02AD799E26FF569FBDCD9C3C /* Pods-HempChainTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HempChainTests.debug.xcconfig"; path = "Target Support Files/Pods-HempChainTests/Pods-HempChainTests.debug.xcconfig"; sourceTree = "<group>"; };
+
 		13B07F961A680F5B00A75B9A /* HempChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HempChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HempChain/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HempChain/AppDelegate.m; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		670FC975C4641D45F3C4BEC6 /* libPods-HempChain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HempChain.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A4CF27D0FE97798151B12A /* Pods-HempChain-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HempChain-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-HempChain-tvOS/Pods-HempChain-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		93899EA1B889779A94FB7820 /* Pods-HempChain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HempChain.debug.xcconfig"; path = "Target Support Files/Pods-HempChain/Pods-HempChain.debug.xcconfig"; sourceTree = "<group>"; };
+
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F326B92919E693CB43FBDF36 /* libPods-HempChain-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HempChain-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,10 +143,11 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				670FC975C4641D45F3C4BEC6 /* libPods-HempChain.a */,
+        670FC975C4641D45F3C4BEC6 /* libPods-HempChain.a */,
 				F3D17F42003D9D06E5DBA1C6 /* libPods-HempChain-tvOS.a */,
 				F326B92919E693CB43FBDF36 /* libPods-HempChain-tvOSTests.a */,
 				19112953563E14B1533A68BB /* libPods-HempChainTests.a */,
+
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -375,6 +379,7 @@
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
 		284A7B89CF41EFB277E1BF72 /* [CP] Check Pods Manifest.lock */ = {
+
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -624,6 +629,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 93899EA1B889779A94FB7820 /* Pods-HempChain.debug.xcconfig */;
+
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -645,6 +651,7 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 48EAE45C1EDB73FA0ED70537 /* Pods-HempChain.release.xcconfig */;
+
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -665,6 +672,7 @@
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 88A4CF27D0FE97798151B12A /* Pods-HempChain-tvOS.debug.xcconfig */;
+
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -693,6 +701,7 @@
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1B8B6F0F78B3B7B68A28D4C9 /* Pods-HempChain-tvOS.release.xcconfig */;
+
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -721,6 +730,7 @@
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FE505413F2627ECCC39B0AE5 /* Pods-HempChain-tvOSTests.debug.xcconfig */;
+
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -748,6 +758,7 @@
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41D39B7B95752A961F52BBB1 /* Pods-HempChain-tvOSTests.release.xcconfig */;
+
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

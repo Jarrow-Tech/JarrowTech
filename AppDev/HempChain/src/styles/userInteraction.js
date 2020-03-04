@@ -7,5 +7,6 @@ export const inputBox ={
     paddingHorizontal: 16,
     fontSize: 16,
     color: '#ffffff',
-    marginVertical: 10    
-  };
+    marginVertical: 10,
+    height: 50,
+};

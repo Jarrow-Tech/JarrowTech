@@ -71,7 +71,8 @@ export default class ManufProcs extends Component {
                  placeholderTextColor='#ffffff'
                  ref={(input) => this.serial = input}
                  onChangeText={(serial) => this.setState({serial})}
-                 value={this.state.serial} />
+                 value={this.state.serial}
+                 captureAudio={false} />
                 <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
                     <Text style={Typography.buttonText}>
                         Search Serial

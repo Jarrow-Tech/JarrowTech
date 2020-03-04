@@ -11,11 +11,23 @@ import {
   Picker,
   Alert,
   Button,
+  ActionSheetIOS,
 } from 'react-native';
 import Prompt from 'react-native-input-prompt'
 import { userRef } from '../../../App';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+
+let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+    'Connecticut', 'Deleware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana',
+    'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan',
+    'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+    'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma',
+    'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas',
+    'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+let agencies = ['Government', 'Law Enforcement', 'Cultivator', 'Processor/Manufacturer', 'Transporter'];
+let agenciesTags = ['Regulator', 'Police/Highway', 'Farmer', 'Factory', 'Trucker'];
 
 export default class buisRegistration extends Component {
 
@@ -28,6 +40,7 @@ export default class buisRegistration extends Component {
             lastName: " ",
             operatingState: " ",
             agency:" ",
+            agencyDisplay:" ",
             city: " ",
             badgeID: " ",
             hempCultID: " ",
@@ -70,7 +83,7 @@ export default class buisRegistration extends Component {
     //this function checks to see what agencey the user picked and if it they have choosen
     // either Cultivator or Law Enforcement a prompt will appear and ask them to enter either a badge number
     // or hemp cultivator ID
-    promptChecker=(itemValue) => {
+    promptChecker = (itemValue) => {
         this.setState({agency: itemValue});
         if (itemValue == "Police/Highway") {
             this.setState({isDialogVisibleLaw: true})
@@ -99,80 +112,115 @@ export default class buisRegistration extends Component {
         }
     }
 
+    // generate a picker for ios instead of a React Picker
+    generatePicker(opts) {
+        ActionSheetIOS.showActionSheetWithOptions({
+            options: opts
+        },
+        (buttonIndex) => {
+            // switch based on which picker is invoked (indicated by the 'opts' passed as arguments)
+            if (opts == states) {
+                this.setState({operatingState: opts[buttonIndex]});
+            } else if (opts == agencies) {
+                this.setState({agencyDisplay: agencies[buttonIndex]});
+                this.setState({agency: agenciesTags[buttonIndex]});
+                this.setState({badgeID: "N/A"});
+                this.setState({hempCultID: "N/A"});
+                this.promptChecker(agenciesTags[buttonIndex]);
+            } else {
+                // opts didn't match any expected input.
+                // somehow generatePicker was called from an unexpected location
+                // TODO: error code subject to change once we decide on a scheme to name them
+                Alert.alert("Something has gone wrong. Please retry registration. Error Code 1001");
+            }
+        });
+    }
+
     render(){
         return(
             <View style={Spacing.colorContainer}>
-                <Picker style={UserInterface.inputBox}
-                    mode="dropdown"
-                    selectedValue={this.state.operatingState}
-                    onValueChange={itemValue => this.onLocationChange(itemValue)}>
-                    <Picker.Item label="Select a State" value="NULL"/>
-                    <Picker.Item label="Alabama" value="Alabama" />
-                    <Picker.Item label="Alaska" value="Alaska" />
-                    <Picker.Item label="Arizona" value="Arizona" />
-                    <Picker.Item label="Arkansas" value="Arkansas" />
-                    <Picker.Item label="California" value="California" />
-                    <Picker.Item label="Colorado" value="Colorado" />
-                    <Picker.Item label="Connecticut" value="Connecticut" />
-                    <Picker.Item label="Delaware" value="Delaware" />
-                    <Picker.Item label="Florida" value="Florida" />
-                    <Picker.Item label="Georgia" value="Georgia" />
-                    <Picker.Item label="Hawaii" value="Hawaii" />
-                    <Picker.Item label="Idaho" value="Idaho" />
-                    <Picker.Item label="Illinois" value="Illinois" />
-                    <Picker.Item label="Indiana" value="Indiana" />
-                    <Picker.Item label="Iowa" value="Iowa" />
-                    <Picker.Item label="Kansas" value="Kansas" />
-                    <Picker.Item label="Kentucky" value="Kentucky" />
-                    <Picker.Item label="Louisiana" value="Louisiana" />
-                    <Picker.Item label="Maine" value="Maine" />
-                    <Picker.Item label="Maryland" value="Maryland" />
-                    <Picker.Item label="Massachusetts" value="Massachusetts" />
-                    <Picker.Item label="Michigan" value="Michigan" />
-                    <Picker.Item label="Minnesota" value="Minnesota" />
-                    <Picker.Item label="Mississippi" value="Mississippi" />
-                    <Picker.Item label="Missouri" value="Missouri" />
-                    <Picker.Item label="Montana" value="Montana" />
-                    <Picker.Item label="Nebraska" value="Nebraska" />
-                    <Picker.Item label="Nevada" value="Nevada" />
-                    <Picker.Item label="New Hampshire" value="New Hampshire" />
-                    <Picker.Item label="New Jersey" value="New Jersey" />
-                    <Picker.Item label="New Mexico" value="New Mexico" />
-                    <Picker.Item label="New York" value="New York" />
-                    <Picker.Item label="North Carolina" value="North Carolina" />
-                    <Picker.Item label="North Dakota" value="North Dakota" />
-                    <Picker.Item label="Ohio" value="Ohio" />
-                    <Picker.Item label="Ohio" value="Ohio" />
-                    <Picker.Item label="Oklahoma" value="Oklahoma" />
-                    <Picker.Item label="Oregon" value="Oregon" />
-                    <Picker.Item label="Pennsylvania" value="Pennsylvania" />
-                    <Picker.Item label="Rhode Island" value="Rhode Island" />
-                    <Picker.Item label="South Carolina" value="South Carolina" />
-                    <Picker.Item label="South Dakota" value="South Dakota" />
-                    <Picker.Item label="Tennessee" value="Tennessee" />
-                    <Picker.Item label="Texas" value="Texas" />
-                    <Picker.Item label="Utah" value="Utah" />
-                    <Picker.Item label="Vermont" value="Vermont" />
-                    <Picker.Item label="Virginia" value="Virginia" />
-                    <Picker.Item label="Washington" value="Washington" />
-                    <Picker.Item label="West Virginia" value="West Virginia" />
-                    <Picker.Item label="Wisconsin" value="Wisconsin" />
-                    <Picker.Item label="Wyoming" value="Wyoming" />
-                </Picker>
-                <Picker
-                    style={UserInterface.inputBox}
-                    mode="dropdown"
-                    selectedValue={this.state.agency}
-                    onValueChange={(itemValue) => {this.onAgencyChange(itemValue); this.promptChecker(itemValue)}}>
-                    <Picker.Item label="Choose an Agency" value="NULL"/>
-                    <Picker.Item label="Government" value="Regulator" />
-                    <Picker.Item label="Law Enforcement" value="Police/Highway" />
-                    <Picker.Item label="Cultivator" value="Farmer" />
-                    <Picker.Item label="Processor/Manufacturer" value="Factory" />
-                    <Picker.Item label="Transporter" value="Trucker" />
-                    <Picker.Item label="Lab" value="LabTester" />
-
-                </Picker>
+                {(Platform.OS === 'ios') ?
+                    <TouchableOpacity style={Buttons.iosPickerButton} onPress={() => this.generatePicker(states)}>
+                        <Text style={Typography.buttonText}>
+                            {(this.state.operatingState == " ") ? "Select a State" : this.state.operatingState}
+                        </Text>
+                    </TouchableOpacity> :
+                    <Picker style={UserInterface.inputBox}
+                        mode="dropdown"
+                        selectedValue={this.state.operatingState}
+                        onValueChange={itemValue => this.onLocationChange(itemValue)}>
+                        <Picker.Item label="Select a State" value="NULL"/>
+                        <Picker.Item label="Alabama" value="Alabama" />
+                        <Picker.Item label="Alaska" value="Alaska" />
+                        <Picker.Item label="Arizona" value="Arizona" />
+                        <Picker.Item label="Arkansas" value="Arkansas" />
+                        <Picker.Item label="California" value="California" />
+                        <Picker.Item label="Colorado" value="Colorado" />
+                        <Picker.Item label="Connecticut" value="Connecticut" />
+                        <Picker.Item label="Delaware" value="Delaware" />
+                        <Picker.Item label="Florida" value="Florida" />
+                        <Picker.Item label="Georgia" value="Georgia" />
+                        <Picker.Item label="Hawaii" value="Hawaii" />
+                        <Picker.Item label="Idaho" value="Idaho" />
+                        <Picker.Item label="Illinois" value="Illinois" />
+                        <Picker.Item label="Indiana" value="Indiana" />
+                        <Picker.Item label="Iowa" value="Iowa" />
+                        <Picker.Item label="Kansas" value="Kansas" />
+                        <Picker.Item label="Kentucky" value="Kentucky" />
+                        <Picker.Item label="Louisiana" value="Louisiana" />
+                        <Picker.Item label="Maine" value="Maine" />
+                        <Picker.Item label="Maryland" value="Maryland" />
+                        <Picker.Item label="Massachusetts" value="Massachusetts" />
+                        <Picker.Item label="Michigan" value="Michigan" />
+                        <Picker.Item label="Minnesota" value="Minnesota" />
+                        <Picker.Item label="Mississippi" value="Mississippi" />
+                        <Picker.Item label="Missouri" value="Missouri" />
+                        <Picker.Item label="Montana" value="Montana" />
+                        <Picker.Item label="Nebraska" value="Nebraska" />
+                        <Picker.Item label="Nevada" value="Nevada" />
+                        <Picker.Item label="New Hampshire" value="New Hampshire" />
+                        <Picker.Item label="New Jersey" value="New Jersey" />
+                        <Picker.Item label="New Mexico" value="New Mexico" />
+                        <Picker.Item label="New York" value="New York" />
+                        <Picker.Item label="North Carolina" value="North Carolina" />
+                        <Picker.Item label="North Dakota" value="North Dakota" />
+                        <Picker.Item label="Ohio" value="Ohio" />
+                        <Picker.Item label="Oklahoma" value="Oklahoma" />
+                        <Picker.Item label="Oregon" value="Oregon" />
+                        <Picker.Item label="Pennsylvania" value="Pennsylvania" />
+                        <Picker.Item label="Rhode Island" value="Rhode Island" />
+                        <Picker.Item label="South Carolina" value="South Carolina" />
+                        <Picker.Item label="South Dakota" value="South Dakota" />
+                        <Picker.Item label="Tennessee" value="Tennessee" />
+                        <Picker.Item label="Texas" value="Texas" />
+                        <Picker.Item label="Utah" value="Utah" />
+                        <Picker.Item label="Vermont" value="Vermont" />
+                        <Picker.Item label="Virginia" value="Virginia" />
+                        <Picker.Item label="Washington" value="Washington" />
+                        <Picker.Item label="West Virginia" value="West Virginia" />
+                        <Picker.Item label="Wisconsin" value="Wisconsin" />
+                        <Picker.Item label="Wyoming" value="Wyoming" />
+                    </Picker>
+                }
+                {(Platform.OS === 'ios') ?
+                    <TouchableOpacity style={Buttons.iosPickerButton} onPress={() => this.generatePicker(agencies)}>
+                        <Text style={Typography.buttonText}>
+                            {(this.state.agencyDisplay == " ") ? "Select an Agency" : this.state.agencyDisplay}
+                        </Text>
+                    </TouchableOpacity> :
+                    <Picker
+                        style={UserInterface.inputBox}
+                        mode="dropdown"
+                        selectedValue={this.state.agency}
+                        onValueChange={(itemValue) => {this.onAgencyChange(itemValue); this.promptChecker(itemValue)}}>
+                        <Picker.Item label="Choose an Agency" value="NULL"/>
+                        <Picker.Item label="Government" value="Regulator" />
+                        <Picker.Item label="Law Enforcement" value="Police/Highway" />
+                        <Picker.Item label="Cultivator" value="Farmer" />
+                        <Picker.Item label="Processor/Manufacturer" value="Factory" />
+                        <Picker.Item label="Transporter" value="Trucker" />
+                    </Picker>
+                }
                 <Prompt
                     visible={this.state.isDialogVisibleLaw}
                     title="Please Enter Badge Number"

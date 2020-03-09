@@ -1,5 +1,4 @@
 // the style collection for all user interaction objects
-import {Platform} from 'react-native'
 export const inputBox = {
     width: 300,
     backgroundColor: 'rgba(255, 255, 255, 0.3)',

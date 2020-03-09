@@ -66,26 +66,30 @@ export default class LoginForm extends Component {
     render() {
         return(
             <View style={Spacing.container}>
-                <TextInput style={UserInterface.inputBox}
-                placeholder="Email"
-                placeholderTextColor="#ffffff"
-                selectionColor="#ffffff"
-                keyboardType= "email-address"
-                value={this.state.email}
-                onChangeText={(text) => this.setState({email: text})}
-                onSubmitEditing={() => this.password.focus()}
-                autoCapitalize="none"
-                autoCorrect={false}
-                />
-                <TextInput style={UserInterface.inputBox}
-                placeholder="Password"
-                secureTextEntry= {true}
-                placeholderTextColor="#ffffff"
-                value={this.state.password}
-                onChangeText={(text) => this.setState({password: text})}
-                ref={(input) => this.password=input}
-                autoCorrect={false}
-                />
+                <View style={UserInterface.inputBox.inputContainer}>
+                    <TextInput style={UserInterface.inputBox.inputText}
+                    placeholder="Email"
+                    placeholderTextColor="#ffffff"
+                    selectionColor="#ffffff"
+                    keyboardType= "email-address"
+                    value={this.state.email}
+                    onChangeText={(text) => this.setState({email: text})}
+                    onSubmitEditing={() => this.password.focus()}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    />
+                </View>
+                <View style={UserInterface.inputBox.inputContainer}>
+                    <TextInput style={UserInterface.inputBox.inputText}
+                    placeholder="Password"
+                    secureTextEntry= {true}
+                    placeholderTextColor="#ffffff"
+                    value={this.state.password}
+                    onChangeText={(text) => this.setState({password: text})}
+                    ref={(input) => this.password=input}
+                    autoCorrect={false}
+                    />
+                </View>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.loginUser(this.state.email, this.state.password)}>
                     <Text style={Typography.buttonText}>
                         Login
@@ -96,7 +100,7 @@ export default class LoginForm extends Component {
                         Forgot Password?
                     </Text>
                 </TouchableOpacity>
-            </View>
+                </View>
         );
     }
 }

@@ -42,6 +42,11 @@ export default class ForgotPassword extends Component {
                  onChangeText={(text) => this.setState({email: text})}
                  onSubmitEditing={() => this.password.focus()}
                   />
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>
+                    <Text style={Typography.buttonText}>
+                        Go Back
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={Buttons.button} onPress={this.onResetPasswordPress}>
                     <Text style={Typography.buttonText}>
                         Send Reset Link

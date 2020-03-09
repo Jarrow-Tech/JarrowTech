@@ -59,6 +59,11 @@ export default class EmployeeReg extends Component {
                  placeholderTextColor="#ffffff"
                  ref={(input) => this.password=input}
                 />
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>
+                    <Text style={Typography.buttonText}>
+                        Go Back
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={Spacing.buttonContainer} onPress={() => this.props.navigation.navigate('Login')}>
                     <Text style={Typography.buttonText}>
                         Finish Registration

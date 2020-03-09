@@ -72,6 +72,9 @@ import LogTransaction from './src/pages/Displays/ProcessManufHelpers/LogTransact
 import Lab from './src/pages/Displays/Lab';
 import LogReport from './src/pages/Displays/LabPageHelpers/LogReport';
 import CultTransaction from './src/pages/Displays/CultivatorHelpers/Transaction';
+import LicenseApplicaton from './src/pages/Registration/LicenseApplication';
+import KeyParticipants from './src/pages/Registration/ApplicationHelpers/KeyParticipants';
+import ProducingAreas from './src/pages/Registration/ApplicationHelpers/ProducingAreas';
 
 
 
@@ -145,6 +148,13 @@ export default class App extends Component {
                     <Stack.Screen name="Lab" component={Lab} />
                     <Stack.Screen name="LogReport" component={LogReport} />
                     <Stack.Screen name="CultTransaction" component={CultTransaction} />
+                    <Stack.Screen name="LicenseApplication" component={LicenseApplicaton} />
+                    <Stack.Screen name="KeyParticipants" component={KeyParticipants} />
+                    <Stack.Screen name="ProducingAreas" component={ProducingAreas} />
+
+
+
+
 
 
 

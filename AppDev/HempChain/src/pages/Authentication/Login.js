@@ -28,7 +28,7 @@ export default class Login extends Component {
                     <Text style={Typography.signupText}>
                         Don't have an Account?{"  "}
                     </Text>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUp')}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('BusinessRegistration')}>
                         <Text style={Buttons.signupButton}>
                             Register Here!
                         </Text>

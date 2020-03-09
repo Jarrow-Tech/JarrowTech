@@ -66,8 +66,8 @@ export default class LoginForm extends Component {
     render() {
         return(
             <View style={Spacing.container}>
-                <View style={UserInterface.inputBox.inputContainer}>
-                    <TextInput style={UserInterface.inputBox.inputText}
+                <View style={UserInterface.inputBox}>
+                <TextInput style={UserInterface.inputText}
                     placeholder="Email"
                     placeholderTextColor="#ffffff"
                     selectionColor="#ffffff"
@@ -79,8 +79,8 @@ export default class LoginForm extends Component {
                     autoCorrect={false}
                     />
                 </View>
-                <View style={UserInterface.inputBox.inputContainer}>
-                    <TextInput style={UserInterface.inputBox.inputText}
+                <View style={UserInterface.inputBox}>
+                <TextInput style={UserInterface.inputText}
                     placeholder="Password"
                     secureTextEntry= {true}
                     placeholderTextColor="#ffffff"
@@ -100,7 +100,7 @@ export default class LoginForm extends Component {
                         Forgot Password?
                     </Text>
                 </TouchableOpacity>
-                </View>
+            </View>
         );
     }
 }

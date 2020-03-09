@@ -67,7 +67,7 @@ export default class LoginForm extends Component {
         return(
             <View style={Spacing.container}>
                 <View style={UserInterface.inputBox}>
-                <TextInput style={UserInterface.inputText}
+                    <TextInput style={UserInterface.inputText}
                     placeholder="Email"
                     placeholderTextColor="#ffffff"
                     selectionColor="#ffffff"
@@ -80,7 +80,7 @@ export default class LoginForm extends Component {
                     />
                 </View>
                 <View style={UserInterface.inputBox}>
-                <TextInput style={UserInterface.inputText}
+                    <TextInput style={UserInterface.inputText}
                     placeholder="Password"
                     secureTextEntry= {true}
                     placeholderTextColor="#ffffff"

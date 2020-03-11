@@ -35,3 +35,10 @@ export const signupTextContainer = {
     paddingVertical: Platform.OS === 'ios' ? 55 : 26,
     flexDirection: 'row'
 };
+
+export const imageContainer ={
+    borderWidth: 1,
+    borderColor: 'black',
+    width: '80%',
+    height: 150
+};

@@ -249,43 +249,53 @@ export default class buisRegistration extends Component {
                             hempCultID: text,
                         })
                     }/>
-                  <TextInput style={UserInterface.inputBox}
-                   placeholder="City"
-                   placeholderTextColor="#ffffff"
-                   ref={(input) => this.city = input}
-                   onChangeText={(city) => this.setState({city})}
-                   onSubmitEditing={() => this.firstName.focus()}
-                  />
-                  <TextInput style={UserInterface.inputBox}
-                   placeholder="Admin First Name"
-                   placeholderTextColor="#ffffff"
-                   ref={(input) => this.firstName = input}
-                   onChangeText={(firstName) => this.setState({firstName})}
-                   onSubmitEditing={() => this.lastName.focus()}
-                  />
-                  <TextInput style={UserInterface.inputBox}
-                   placeholder="Admin Last Name"
-                   placeholderTextColor="#ffffff"
-                   ref={(input) => this.lastName = input}
-                   onChangeText={(lastName) => this.setState({lastName})}
-                   onSubmitEditing={() => this.adminEmail.focus()}
-                  />
-                  <TextInput style={UserInterface.inputBox}
-                   placeholder="Admin Email"
-                   selectionColor="#ffffff"
-                   keyboardType= 'email-address'
-                   placeholderTextColor="#ffffff"
-                   ref={(input) => this.adminEmail = input}
-                   onChangeText={(email) => this.setState({email})}
-                   onSubmitEditing={() => this.password.focus()}
-                  />
-                  <TextInput style={UserInterface.inputBox}
-                   placeholder="Admin Password"
-                   secureTextEntry= {true}
-                   placeholderTextColor="#ffffff"
-                   onChangeText={(password) => this.setState({password})}
-                   ref={(input) => this.password = input}
-                  />
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="City"
+                    placeholderTextColor="#ffffff"
+                    ref={(input) => this.city = input}
+                    onChangeText={(city) => this.setState({city})}
+                    onSubmitEditing={() => this.firstName.focus()}
+                    />
+                </View>
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Admin First Name"
+                    placeholderTextColor="#ffffff"
+                    ref={(input) => this.firstName = input}
+                    onChangeText={(firstName) => this.setState({firstName})}
+                    onSubmitEditing={() => this.lastName.focus()}
+                    />
+                </View>
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Admin Last Name"
+                    placeholderTextColor="#ffffff"
+                    ref={(input) => this.lastName = input}
+                    onChangeText={(lastName) => this.setState({lastName})}
+                    onSubmitEditing={() => this.adminEmail.focus()}
+                    />
+                </View>
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Admin Email"
+                    selectionColor="#ffffff"
+                    keyboardType= 'email-address'
+                    placeholderTextColor="#ffffff"
+                    ref={(input) => this.adminEmail = input}
+                    onChangeText={(email) => this.setState({email})}
+                    onSubmitEditing={() => this.password.focus()}
+                    />
+                </View>
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Admin Password"
+                    secureTextEntry= {true}
+                    placeholderTextColor="#ffffff"
+                    onChangeText={(password) => this.setState({password})}
+                    ref={(input) => this.password = input}
+                    />
+                </View>
                   <TouchableOpacity style={Spacing.buttonContainer} onPress={() => {this.signUpUser(this.state.email,this.state.password)}}>
                         <Text style={Typography.buttonText}>
                             Finish Registration

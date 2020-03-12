@@ -65,12 +65,15 @@ export default class LawEnforcement extends Component {
                     flashMode={RNCamera.Constants.FlashMode.on}
                     onBarCodeRead={this.barcodeRecognized}>
                 </RNCamera>
-                <TextInput style={UserInterface.inputBox}
-                 placeholder="Serial Number"
-                 placeholderTextColor='#ffffff'
-                 ref={(input) => this.serial = input}
-                 onChangeText={(serial) => this.setState({serial})}
-                 value={this.state.serial} />
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Serial Number"
+                    placeholderTextColor='#ffffff'
+                    ref={(input) => this.serial = input}
+                    onChangeText={(serial) => this.setState({serial})}
+                    value={this.state.serial} 
+                    />
+                </View>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
                     <Text style={Typography.buttonText}>
                         Search Serial

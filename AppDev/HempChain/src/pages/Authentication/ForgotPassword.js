@@ -33,15 +33,17 @@ export default class ForgotPassword extends Component {
     render() {
         return(
             <View style={Spacing.colorContainer}>
-                <TextInput style={UserInterface.inputBox}
-                 placeholder="Email"
-                 placeholderTextColor="#ffffff"
-                 selectionColor="#ffffff"
-                 keyboardType="email-address"
-                 value={this.state.email}
-                 onChangeText={(text) => this.setState({email: text})}
-                 onSubmitEditing={() => this.password.focus()}
-                  />
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Email"
+                    placeholderTextColor="#ffffff"
+                    selectionColor="#ffffff"
+                    keyboardType="email-address"
+                    value={this.state.email}
+                    onChangeText={(text) => this.setState({email: text})}
+                    onSubmitEditing={() => this.password.focus()}
+                    />
+                </View>
                 <TouchableOpacity style={Buttons.button} onPress={this.onResetPasswordPress}>
                     <Text style={Typography.buttonText}>
                         Send Reset Link

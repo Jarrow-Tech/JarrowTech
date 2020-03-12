@@ -41,7 +41,20 @@ export default class LoginForm extends Component {
             } else if (firebase.auth().currentUser.emailVerified == true) {
                 firebase.database().ref("Users/" + firebase.auth().currentUser.uid + "/agency").once('value').then((snapshot) => {
                     console.log(snapshot.val());
-                    if (snapshot.val() == 'Police/Highway') {
+                    let temp = "";
+                    // switch (snapshot.val()) {
+                    //     case 'Police/Highway': { console.log('hit'); temp = 'LawEnforcement' };
+                    //     case 'Farmer': { console.log('hit'); temp = 'Cultivator' };
+                    //     case 'Factory': { temp = 'ManufacturingProcess' };
+                    //     default: temp = 'SignUp';
+                    // } LabTester, Lab
+                    if(snapshot.val() == 'LabTester'){
+                        this.props.navigation.navigate('Lab');
+                    } else if(snapshot.val() == 'Trucker'){
+                        this.props.navigation.navigate('Transporter');
+                    } else if(snapshot.val() == 'Regulator'){
+                        this.props.navigation.navigate('Regulator');
+                    } else if (snapshot.val() == 'Police/Highway') {
                         this.props.navigation.navigate('LawEnforcement');
                     } else if (snapshot.val() == 'Farmer') {
                         this.props.navigation.navigate('Cultivator');

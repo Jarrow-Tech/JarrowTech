@@ -2,31 +2,18 @@
 
 -----------------
 
-**Current Project State**: Building Baselines |  Last Updated: November 11th, 2019
+**Current Project State**: Rushing to MVP |  Last Updated: March 11th, 2020
 -----------------
 
 ## Overview
 **JarrowTech® HempChain™ 1.0** is a cross-platform application developed in order to aid in the reliable tracking of hemp products from seed to shelf across the entirety of the United States
-> :pushpin: For more information on the project please consult with either James or Carlton. You can read about the beginnings of the idea here: https://jarrowtech.com/
+> :pushpin: For more information on the project you can read about the idea here: https://jarrowtech.com/
 
 ## Download and Run
 * **Download** - The latest release includes user registration that is connected to a firebase database. This is currently being more perfected before moving onto the tracking & trading systems.
 
-* **Run** - After installing the latest release you will open an emulator/browser depending on which you are testing and run the following code depending on your testing system:
-
-Android: Run from the hempchain directory of this project
-> cd AppDev |
-> cd HempChain |
-> npm install |
-> react-native start |
-*open a new terminal* |
-> cd AppDev |
-> cd HempChain |
->react-native run-android |
-
-IOS: *In Development*
-
-WebApp: *In Development*
+## Information
+**Ethereum Blockchain** - The application is currently being developed on Ethereum using Vyper for the smart contract development. More Information will be added soon.
 
 ## Ready to Track!
 

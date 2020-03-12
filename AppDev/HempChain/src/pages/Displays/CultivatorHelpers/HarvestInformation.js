@@ -53,24 +53,28 @@ export default class HarvestInformation extends Component{
                 <Text style={Typography.buttonText}>
                     Enter Harvest Details Below
                 </Text>
-                <TextInput style={UserInterface.inputBox}
-                 placeholder="Crop Size"
-                 placeholderTextColor="#ffffff"
-                 selectionColor="#ffffff"
-                 value={this.state.cropSize}
-                 onChangeText={(text) => this.setState({cropSize: text})}
-                 autoCapitalize="none"
-                 autoCorrect={false}
-                  />
-                <TextInput style={UserInterface.inputBox}
-                 placeholder="Crop Type"
-                 placeholderTextColor="#ffffff"
-                 selectionColor="#ffffff"
-                 value={this.state.cropType}
-                 onChangeText={(text) => this.setState({cropType: text})}
-                 autoCapitalize="none"
-                 autoCorrect={false}
-                  />
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Crop Size"
+                    placeholderTextColor="#ffffff"
+                    selectionColor="#ffffff"
+                    value={this.state.cropSize}
+                    onChangeText={(text) => this.setState({cropSize: text})}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    />
+                </View>
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Crop Type"
+                    placeholderTextColor="#ffffff"
+                    selectionColor="#ffffff"
+                    value={this.state.cropType}
+                    onChangeText={(text) => this.setState({cropType: text})}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    />
+                </View>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.harvest()}>
                     <Text style={Typography.buttonText}>
                         Log Harvest Details

@@ -9,14 +9,6 @@ struct StateStruct:
     inTesting: bool
     delivered: bool
 
-# Certificate Of Analysis structs
-# struct for the table
-# struct CertificateOfAnalysis:
-#     cbda: uint256[3]
-#     thca: uint256[3]
-#     cbga: uint256[3]
-#     dthc: uint256[3]
-
 # scan object struct
 struct ScanObject:
     size: uint256
@@ -26,17 +18,6 @@ struct ScanObject:
     owner: address
     cocr: uint256
     coa: uint256[3][4]
-
-# roles:
-#   10 - farmer
-#   50 - regulator (government)
-#   20 - enforcement (law enforcement)
-#   30 - technician (from the labs)
-#   40 - transporter
-#   60 - endUser
-#   11 - planted
-#   00 - scan
-#   31 - TestingLog
 
 # properties of the contract
 contractVersion: public(uint256)
@@ -59,14 +40,12 @@ def __init__():
     self.growerAddress = msg.sender
     self.ownerAddress = msg.sender
     self.contractVersion = 1
-    self.cropSize = 10
     self.coa = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
     # chain of custody info
     self.cocItems = 1
     self.chainOfCustodyAddress[self.cocItems - 1] = msg.sender
     self.chainOfCustodyRole[self.cocItems - 1] = 0
-
 
 @private
 @constant
@@ -91,6 +70,7 @@ def getRoleCode(mRole: string[12]) -> uint256:
     return 0
 
 @public
+@nonreentrant("plant")
 def plant():
     assert (not self.state.planted)
     self.state.planted = True
@@ -102,21 +82,24 @@ def plant():
 
 @public
 @nonreentrant("harvest")
-def harvest() -> ScanObject:
+def harvest(size: uint256) -> ScanObject:
     assert (self.state.planted and (not self.state.harvested))
-    self.state.harvested = True
 
     # update chain of custody
     self.chainOfCustodyAddress[self.cocItems] = msg.sender
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Farmer")
     self.cocItems = self.cocItems + 1
 
+    # update crop size with harvest info
+    self.cropSize = size
+    self.state.harvested = True
+
     return ScanObject({size: self.cropSize, serial: self.serialNumber, state: self.state, grower: self.growerAddress, owner: self.ownerAddress, cocr: self.chainOfCustodyRole[self.cocItems], coa: self.coa})
 
 # an event that fires and logs every scan action of the product
 @public
 def scan(mRole: string[12]) -> ScanObject:
-    # assert self.state.harvested == True
+    assert self.state.harvested == True
 
     # update chain of custody
     self.chainOfCustodyAddress[self.cocItems] = msg.sender

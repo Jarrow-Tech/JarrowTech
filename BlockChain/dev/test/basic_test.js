@@ -8,10 +8,10 @@ contract("Hemp", accounts => {
 
     it("Plant, Harvest, Scan, Transfer to Technician, Add COA", () => {
         HempInst.plant.call();
-        HempInst.harvest.call();
+        HempInst.harvest.call(10);
         HempInst.scan.call("Farmer");
         HempInst.transferOwner.call("Technician");
         HempInst.testCrop.call(coa);
     });
-    
+
 })

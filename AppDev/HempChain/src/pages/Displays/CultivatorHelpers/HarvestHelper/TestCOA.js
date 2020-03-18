@@ -28,8 +28,6 @@ const fs = RNFetchBlob.fs
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
 window.Blob = Blob
 
-export function uploadImage(image, on )
-
 export default class TestResults extends Component {
     constructor(props) {
         super(props);

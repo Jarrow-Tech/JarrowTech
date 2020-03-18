@@ -13,77 +13,96 @@ import {
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../../styles/index';
 
-
-let applicantTypes = ['Individual', 'Buisness']
-let applicantTags = ['Farmer', 'Factory']
-
-export default class ProducingAreas extends Component {
-    constructor(props) {
-        super(props)
-        this.state = ({
-            email: " ",
-            password: " ",
-            firstName: " ",
-            lastName: " ",
-            operatingState: " ",
-            applicant:" ",
-            applicantDisplay:" ",
-            city: " ",
-            badgeID: " ",
-            hempCultID: " ",
-            isDialogVisibleLaw: false,
-            isDialogVisibleCult: false,
-            dialogVisable: false,
-    });}
+import PDFLib, { PDFDocument, PDFPage } from 'react-native-pdf-lib';
 
 
+export default class ProducingAreas extends Component{
+
+modifyPdf(){
+    const page1 = PDFPage
+    .modify(0)
+    .drawText('This is a modification on the first page!', {
+      x: 5,
+      y: 235,
+      color: '#F62727',
+    })
+    .drawRectangle({
+      x: 150,
+      y: 150,
+      width: 50,
+      height: 50,
+      color: '#81C744',
+    });
+   
+  // Modify second page in document
+
+  const page2 = PDFPage
+    .modify(1)
+    .drawText('You can add images to modified pages too!')
+    .drawImage(
+      jpgPath,
+      'jpg',
+      {
+        x: 5,
+        y: 125,
+        width: 200,
+        height: 100,
+        source: 'assets' // 'assets' to get image from Android assets 'path' to get image from imagePath
+      }
+    )
+    .drawImage(
+      pngPath,
+      'png',
+      {
+        x: 5,
+        y: 25,
+        width: 200,
+        height: 100,
+        source: 'path' // 'assets' to get image from Android assets 'path' to get image from imagePath
+      }
+     );
+   
+  // Create a PDF page to add to document
+  const page3 = PDFPage
+    .create()
+    .setMediaBox(200, 200)
+    .drawText('You can add new pages to a modified PDF as well!', {
+      x: 5,
+      y: 235,
+      color: '#007386',
+    });
+   
+  const existingPDF = 'path/to/existing.pdf';
+  PDFDocument
+    .modify(existingPDF)
+    .modifyPages(page1, page2)
+    .addPage(page3)
+    .write() // Returns a promise that resolves with the PDF's path
+    .then(path => {
+      console.log('PDF modified at: ' + path);
+    });
+  
+  }
+
+  render() {
+    return (
+      <View style={Spacing.colorContainer}>
+
+<TouchableOpacity style={Spacing.buttonContainer} onPress={() => this.modifyPdf() }>
+                        <Text style={Typography.buttonText}>
+                            Modify PDF
+                        </Text>
+                  </TouchableOpacity>
+       
 
 
 
 
-
-      // generate a picker for ios instead of a React Picker
-      generatePicker(opts) {
-        ActionSheetIOS.showActionSheetWithOptions({
-            options: opts
-        },
-        (buttonIndex) => {
-            // switch based on which picker is invoked (indicated by the 'opts' passed as arguments)
-             if (opts == applicantTypes) {
-                this.setState({applicantDisplay: applicantTypes[buttonIndex]});
-                this.setState({applicant: applicantTags[buttonIndex]});
-            } else {
-                // opts didn't match any expected input.
-                // somehow generatePicker was called from an unexpected location
-                // TODO: error code subject to change once we decide on a scheme to name them
-                Alert.alert("Something has gone wrong. Please retry registration. Error Code 1001");
-            }
-        });
-    }
-
-
-    onApplicantChange(itemValue) {
-        this.setState({applicant: itemValue});
-        if (itemValue == "NULL") {
-            Alert.alert("Must Choose a Valid Applicant Type");
-        }
-    }
-
-    render() {
-        return(
-            <View style={Spacing.colorContainer}>
-
-                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>
-                    <Text style={Typography.buttonText}>
-                        Go Back
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={Spacing.buttonContainer} onPress={() => this.props.navigation.navigate('Login')}>
-                    <Text style={Typography.buttonText}>
-                        Next
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+      </View>
+    );
+  }
 }
+
+
+
+

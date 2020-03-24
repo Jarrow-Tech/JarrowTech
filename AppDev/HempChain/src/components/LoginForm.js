@@ -4,6 +4,8 @@
 //Firebase is the database that will have our user accounts on it
 import * as firebase from 'firebase';
 
+import * as webHelp from '../utility/webHelper';
+
 import React,{Component} from 'react';
 import {
     StyleSheet,
@@ -71,6 +73,11 @@ export default class LoginForm extends Component {
         });
     }
 
+    serve = () => {
+        console.log("test");
+        webHelp.sendToServer("testMessage ");
+    }
+
     //keyboardtype allows us to specify what type to use
     //onSubmitEditing takes us straight to the password textinput after entering email
     //securetextentry dots out the input text
@@ -106,6 +113,11 @@ export default class LoginForm extends Component {
                 <TouchableOpacity style={Buttons.button} onPress={() => this.loginUser(this.state.email, this.state.password)}>
                     <Text style={Typography.buttonText}>
                         Login
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.serve()}>
+                    <Text style={Typography.buttonText}>
+                        Test
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={Typography.signupText} onPress={() => this.props.navigation.navigate('ForgotPassword')}>

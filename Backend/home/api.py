@@ -33,5 +33,10 @@ def api_all():
 def api_test():
     w3 = block.getWeb3Endpoint()
     HempContract = block.makeContract()
-    plant = block.plant(HempContract)
-    return hemp
+    block.plant(HempContract)
+    block.harvest(HempContract, 100)
+    scanResults = block.scan(HempContract, 'EndUser')
+    print(scanResults)
+    # scanResults = block.transferOwner(HempContract, 'Technician')
+    # scanResults = block.testCrop(HempContract, [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]])
+    return 'Done'

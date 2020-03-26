@@ -1,6 +1,8 @@
 from flask import jsonify, Blueprint
 from flask_cors import cross_origin
 
+import blockchain.blockInterface as block
+
 home_api = Blueprint('home_api', __name__)
 
 books = [
@@ -25,3 +27,11 @@ books = [
 @cross_origin()
 def api_all():
     return jsonify(books)
+
+@home_api.route('/api/web/test')
+@cross_origin()
+def api_test():
+    w3 = block.getWeb3Endpoint()
+    HempContract = block.makeContract()
+    plant = block.plant(HempContract)
+    return hemp

@@ -42,15 +42,16 @@ def scan(contract, role):
     return scan
 
 def transferOwner(contract, role):
-    tx_hash = contract.functions.transferOwner('Farmer').transact(transaction={'from': w3.eth.accounts[4]})
+    # NOTE: you must open the contract for transfer when a new owner wants to claim ownership of it
+    tx_hash = contract.functions.transferOwner('Farmer').transact(transaction={'from': w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     tx_hash = contract.functions.transferOwner(role).transact(transaction={'from': w3.eth.accounts[6]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-    # scan = contract.functions.transferOwner(role).call()
-    return #scan
+    scan = contract.functions.scan(role).call()
+    return scan
 
 def testCrop(contract, coa):
-    tx_hash = contract.functions.testCrop(coa).transact(transaction={'from': w3.eth.accounts[7]})
+    tx_hash = contract.functions.testCrop(coa).transact(transaction={'from': w3.eth.accounts[6]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     scan = contract.functions.testCrop(coa).call()
     return scan

@@ -147,12 +147,11 @@ def transferOwner(mRole: string[12]) -> ScanObject:
 # add testing data to the contract
 @public
 def testCrop(mCoA: uint256[3][4]) -> ScanObject:
-    assert self.chainOfCustodyRole[self.cocItems] == self.getRoleCode("Technician")
-    assert self.chainOfCustodyAddress[self.cocItems] == msg.sender
+    assert self.state.inTesting
 
     # update chain of custody to include testing and technician again
     self.chainOfCustodyAddress[self.cocItems] = msg.sender
-    self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Tehcnician")
+    self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Technician")
     self.cocItems = self.cocItems + 1
 
     # update coa information

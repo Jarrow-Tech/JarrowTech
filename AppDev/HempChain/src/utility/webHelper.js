@@ -1,8 +1,8 @@
 const axios = require('react-native-axios');
 
-export async function sendToServer(message) {
+export async function sendToServer(url, message) {
     console.log(message);
-    axios.get('http://10.0.2.2:5000/api/web')
+    axios.post(url, message)
         .then(response => {
             console.log(response.data);
             console.log("done");

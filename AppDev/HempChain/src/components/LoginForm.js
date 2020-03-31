@@ -75,7 +75,10 @@ export default class LoginForm extends Component {
 
     serve = () => {
         console.log("test");
-        webHelp.sendToServer("testMessage ");
+        webHelp.sendToServer('http://10.0.2.2:5000/api/web/test', {
+            firstName: 'Finn',
+            lastName: 'Williams'
+        });
     }
 
     //keyboardtype allows us to specify what type to use

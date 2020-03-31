@@ -24,6 +24,8 @@ def makeContract():
     return HempContract
 
 def plant(contract):
+    print("Starting Contract Plant Function")
+    # contract.functions.plant().call()
     tx_hash = contract.functions.plant().transact(transaction={'from': w3.eth.accounts[3]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
@@ -45,11 +47,11 @@ def transferOwner(contract, role):
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     tx_hash = contract.functions.transferOwner(role).transact(transaction={'from': w3.eth.accounts[6]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-    scan = contract.functions.scan(role).call()
-    return scan
+    # scan = contract.functions.transferOwner(role).call()
+    return #scan
 
 def testCrop(contract, coa):
-    tx_hash = contract.functions.testCrop(coa).transact(transaction={'from': w3.eth.accounts[6]})
+    tx_hash = contract.functions.testCrop(coa).transact(transaction={'from': w3.eth.accounts[7]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-    scan = contract.functions.scan("Technician").call()
+    scan = contract.functions.testCrop(coa).call()
     return scan

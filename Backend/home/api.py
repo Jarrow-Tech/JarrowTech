@@ -43,3 +43,32 @@ def api_test():
     scanResults = block.testCrop(HempContract, [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]])
     print(scanResults)
     return 'Done'
+
+# call to create a new Hemp contract.
+# returns the address to the created contract
+@home_api.route('/api/web/makeContract', methods=['GET', 'POST'])
+@cross_origin()
+def api_makeContract():
+    HempContract = block.makeContract()
+    return jsonify(HempContract.address)
+
+@home_api.route('/api/web/harvest', methods=['GET', 'POST'])
+@cross_origin()
+def api_harvest():
+    try:
+        HempContract = block.makeContractFromAddress(request.json.address)
+        block.plant(HempContract)
+        block.harvest(HempContract, request.json.cropSize)
+        return jsonify(True)
+    except Exception as e:
+        return jsonify(False)
+
+
+@home_api.route('/api/web/scan', methods=['GET', 'POST'])
+@cross_origin()
+def api_scan():
+    HempContract = block.makeContractFromAddress('0xd3eCcC0981C6cfebF14FFCdFd41267e28a2CB364')
+    # this is currently failing because an assert in scan says it must be harvested first
+    scanResults = block.scan(HempContract, 'EndUser')
+    print(scanResults)
+    return 'Did it.'

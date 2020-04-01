@@ -23,6 +23,20 @@ def makeContract():
 
     return HempContract
 
+def makeContractFromAddress(address):
+    contractJson = json.loads(open("build/contracts/Hemp.json").read())
+    abi = contractJson['abi']
+    bytecode = contractJson['bytecode']
+
+    Hemp = w3.eth.contract(abi=abi, bytecode=bytecode)
+    HempContract = w3.eth.contract(
+        address=address,
+        abi=abi
+    )
+
+    return HempContract
+
+
 def plant(contract):
     print("Starting Contract Plant Function")
     # contract.functions.plant().call()

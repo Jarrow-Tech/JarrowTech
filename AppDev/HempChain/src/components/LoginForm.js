@@ -73,14 +73,6 @@ export default class LoginForm extends Component {
         });
     }
 
-    serve = () => {
-        console.log("test");
-        webHelp.sendToServer('http://10.0.2.2:5000/api/web/test', {
-            firstName: 'Finn',
-            lastName: 'Williams'
-        });
-    }
-
     //keyboardtype allows us to specify what type to use
     //onSubmitEditing takes us straight to the password textinput after entering email
     //securetextentry dots out the input text
@@ -118,7 +110,7 @@ export default class LoginForm extends Component {
                         Login
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.serve()}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('TestPage')}>
                     <Text style={Typography.buttonText}>
                         Test
                     </Text>

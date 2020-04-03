@@ -144,11 +144,6 @@ export default class App extends Component {
                     <Stack.Screen name="LogReport" component={LogReport} />
                     <Stack.Screen name="CultTransaction" component={CultTransaction} />
                     <Stack.Screen name="TestPage" component={TestPage} />
-
-
-
-
-
                 </Stack.Navigator>
             </NavigationContainer>
         )

@@ -23,12 +23,21 @@ import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index'
 import * as webHelp from '../../utility/webHelper';
 
 async function serve(){
-    let address = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/makeContract', {});
+    let addy = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/makeContract', {});
+    console.log(addy);
     let tryHarvest = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/harvest', {
-        address: address,
+        address: addy,
         cropSize: 100,
     });
     console.log(tryHarvest);
+    if (tryHarvest) {
+        let scanObject = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/scan', {
+            address: addy,
+            userTag: 'EndUser',
+        });
+        console.log(scanObject);
+    }
+    console.log("Done");
 }
 
 export default class TestPage extends Component {

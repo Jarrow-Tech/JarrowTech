@@ -6,6 +6,7 @@ w3 = Web3(HTTPProvider('http://localhost:7545'))
 def getWeb3Endpoint():
     return w3
 
+# create a contract with default information
 def makeContract():
     contractJson = json.loads(open("build/contracts/Hemp.json").read())
     abi = contractJson['abi']
@@ -23,6 +24,7 @@ def makeContract():
 
     return HempContract
 
+# create a contract object from a specific address. (i.e. a contract has been deployed and you want to reference it again)
 def makeContractFromAddress(address):
     contractJson = json.loads(open("build/contracts/Hemp.json").read())
     abi = contractJson['abi']
@@ -39,7 +41,6 @@ def makeContractFromAddress(address):
 
 def plant(contract):
     print("Starting Contract Plant Function")
-    # contract.functions.plant().call()
     tx_hash = contract.functions.plant().transact(transaction={'from': w3.eth.accounts[3]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
@@ -61,8 +62,7 @@ def transferOwner(contract, role):
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     tx_hash = contract.functions.transferOwner(role).transact(transaction={'from': w3.eth.accounts[6]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-    # scan = contract.functions.transferOwner(role).call()
-    return #scan
+    return
 
 def testCrop(contract, coa):
     tx_hash = contract.functions.testCrop(coa).transact(transaction={'from': w3.eth.accounts[7]})

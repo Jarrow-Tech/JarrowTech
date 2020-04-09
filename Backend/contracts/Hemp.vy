@@ -12,17 +12,21 @@ struct StateStruct:
 # scan object struct
 struct ScanObject:
     size: uint256
-    serial: uint256
     state: StateStruct
     grower: string[128]
     owner: string[128]
     cocr: uint256
     coa: uint256[3][4]
 
+# best practice appears to be using an event to return information to the client instead of trying
+# to check the state of the contract with a return on a transact (something that is impossible)
+# scan event
+ScanInt: event({_size: uint256})
+ScanString: event({_grower: string[128]})
+
 # properties of the contract
 contractVersion: public(uint256)
 cropSize: public(uint256)
-serialNumber: public(uint256)
 growerAddress: public(string[128])
 ownerAddress: public(string[128])
 state: public(StateStruct)
@@ -57,43 +61,45 @@ def getRoleCode(mRole: string[12]) -> uint256:
         return 50
     if mRole == "EndUser":
         return 60
+    if mRole == "Initialize":
+        return 61
     # scan
     return 0
 
 @public
-@nonreentrant("create")
-def create(owner: string[128]):
-    assert self.contractVersion = 2
+@nonreentrant("createContract")
+def createContract(owner: string[128]):
+    assert self.contractVersion == 2
     self.growerAddress = owner
     self.ownerAddress = owner
     self.chainOfCustodyAddress[self.cocItems - 1] = owner
-    self.chainOfCustodyRole[self.cocItems - 1] = 0
+    self.chainOfCustodyRole[self.cocItems - 1] = 61
 
 @public
 @nonreentrant("plant")
-def plant(caller: string[128]):
-    assert self.contractVersion = 2
+def plant(uid: string[128]):
+    assert self.contractVersion == 2
     assert (not self.state.planted)
-    assert caller = self.ownerAddress
-    assert caller = self.growerAddress
+    assert uid == self.ownerAddress
+    assert uid == self.growerAddress
     self.state.planted = True
 
     # update chain of custody
-    self.chainOfCustodyAddress[self.cocItems] = caller
+    self.chainOfCustodyAddress[self.cocItems] = uid
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Farmer")
     self.cocItems = self.cocItems + 1
 
 @public
 @nonreentrant("harvest")
-def harvest(caller: string[128], size: uint256):
+def harvest(uid: string[128], size: uint256):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
-    assert self.contractVersion = 2
+    assert self.contractVersion == 2
     assert (self.state.planted and (not self.state.harvested))
-    assert caller = self.growerAddress
-    assert caller = self.ownerAddress
+    assert uid == self.growerAddress
+    assert uid == self.ownerAddress
 
     # update chain of custody
-    self.chainOfCustodyAddress[self.cocItems] = caller
+    self.chainOfCustodyAddress[self.cocItems] = uid
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Farmer")
     self.cocItems = self.cocItems + 1
 
@@ -103,27 +109,30 @@ def harvest(caller: string[128], size: uint256):
 
 # an event that fires and logs every scan action of the product
 @public
-def scan(caller: string[128], mRole: string[12]) -> ScanObject:
+def scan(uid: string[128], mRole: string[12]):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
-    assert self.contractVersion = 2
-    assert self.state.harvested == True
+    assert self.contractVersion == 2
 
     # update chain of custody
-    self.chainOfCustodyAddress[self.cocItems] = caller
+    self.chainOfCustodyAddress[self.cocItems] = uid
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Scan")
     self.cocItems = self.cocItems + 1
 
-    return ScanObject({size: self.cropSize, serial: self.serialNumber, state: self.state, grower: self.growerAddress, owner: self.ownerAddress, cocr: self.chainOfCustodyRole[self.cocItems], coa: self.coa})
+    # this should be refactored once Events can emit Structs
+    log.ScanInt(self.cropSize)
+    log.ScanString(self.growerAddress)
+    log.ScanString(self.ownerAddress)
+    log.ScanInt(self.chainOfCustodyRole[self.cocItems - 1])
 
-# a dual custody ownership schema
 @public
-def transferOwner(caller: string[128], mRole: string[12]):
+def transferOwner(uid: string[128], nextOwner: string[128], mRole: string[12]):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
-    assert self.contractVersion = 2
+    assert self.contractVersion == 2
+    assert self.ownerAddress == uid
 
     # update chain of custody
-    self.ownerAddress = caller
-    self.chainOfCustodyAddress[self.cocItems] = caller
+    self.ownerAddress = nextOwner
+    self.chainOfCustodyAddress[self.cocItems] = nextOwner
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode(mRole)
     self.cocItems = self.cocItems + 1
 
@@ -143,13 +152,13 @@ def transferOwner(caller: string[128], mRole: string[12]):
 
 # add testing data to the contract
 @public
-def testCrop(caller: string[128], mCoA: uint256[3][4]):
+def testCrop(uid: string[128], mCoA: uint256[3][4]):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
     assert self.state.inTesting
-    assert self.contractVersion = 2
+    assert self.contractVersion == 2
 
     # update chain of custody to include testing and technician again
-    self.chainOfCustodyAddress[self.cocItems] = caller
+    self.chainOfCustodyAddress[self.cocItems] = uid
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Technician")
     self.cocItems = self.cocItems + 1
 

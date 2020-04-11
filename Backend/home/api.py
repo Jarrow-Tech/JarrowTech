@@ -38,16 +38,22 @@ def api_all():
 def api_test():
     print(request.json)
     w3 = block.getWeb3Endpoint()
+    uid1 = 'farmerUID'
+    uid2 = 'enduserUID'
+    uid3 = 'technicianUID'
     HempContract = block.makeContract()
-    block.plant(HempContract)
-    block.harvest(HempContract, 100)
-    scanResults = block.scan(HempContract, 'EndUser')
+    print('made contract')
+    block.initialize(HempContract, uid1)
+    print('initialized')
+    block.plant(HempContract, uid1)
+    print('planted')
+    block.harvest(HempContract, uid1, 100)
+    print('harvested')
+    scanResults = block.scan(HempContract, uid2, 'EndUser')
     print(scanResults)
-    scanResults = block.transferOwner(HempContract, 'Technician')
-    print(scanResults)
-    scanResults = block.testCrop(HempContract, [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]])
-    print(scanResults)
-    return 'Done'
+    block.transferOwner(HempContract, uid1, uid3, 'Technician')
+    block.testCrop(HempContract, uid3, [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]])
+    return scanResults
 
 # call to create a new Hemp contract.
 # requires nothing
@@ -69,8 +75,9 @@ def api_makeContract():
 def api_harvest():
     try:
         HempContract = block.makeContractFromAddress(request.json['address'])
-        block.plant(HempContract)
-        block.harvest(HempContract, request.json['cropSize'])
+        block.initialize(HempContract, request.json['uid'])
+        block.plant(HempContract, request.json['uid'])
+        block.harvest(HempContract, request.json['uid'], request.json['cropSize'])
         return jsonify(True)
     except Exception as e:
         return jsonify(False)

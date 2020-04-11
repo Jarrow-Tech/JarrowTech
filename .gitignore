@@ -60,3 +60,8 @@ buck-out/
 
 # Virtual Environments
 venv/
+
+
+build/
+chaindata/
+__pycache__/

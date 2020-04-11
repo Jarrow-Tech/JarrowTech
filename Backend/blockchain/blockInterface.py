@@ -1,4 +1,5 @@
 from web3 import Web3, HTTPProvider, IPCProvider, WebsocketProvider
+from flask import jsonify
 import json
 
 w3 = Web3(HTTPProvider('http://localhost:7545'))
@@ -38,34 +39,47 @@ def makeContractFromAddress(address):
 
     return HempContract
 
-
-def plant(contract):
-    print("Starting Contract Plant Function")
-    tx_hash = contract.functions.plant().transact(transaction={'from': w3.eth.accounts[3]})
+def initialize(contract, uid):
+    tx_hash = contract.functions.createContract(uid).transact(transaction={'from': w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 
-def harvest(contract, size):
-    tx_hash = contract.functions.harvest(size).transact(transaction={'from': w3.eth.accounts[4]})
+def plant(contract, uid):
+    tx_hash = contract.functions.plant(uid).transact(transaction={'from': w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 
-def scan(contract, role):
-    tx_hash = contract.functions.scan(role).transact(transaction={'from': w3.eth.accounts[5]})
-    tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-    scan = contract.functions.scan(role).call()
-    return scan
-
-def transferOwner(contract, role):
-    # NOTE: you must open the contract for transfer when a new owner wants to claim ownership of it
-    tx_hash = contract.functions.transferOwner('Farmer').transact(transaction={'from': w3.eth.accounts[2]})
-    tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-    tx_hash = contract.functions.transferOwner(role).transact(transaction={'from': w3.eth.accounts[6]})
+def harvest(contract, uid, size):
+    tx_hash = contract.functions.harvest(uid, size).transact(transaction={'from': w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 
-def testCrop(contract, coa):
-    tx_hash = contract.functions.testCrop(coa).transact(transaction={'from': w3.eth.accounts[7]})
+# NOTE: This system of individual event listeners for different actions will be refactored once the
+# events system has be extended by Vyper to include returning structs
+def scan(contract, uid, role):
+    tx_hash = contract.functions.scan(uid, role).transact(transaction={'from': w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-    scan = contract.functions.testCrop(coa).call()
-    return scan
+    events = tx_receipt['logs']
+    size = int(events[0]['data'], 16)
+    grower = clean(w3.toText(events[1]['data']))
+    owner = clean(w3.toText(events[2]['data']))
+    role = int(events[3]['data'], 16)
+    return jsonify(size, grower, owner, role)
+
+def transferOwner(contract, uidCurrent, uidNext, role):
+    tx_hash = contract.functions.transferOwner(uidCurrent, uidNext, role).transact(transaction={'from': w3.eth.accounts[2]})
+    tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
+    return
+
+def testCrop(contract, uid, coa):
+    tx_hash = contract.functions.testCrop(uid, coa).transact(transaction={'from': w3.eth.accounts[2]})
+    tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
+    return
+
+def clean(ss):
+    nots = [' ', '\t', '\x00']
+    o = ''
+    for s in ss:
+        if not s in nots:
+            o += s
+    return o

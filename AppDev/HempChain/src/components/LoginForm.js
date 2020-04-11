@@ -4,6 +4,8 @@
 //Firebase is the database that will have our user accounts on it
 import * as firebase from 'firebase';
 
+import * as webHelp from '../utility/webHelper';
+
 import React,{Component} from 'react';
 import {
     StyleSheet,
@@ -21,6 +23,9 @@ import { CommonActions } from '@react-navigation/native';
 import { user } from '../../App';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
+
+// set this to true to access a testing page that you can do whatever with from the login form
+let testing = false;
 
 //Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class LoginForm extends Component {
@@ -40,19 +45,11 @@ export default class LoginForm extends Component {
                 Alert.alert("Please Verify Email Address");
             } else if (firebase.auth().currentUser.emailVerified == true) {
                 firebase.database().ref("Users/" + firebase.auth().currentUser.uid + "/agency").once('value').then((snapshot) => {
-                    console.log(snapshot.val());
-                    let temp = "";
-                    // switch (snapshot.val()) {
-                    //     case 'Police/Highway': { console.log('hit'); temp = 'LawEnforcement' };
-                    //     case 'Farmer': { console.log('hit'); temp = 'Cultivator' };
-                    //     case 'Factory': { temp = 'ManufacturingProcess' };
-                    //     default: temp = 'SignUp';
-                    // } LabTester, Lab
-                    if(snapshot.val() == 'LabTester'){
+                    if(snapshot.val() == 'LabTester') {
                         this.props.navigation.navigate('Lab');
-                    } else if(snapshot.val() == 'Trucker'){
+                    } else if(snapshot.val() == 'Trucker') {
                         this.props.navigation.navigate('Transporter');
-                    } else if(snapshot.val() == 'Regulator'){
+                    } else if(snapshot.val() == 'Regulator') {
                         this.props.navigation.navigate('Regulator');
                     } else if (snapshot.val() == 'Police/Highway') {
                         this.props.navigation.navigate('LawEnforcement');
@@ -108,6 +105,14 @@ export default class LoginForm extends Component {
                         Login
                     </Text>
                 </TouchableOpacity>
+
+                {(testing === true) ? // set testing to true to access a test page
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('TestPage')}>
+                    <Text style={Typography.buttonText}>
+                        Test
+                    </Text>
+                </TouchableOpacity> : null }
+
                 <TouchableOpacity style={Typography.signupText} onPress={() => this.props.navigation.navigate('ForgotPassword')}>
                     <Text style={Typography.buttonText}>
                         Forgot Password?

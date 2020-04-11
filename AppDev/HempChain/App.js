@@ -47,12 +47,6 @@ const Stack = createStackNavigator();
 import { Provider } from 'react-redux';
 import { store } from './src/redux/Appredux';
 
-//import Login from './src/pages/Login';
-//import SignUp from './src/pages/Sign-Up';
-//import CultivatorReg from './src/pages/CultivatorReg'
-//import TransferPage from './src/pages/TransferPage'
-import TestScreen from './src/pages/TestScreen'
-
 //Routes allows us to navigate to different pages much easier than using the standard react-navigation tools
 // react-navigation tools are built into the react-native-router-flux github that is downloaded
 import Dashboard from './src/pages/Displays/FinishedReg';
@@ -77,8 +71,7 @@ import LogTransaction from './src/pages/Displays/ProcessManufHelpers/LogTransact
 import Lab from './src/pages/Displays/Lab';
 import LogReport from './src/pages/Displays/LabPageHelpers/LogReport';
 import CultTransaction from './src/pages/Displays/CultivatorHelpers/Transaction';
-
-
+import TestPage from './src/pages/Displays/TestPage'
 
 // this line supresses the firebase timer warning.
 // it is addressed at https://github.com/facebook/react-native/issues/12981
@@ -150,12 +143,7 @@ export default class App extends Component {
                     <Stack.Screen name="Lab" component={Lab} />
                     <Stack.Screen name="LogReport" component={LogReport} />
                     <Stack.Screen name="CultTransaction" component={CultTransaction} />
-
-
-
-
-
-
+                    <Stack.Screen name="TestPage" component={TestPage} />
                 </Stack.Navigator>
             </NavigationContainer>
         )

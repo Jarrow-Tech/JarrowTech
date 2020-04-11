@@ -82,7 +82,7 @@ def plant():
 
 @public
 @nonreentrant("harvest")
-def harvest(size: uint256) -> ScanObject:
+def harvest(size: uint256):
     assert (self.state.planted and (not self.state.harvested))
 
     # update chain of custody
@@ -93,8 +93,6 @@ def harvest(size: uint256) -> ScanObject:
     # update crop size with harvest info
     self.cropSize = size
     self.state.harvested = True
-
-    return ScanObject({size: self.cropSize, serial: self.serialNumber, state: self.state, grower: self.growerAddress, owner: self.ownerAddress, cocr: self.chainOfCustodyRole[self.cocItems], coa: self.coa})
 
 # an event that fires and logs every scan action of the product
 @public
@@ -110,7 +108,7 @@ def scan(mRole: string[12]) -> ScanObject:
 
 # a dual custody ownership schema
 @public
-def transferOwner(mRole: string[12]) -> ScanObject:
+def transferOwner(mRole: string[12]):
     assert (msg.sender == self.ownerAddress or self.cocTransferable)
 
     # the current owner consents to a change of ownership
@@ -142,20 +140,15 @@ def transferOwner(mRole: string[12]) -> ScanObject:
         # shut down modifiable contract
         self.cocTransferable = False
 
-    return ScanObject({size: self.cropSize, serial: self.serialNumber, state: self.state, grower: self.growerAddress, owner: self.ownerAddress, cocr: self.chainOfCustodyRole[self.cocItems], coa: self.coa})
-
 # add testing data to the contract
 @public
-def testCrop(mCoA: uint256[3][4]) -> ScanObject:
-    assert self.chainOfCustodyRole[self.cocItems] == self.getRoleCode("Technician")
-    assert self.chainOfCustodyAddress[self.cocItems] == msg.sender
+def testCrop(mCoA: uint256[3][4]):
+    assert self.state.inTesting
 
     # update chain of custody to include testing and technician again
     self.chainOfCustodyAddress[self.cocItems] = msg.sender
-    self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Tehcnician")
+    self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Technician")
     self.cocItems = self.cocItems + 1
 
     # update coa information
     self.coa = mCoA
-
-    return ScanObject({size: self.cropSize, serial: self.serialNumber, state: self.state, grower: self.growerAddress, owner: self.ownerAddress, cocr: self.chainOfCustodyRole[self.cocItems], coa: self.coa})

@@ -2,6 +2,7 @@ from flask import jsonify, Blueprint, request
 from flask_cors import cross_origin
 
 import blockchain.blockInterface as block
+import blockchain.validator as validator
 
 home_api = Blueprint('home_api', __name__)
 
@@ -36,24 +37,25 @@ def api_all():
 @home_api.route('/api/web/test', methods=['GET', 'POST'])
 @cross_origin()
 def api_test():
-    print(request.json)
-    w3 = block.getWeb3Endpoint()
-    uid1 = 'farmerUID'
-    uid2 = 'enduserUID'
-    uid3 = 'technicianUID'
-    HempContract = block.makeContract()
-    print('made contract')
-    block.initialize(HempContract, uid1)
-    print('initialized')
-    block.plant(HempContract, uid1)
-    print('planted')
-    block.harvest(HempContract, uid1, 100)
-    print('harvested')
-    scanResults = block.scan(HempContract, uid2, 'EndUser')
-    print(scanResults)
-    block.transferOwner(HempContract, uid1, uid3, 'Technician')
-    block.testCrop(HempContract, uid3, [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]])
-    return scanResults
+    # print(request.json)
+    # w3 = block.getWeb3Endpoint()
+    # uid1 = 'farmerUID'
+    # uid2 = 'enduserUID'
+    # uid3 = 'technicianUID'
+    # HempContract = block.makeContract()
+    # print('made contract')
+    # block.initialize(HempContract, uid1)
+    # print('initialized')
+    # block.plant(HempContract, uid1)
+    # print('planted')
+    # block.harvest(HempContract, uid1, 100)
+    # print('harvested')
+    # scanResults = block.scan(HempContract, uid2, 'EndUser')
+    # print(scanResults)
+    # block.transferOwner(HempContract, uid1, uid3, 'Technician')
+    # block.testCrop(HempContract, uid3, [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]])
+    # return scanResults
+    return jsonify(validator.exists('7W5uarYrR6g669HVbssLBom0ZHH3'))
 
 # call to create a new Hemp contract.
 # requires nothing
@@ -76,8 +78,10 @@ def api_plant():
     try:
         HempContract = block.makeContractFromAddress(request.json['address'])
         block.initialize(HempContract, request.json['uid'])
-        block.plant(HempContract, request.json['uid'])
-        return jsonify(True)
+        if (validator.farmer(request.json['uid'])):
+            block.plant(HempContract, request.json['uid'])
+            return jsonify(True)
+        return jsonify(False)
     except Exception as e:
         return jsonify(False)
 
@@ -90,9 +94,11 @@ def api_harvest():
     try:
         HempContract = block.makeContractFromAddress(request.json['address'])
         block.initialize(HempContract, request.json['uid'])
-        block.plant(HempContract, request.json['uid'])
-        block.harvest(HempContract, request.json['uid'], request.json['cropSize'])
-        return jsonify(True)
+        if (validator.farmer(request.json['uid'])):
+            block.plant(HempContract, request.json['uid'])
+            block.harvest(HempContract, request.json['uid'], request.json['cropSize'])
+            return jsonify(True)
+        return jsonify(False)
     except Exception as e:
         return jsonify(False)
 
@@ -103,13 +109,15 @@ def api_harvest():
 @cross_origin()
 def api_scan():
     try:
-        HempContract = block.makeContractFromAddress(request.json['address'])
-        scanResults = block.scan(HempContract, request.json['uid'], request.json['userTag'])
-        # since we need to fetch individual scan results from emitted events in the blockInterface.py
-        # it has to be jsonified to return to this function. as a result, scanResults is already JSON,
-        # so we can't re-jsonify it. if we are able to return some other object in scanResults, you may need
-        # to add the jsonify call back.
-        return scanResults
+        if (validator.exists(request.json['uid'])):
+            HempContract = block.makeContractFromAddress(request.json['address'])
+            scanResults = block.scan(HempContract, request.json['uid'], request.json['userTag'])
+            # since we need to fetch individual scan results from emitted events in the blockInterface.py
+            # it has to be jsonified to return to this function. as a result, scanResults is already JSON,
+            # so we can't re-jsonify it. if we are able to return some other object in scanResults, you may need
+            # to add the jsonify call back.
+            return scanResults
+        return jsonify(False)
     except Exception as e:
         return jsonify(False)
 
@@ -120,9 +128,11 @@ def api_scan():
 @cross_origin()
 def api_transferOwner():
     try:
-        HempContract = block.makeContractFromAddress(request.json['address'])
-        block.transferOwner(HempContract, request.json['ownerUid'], request.json['newOwnerUid'], request.json['userTag'])
-        return jsonify(True)
+        if (validator.exists(request.json['ownerUid']) and validator.exists(request.json['newOwnerUid'])):
+            HempContract = block.makeContractFromAddress(request.json['address'])
+            block.transferOwner(HempContract, request.json['ownerUid'], request.json['newOwnerUid'], request.json['userTag'])
+            return jsonify(True)
+        return jsonify(False)
     except Exception as e:
         return jsonify(False)
 
@@ -133,9 +143,11 @@ def api_transferOwner():
 @cross_origin()
 def api_addCoa():
     try:
-        HempContract = block.makeContractFromAddress(request.json['address'])
-        block.testCrop(HempContract, request.json['uid'], request.json['coa'])
-        return jsonify(True)
+        if (validator.technician(request.json['uid'])):
+            HempContract = block.makeContractFromAddress(request.json['address'])
+            block.testCrop(HempContract, request.json['uid'], request.json['coa'])
+            return jsonify(True)
+        return jsonify(False)
     except Exception as e:
         return jsonify(False)
 
@@ -145,6 +157,11 @@ def api_addCoa():
 @home_api.route('/api/web/manufacture', methods=['GET', 'POST'])
 @cross_origin()
 def api_manufacture():
-    HempContract = block.makeContractFromAddress(request.json['address'])
-    block.manufacture(HempContract, request.json['uid'], request.json['hempState'])
-    return jsonify(True)
+    try:
+        if (validator.manufacturer(request.json['uid'])):
+            HempContract = block.makeContractFromAddress(request.json['address'])
+            block.manufacture(HempContract, request.json['uid'], request.json['hempState'])
+            return jsonify(True)
+        return jsonify(False)
+    except Exception as e:
+        return jsonify(False)

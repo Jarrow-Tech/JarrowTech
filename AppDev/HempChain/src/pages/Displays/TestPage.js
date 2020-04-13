@@ -24,28 +24,37 @@ import * as webHelp from '../../utility/webHelper';
 
 async function serve() {
     console.log("Begininning Test 1");
+
+    let farmerUID = '7W5uarYrR6g669HVbssLBom0ZHH3';
+    let driverUID = 'nBK2c72v0iVsTCup2bCgHdrSN5g1';
+    let enduserUID = '7W5uarYrR6g669HVbssLBom0ZHH3'
+
     let addy = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/makeContract', {});
     console.log(addy);
+
     let tryHarvest = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/harvest', {
         address: addy,
         cropSize: 100,
-        uid: 'farmerUID',
+        uid: farmerUID,
     });
     console.log(tryHarvest);
+
     if (tryHarvest) {
         let scanObject = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/scan', {
             address: addy,
             userTag: 'EndUser',
-            uid: 'enduserUID',
+            uid: enduserUID,
         });
         console.log(scanObject);
     }
+
     let transferOwner = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/transferOwner', {
         address: addy,
-        ownerUid: 'farmerUID',
-        newOwnerUid: 'driverUID',
+        ownerUid: farmerUID,
+        newOwnerUid: driverUID,
         userTag: 'Transporter',
     });
+
     if (transferOwner) {
         console.log("Transfered ownership.");
     }
@@ -54,22 +63,30 @@ async function serve() {
 
 async function serve2() {
     console.log("Beginning Test 2");
+
+    let farmerUID = '7W5uarYrR6g669HVbssLBom0ZHH3';
+    let technicianUID = 'technicianUID';
+    let manufacturingUID = 'zsSobaRfB6MQVLlj3l79lZGh1703';
+
     let addy = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/makeContract', {});
     console.log(addy);
+
     let tryPlant = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/plant', {
         address: addy,
-        uid: 'farmerUID',
+        uid: farmerUID,
     });
     console.log(tryPlant);
+
     let tryAddCoa = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/addCoa', {
         address: addy,
-        uid: 'technicianUID',
+        uid: technicianUID,
         coa: [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]],
     });
     console.log(tryAddCoa);
+
     let tryManufacture = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/manufacture', {
         address: addy,
-        uid: 'manufacturingUID',
+        uid: manufacturingUID,
         hempState: 'CBD',
     })
     console.log(tryManufacture);
@@ -80,7 +97,6 @@ export default class TestPage extends Component {
     constructor(props) {
         super(props)
         this.state= ({
-
     });}
 
     render(){

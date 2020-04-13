@@ -22,22 +22,52 @@ import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index'
 
 import * as webHelp from '../../utility/webHelper';
 
-async function serve(){
+async function serve() {
+    console.log("Begininning Test 1");
     let addy = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/makeContract', {});
     console.log(addy);
     let tryHarvest = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/harvest', {
         address: addy,
         cropSize: 100,
+        uid: 'farmerUID',
     });
     console.log(tryHarvest);
     if (tryHarvest) {
         let scanObject = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/scan', {
             address: addy,
             userTag: 'EndUser',
+            uid: 'enduserUID',
         });
         console.log(scanObject);
     }
-    console.log("Done");
+    let transferOwner = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/transferOwner', {
+        address: addy,
+        ownerUid: 'farmerUID',
+        newOwnerUid: 'driverUID',
+        userTag: 'Transporter',
+    });
+    if (transferOwner) {
+        console.log("Transfered ownership.");
+    }
+    console.log("Done w/ Test 1");
+}
+
+async function serve2() {
+    console.log("Beginning Test 2");
+    let addy = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/makeContract', {});
+    console.log(addy);
+    let tryPlant = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/plant', {
+        address: addy,
+        uid: 'farmerUID',
+    });
+    console.log(tryPlant);
+    let tryAddCoa = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/addCoa', {
+        address: addy,
+        uid: 'technicianUID',
+        coa: [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]],
+    });
+    console.log(tryAddCoa);
+    console.log("Done w/ Test 2");
 }
 
 export default class TestPage extends Component {
@@ -56,6 +86,11 @@ export default class TestPage extends Component {
                 <TouchableOpacity style={Buttons.button} onPress={() => serve()}>
                     <Text style={Typography.buttonText}>
                         Test 1
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={() => serve2()}>
+                    <Text style={Typography.buttonText}>
+                        Test 2
                     </Text>
                 </TouchableOpacity>
             </View>

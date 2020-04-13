@@ -25,7 +25,7 @@ import { user } from '../../App';
 import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
 
 // set this to true to access a testing page that you can do whatever with from the login form
-let testing = false;
+let testing = true;
 
 //Setting the this.state in a constructor allows us to call and manipulate it easier
 export default class LoginForm extends Component {

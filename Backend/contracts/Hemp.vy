@@ -70,6 +70,7 @@ def getRoleCode(mRole: string[12]) -> uint256:
 @nonreentrant("createContract")
 def createContract(owner: string[128]):
     assert self.contractVersion == 2
+    self.cropSize = 0
     self.growerAddress = owner
     self.ownerAddress = owner
     self.chainOfCustodyAddress[self.cocItems - 1] = owner
@@ -154,7 +155,7 @@ def transferOwner(uid: string[128], nextOwner: string[128], mRole: string[12]):
 @public
 def testCrop(uid: string[128], mCoA: uint256[3][4]):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
-    assert self.state.inTesting
+    # assert self.state.inTesting
     assert self.contractVersion == 2
 
     # update chain of custody to include testing and technician again

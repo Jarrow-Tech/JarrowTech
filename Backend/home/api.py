@@ -67,8 +67,22 @@ def api_makeContract():
     except Exception as e:
         return jsonify(False)
 
+# call to plant a contract
+# requires a contract address and a UID
+# returns True if it successfully planted and False otherwise
+@home_api.route('/api/web/plant', methods=['GET', 'POST'])
+@cross_origin()
+def api_plant():
+    try:
+        HempContract = block.makeContractFromAddress(request.json['address'])
+        block.initialize(HempContract, request.json['uid'])
+        block.plant(HempContract, request.json['uid'])
+        return jsonify(True)
+    except Exception as e:
+        return jsonify(False)
+
 # call to harvest a contract
-# requires a contract address and a crop size sent in a post request
+# requires a contract address, a UID, and a crop size sent in a post request
 # returns True if it successfully harvests and False otherwise
 @home_api.route('/api/web/harvest', methods=['GET', 'POST'])
 @cross_origin()
@@ -83,14 +97,44 @@ def api_harvest():
         return jsonify(False)
 
 # call to scan a contract
-# requires an address to a contract and a userTag
+# requires an address to a contract, a UID and a userTag
 # return a ScanObject if successful and False otherwise
 @home_api.route('/api/web/scan', methods=['GET', 'POST'])
 @cross_origin()
 def api_scan():
     try:
         HempContract = block.makeContractFromAddress(request.json['address'])
-        scanResults = block.scan(HempContract, request.json['userTag'])
-        return jsonify(scanResults)
+        scanResults = block.scan(HempContract, request.json['uid'], request.json['userTag'])
+        # since we need to fetch individual scan results from emitted events in the blockInterface.py
+        # it has to be jsonified to return to this function. as a result, scanResults is already JSON,
+        # so we can't re-jsonify it. if we are able to return some other object in scanResults, you may need
+        # to add the jsonify call back.
+        return scanResults
+    except Exception as e:
+        return jsonify(False)
+
+# call to transfer ownership from one UID to another
+# requires an address to a contract, the current userID, the next userID, and the role of the next user
+# returns a True if successful and False otherwise
+@home_api.route('/api/web/transferOwner', methods=['GET', 'POST'])
+@cross_origin()
+def api_transferOwner():
+    try:
+        HempContract = block.makeContractFromAddress(request.json['address'])
+        block.transferOwner(HempContract, request.json['ownerUid'], request.json['newOwnerUid'], request.json['userTag'])
+        return jsonify(True)
+    except Exception as e:
+        return jsonify(False)
+
+# call to add a CoA to the contract
+# requires an address to a contract, a UID, and a certificate of analysis
+# returns a True if successful and False otherwise
+@home_api.route('/api/web/addCoa', methods=['GET', 'POST'])
+@cross_origin()
+def api_addCoa():
+    try:
+        HempContract = block.makeContractFromAddress(request.json['address'])
+        block.testCrop(HempContract, request.json['uid'], request.json['coa'])
+        return jsonify(True)
     except Exception as e:
         return jsonify(False)

@@ -67,6 +67,12 @@ async function serve2() {
         coa: [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]],
     });
     console.log(tryAddCoa);
+    let tryManufacture = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/manufacture', {
+        address: addy,
+        uid: 'manufacturingUID',
+        hempState: 'CBD',
+    })
+    console.log(tryManufacture);
     console.log("Done w/ Test 2");
 }
 

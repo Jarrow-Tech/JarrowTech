@@ -138,3 +138,13 @@ def api_addCoa():
         return jsonify(True)
     except Exception as e:
         return jsonify(False)
+
+# call to update what state the hemp is in
+# requires an address to a contract, a UID, and a string with the new state
+# returns True if successful and False otherwise
+@home_api.route('/api/web/manufacture', methods=['GET', 'POST'])
+@cross_origin()
+def api_manufacture():
+    HempContract = block.makeContractFromAddress(request.json['address'])
+    block.manufacture(HempContract, request.json['uid'], request.json['hempState'])
+    return jsonify(True)

@@ -32,10 +32,7 @@ def makeContractFromAddress(address):
     bytecode = contractJson['bytecode']
 
     Hemp = w3.eth.contract(abi=abi, bytecode=bytecode)
-    HempContract = w3.eth.contract(
-        address=address,
-        abi=abi
-    )
+    HempContract = w3.eth.contract(address=address, abi=abi)
 
     return HempContract
 
@@ -73,6 +70,11 @@ def transferOwner(contract, uidCurrent, uidNext, role):
 
 def testCrop(contract, uid, coa):
     tx_hash = contract.functions.testCrop(uid, coa).transact(transaction={'from': w3.eth.accounts[2]})
+    tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
+    return
+
+def manufacture(contract, uid, state):
+    tx_hash = contract.functions.manufacture(uid, state).transact(transaction={'from':w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 

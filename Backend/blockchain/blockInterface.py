@@ -73,6 +73,11 @@ def testCrop(contract, uid, coa):
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 
+def validateCrop(contract, uid):
+    tx_hash = contract.functions.validateCoa(uid).transact(transaction={'from': w3.eth.accounts[2]})
+    tx_receipt =  w3.eth.waitForTransactionReceipt(tx_hash)
+    return
+
 def manufacture(contract, uid, state):
     tx_hash = contract.functions.manufacture(uid, state).transact(transaction={'from':w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)

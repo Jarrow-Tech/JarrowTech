@@ -151,6 +151,21 @@ def api_addCoa():
     except Exception as e:
         return jsonify(False)
 
+# call to validate the CoA of the contract
+# requires an address to a contract and a UID
+# returns True if successful and False otherwise
+@home_api.route('/api/web/validateCoa', methods=['GET', 'POST'])
+@cross_origin()
+def api_validateCoa():
+    try:
+        if (validator.technician(request.json['uid'])):
+            HempContract = block.makeContractFromAddress(request.json['address'])
+            block.validateCrop(HempContract, request.json['uid'])
+            return jsonify(True)
+        return jsonify(False)
+    except Exception as e:
+        return jsonify(False)
+
 # call to update what state the hemp is in
 # requires an address to a contract, a UID, and a string with the new state
 # returns True if successful and False otherwise

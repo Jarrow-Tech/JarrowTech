@@ -6,8 +6,9 @@ struct StateStruct:
     planted:   bool
     harvested: bool
     inTransit: bool
-    inTesting: bool
     delivered: bool
+    tested:    bool
+    validated: bool
 
 # scan object struct
 struct ScanObject:
@@ -57,6 +58,8 @@ def getRoleCode(mRole: string[12]) -> uint256:
         return 30
     if mRole == "TestingLog":
         return 31
+    if mRole == "TestValidate":
+        return 32
     if mRole == "Transporter":
         return 40
     if mRole == "Regulator":
@@ -146,31 +149,44 @@ def transferOwner(uid: string[128], nextOwner: string[128], mRole: string[12]):
     # update state information
     if mRole == "Transporter":
         self.state.inTransit = True
-        self.state.inTesting = False
-        self.state.delivered = False
-    elif mRole == "Technician":
-        self.state.inTransit = False
-        self.state.inTesting = True
         self.state.delivered = False
     elif mRole == "EndUser":
         self.state.inTransit = False
-        self.state.inTesting = False
         self.state.delivered = True
 
 # add testing data to the contract
 @public
 def testCrop(uid: string[128], mCoA: uint256[3][4]):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
-    # assert self.state.inTesting
     assert self.contractVersion == 2
+    assert self.state.planted
 
     # update chain of custody to include testing and technician again
     self.chainOfCustodyAddress[self.cocItems] = uid
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Technician")
-    self.cocItems = self.cocItems + 1
+    self.chainOfCustodyAddress[self.cocItems + 1] = uid
+    self.chainOfCustodyRole[self.cocItems + 1] = self.getRoleCode("TestingLog")
+    self.cocItems = self.cocItems + 2
 
     # update coa information
     self.coa = mCoA
+    self.state.tested = True
+    self.state.validated = False
+
+@public
+def validateCoa(uid: string[128]):
+    assert self.contractVersion == 2
+    assert self.state.tested
+
+    self.chainOfCustodyAddress[self.cocItems] = uid
+    self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Technician")
+    self.chainOfCustodyAddress[self.cocItems + 1] = uid
+    self.chainOfCustodyRole[self.cocItems + 1] = self.getRoleCode("TestValidate")
+    self.cocItems = self.cocItems + 2
+
+    # update the validation of the CoA
+    self.state.validated = True
+    self.state.tested = False
 
 # update what the hemp is currently processed as
 @public

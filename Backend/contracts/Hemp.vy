@@ -31,6 +31,7 @@ growerAddress: public(string[128])
 ownerAddress: public(string[128])
 state: public(StateStruct)
 coa: public(uint256[3][4])
+hempState: public(string[256])
 
 chainOfCustodyAddress: map(uint256, string[128])
 chainOfCustodyRole: map(uint256, uint256)
@@ -39,6 +40,7 @@ cocItems: public(uint256)
 @public
 def __init__():
     self.contractVersion = 2
+    self.hempState = "Hemp"
     self.coa = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
     self.cocItems = 1
 
@@ -63,6 +65,10 @@ def getRoleCode(mRole: string[12]) -> uint256:
         return 60
     if mRole == "Initialize":
         return 61
+    if mRole == "Manufacturer":
+        return 70
+    if mRole == "Manufacturin":
+        return 71
     # scan
     return 0
 
@@ -70,6 +76,7 @@ def getRoleCode(mRole: string[12]) -> uint256:
 @nonreentrant("createContract")
 def createContract(owner: string[128]):
     assert self.contractVersion == 2
+    self.cropSize = 0
     self.growerAddress = owner
     self.ownerAddress = owner
     self.chainOfCustodyAddress[self.cocItems - 1] = owner
@@ -154,7 +161,7 @@ def transferOwner(uid: string[128], nextOwner: string[128], mRole: string[12]):
 @public
 def testCrop(uid: string[128], mCoA: uint256[3][4]):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
-    assert self.state.inTesting
+    # assert self.state.inTesting
     assert self.contractVersion == 2
 
     # update chain of custody to include testing and technician again
@@ -164,3 +171,16 @@ def testCrop(uid: string[128], mCoA: uint256[3][4]):
 
     # update coa information
     self.coa = mCoA
+
+# update what the hemp is currently processed as
+@public
+def manufacture(uid: string[128], mHempState: string[256]):
+    assert self.contractVersion == 2
+
+    # update the chain of custody to include the manufacturing
+    self.chainOfCustodyAddress[self.cocItems] = uid
+    self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Manufacturin")
+    self.cocItems = self.cocItems + 1
+
+    # update what state the hemp is in
+    self.hempState = mHempState

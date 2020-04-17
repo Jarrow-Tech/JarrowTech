@@ -15,8 +15,7 @@ def create_app(config_file):
 	return app
 
 if __name__ == '__main__':
-	# t.start_new_thread(uaValidator.start, ())
-	# app = create_app('settinglocal.py')  # Create application with our config file
-	# CORS(app)
-	# app.run()
-	uaValidator.start()
+	t.start_new_thread(uaValidator.start, ())
+	app = create_app('settinglocal.py')  # Create application with our config file
+	CORS(app)
+	app.run()

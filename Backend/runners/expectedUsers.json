@@ -1,0 +1,19 @@
+{
+    "regulators": [{
+        "email": "andeyrobins@gmail.com",
+        "first": "Andey",
+        "last": "Robins"
+        }],
+    "enforcement": [{
+        "email": "andeyrobins@gmail.com",
+        "first": "Andey",
+        "last": "Robins",
+        "badge": 42069
+        }],
+    "technicians": [{
+        "email": "andeyrobins@gmail.com",
+        "first": "Andey",
+        "last": "Robins",
+        "manager": true
+        }]
+}

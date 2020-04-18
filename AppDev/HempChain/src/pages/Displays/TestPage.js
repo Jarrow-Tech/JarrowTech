@@ -84,6 +84,12 @@ async function serve2() {
     });
     console.log(tryAddCoa);
 
+    let tryValidate = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/validateCoa', {
+        address: addy,
+        uid: technicianUID,
+    });
+    console.log(tryValidate);
+
     let tryManufacture = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/manufacture', {
         address: addy,
         uid: manufacturingUID,

@@ -15,7 +15,8 @@ def create_app(config_file):
 	return app
 
 if __name__ == '__main__':
-	t.start_new_thread(uaValidator.start, ())
+	emailPassword = input('Input the support center email password and press enter: ')
+	t.start_new_thread(uaValidator.start, (emailPassword,))
 	app = create_app('settinglocal.py')  # Create application with our config file
 	CORS(app)
 	app.run()

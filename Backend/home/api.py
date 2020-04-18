@@ -79,7 +79,7 @@ def api_plant():
         HempContract = block.makeContractFromAddress(request.json['address'])
         block.initialize(HempContract, request.json['uid'])
         if (validator.farmer(request.json['uid'])):
-            block.plant(HempContract, request.json['uid'])
+            block.plant(HempContract, request.json['uid'], request.json['location'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -130,7 +130,7 @@ def api_transferOwner():
     try:
         if (validator.exists(request.json['ownerUid']) and validator.exists(request.json['newOwnerUid'])):
             HempContract = block.makeContractFromAddress(request.json['address'])
-            block.transferOwner(HempContract, request.json['ownerUid'], request.json['newOwnerUid'], request.json['userTag'])
+            block.transferOwner(HempContract, request.json['ownerUid'], request.json['newOwnerUid'], request.json['location'] request.json['userTag'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:

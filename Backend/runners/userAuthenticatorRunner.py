@@ -2,6 +2,7 @@ import json
 import pyrebase
 import smtplib
 import ssl
+import os
 
 config = {
     "apiKey": "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
@@ -14,13 +15,10 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-emailPassword = ''
-
 # the entry point of this thread
 # starts up all authentication runners
-def start(emailPass):
+def start():
     print('Starting Authentication Runners.')
-    emailPassword = emailPass
     runnerManager()
     return
 
@@ -110,15 +108,15 @@ def dispatchEmail(message):
     # connection settings
     smtpServer = 'smtp.office365.com'
     port = 587
-    senderEmail = 'contactcenter@jarrowtech.com'
+    senderEmail = 'Andey@jarrowtech.com'
     context = ssl.create_default_context()
+
+    emailPassword = open(os.path.join("runners", "pass.txt"), "r").read()
 
     try:
         # open a connection to the server
-        server = smtplib.SMTP(smtpServer, port)
-        # server.ehlo()
+        server = smtplib.SMTP(host=smtpServer, port=port)
         server.starttls(context=context)
-        # server.ehlo()
         server.login(senderEmail, emailPassword)
 
         # send the email
@@ -136,9 +134,9 @@ def generateGoodMessage(uid, data):
 
     This is an automated message.
     A user with uid: """
-    m += uid
+    m += str(uid)
     m += ' has successfuly registered. No further action is required.\n\n'
-    m += data
+    m += str(data)
     return m
 
 # generate the bad message with the uid and data used to register
@@ -148,8 +146,8 @@ def generateBadMessage(uid, data):
 
     This is an automated message.
     A user with uid: """
-    m += uid
+    m += str(uid)
     m += ' has tried to register with the data '
-    m += data
+    m += str(data)
     m += '\n\nVisit the firebase database and change the `validated` property to `true` if this is an expected login.'
     return m

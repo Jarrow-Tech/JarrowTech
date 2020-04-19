@@ -65,3 +65,5 @@ venv/
 build/
 chaindata/
 __pycache__/
+
+Backend/runners/pass.txt

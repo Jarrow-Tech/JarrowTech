@@ -41,8 +41,8 @@ def initialize(contract, uid):
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 
-def plant(contract, uid):
-    tx_hash = contract.functions.plant(uid).transact(transaction={'from': w3.eth.accounts[2]})
+def plant(contract, uid, location):
+    tx_hash = contract.functions.plant(uid, location).transact(transaction={'from': w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 
@@ -63,8 +63,8 @@ def scan(contract, uid, role):
     role = int(events[3]['data'], 16)
     return jsonify(size, grower, owner, role)
 
-def transferOwner(contract, uidCurrent, uidNext, role):
-    tx_hash = contract.functions.transferOwner(uidCurrent, uidNext, role).transact(transaction={'from': w3.eth.accounts[2]})
+def transferOwner(contract, uidCurrent, uidNext, location, role):
+    tx_hash = contract.functions.transferOwner(uidCurrent, uidNext, location, role).transact(transaction={'from': w3.eth.accounts[2]})
     tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
     return
 

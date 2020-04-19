@@ -34,6 +34,9 @@ state: public(StateStruct)
 coa: public(uint256[3][4])
 hempState: public(string[256])
 
+destinations: map(uint256, string[256])
+destinationCount: public(uint256)
+
 chainOfCustodyAddress: map(uint256, string[128])
 chainOfCustodyRole: map(uint256, uint256)
 cocItems: public(uint256)
@@ -44,6 +47,7 @@ def __init__():
     self.hempState = "Hemp"
     self.coa = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
     self.cocItems = 1
+    self.destinationCount = 1
 
 @private
 @constant
@@ -87,7 +91,7 @@ def createContract(owner: string[128]):
 
 @public
 @nonreentrant("plant")
-def plant(uid: string[128]):
+def plant(uid: string[128], location: string[256]):
     assert self.contractVersion == 2
     assert (not self.state.planted)
     assert uid == self.ownerAddress
@@ -98,6 +102,10 @@ def plant(uid: string[128]):
     self.chainOfCustodyAddress[self.cocItems] = uid
     self.chainOfCustodyRole[self.cocItems] = self.getRoleCode("Farmer")
     self.cocItems = self.cocItems + 1
+
+    # update the location of the hemp
+    self.destinations[self.destinationCount] = location
+    self.destinationCount = self.destinationCount + 1
 
 @public
 @nonreentrant("harvest")
@@ -117,6 +125,10 @@ def harvest(uid: string[128], size: uint256):
     self.cropSize = size
     self.state.harvested = True
 
+    # update the location of the hemp
+    self.destinations[self.destinationCount] = self.destinations[self.destinationCount - 1]
+    self.destinationCount = self.destinationCount + 1
+
 # an event that fires and logs every scan action of the product
 @public
 def scan(uid: string[128], mRole: string[12]):
@@ -135,7 +147,7 @@ def scan(uid: string[128], mRole: string[12]):
     log.ScanInt(self.chainOfCustodyRole[self.cocItems - 1])
 
 @public
-def transferOwner(uid: string[128], nextOwner: string[128], mRole: string[12]):
+def transferOwner(uid: string[128], nextOwner: string[128], nextDestination: string[256], mRole: string[12]):
     # assert msg.sender == $HEMPCHAIN_ADDRESS
     assert self.contractVersion == 2
     assert self.ownerAddress == uid
@@ -153,6 +165,10 @@ def transferOwner(uid: string[128], nextOwner: string[128], mRole: string[12]):
     elif mRole == "EndUser":
         self.state.inTransit = False
         self.state.delivered = True
+
+        # update the location of the hemp
+        self.destinations[self.destinationCount] = nextDestination
+        self.destinationCount = self.destinationCount + 1
 
 # add testing data to the contract
 @public

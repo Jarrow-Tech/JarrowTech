@@ -73,6 +73,7 @@ export default class buisRegistration extends Component {
                 city: this.state.city,
                 badgeID: this.state.badgeID,
                 hempCultID: this.state.hempCultID,
+                validated: false,
             });
         }, (error) => {
             Alert.alert(error.message);

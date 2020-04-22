@@ -13,3 +13,7 @@ export const inputText = {
     fontSize: 16,
     color: '#ffffff',
 };
+
+export const scrollBox = {
+    height: 400,
+};

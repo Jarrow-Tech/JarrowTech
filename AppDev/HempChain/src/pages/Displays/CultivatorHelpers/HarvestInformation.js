@@ -44,6 +44,7 @@ export default class HarvestInformation extends Component{
             harvestLong: 0.0, 
             cropSize: 0,
             cropType: '',
+            siteDescription: '',
         });
         this.harvest = this.harvest.bind(this);
     }
@@ -75,10 +76,12 @@ export default class HarvestInformation extends Component{
     render() {
         return(
             <View style={Spacing.colorContainer}>
-                    <Text style={Typography.logoText}>
+                <ScrollView 
+                    style={UserInterface.scrollBox}
+                    contentContainerStyle={Spacing.colorContainer}>
+                    <Text style={Typography.buttonText}>
                         Registrant Information
                     </Text>
-                <ScrollView style={UserInterface.scrollBox}>
                     <View style={UserInterface.inputBox}>
                         <TextInput style={UserInterface.inputText}
                         placeholder="Registrant Name"
@@ -215,6 +218,119 @@ export default class HarvestInformation extends Component{
                         selectionColor="#ffffff"
                         value={this.state.cropSize}
                         onChangeText={(text) => this.setState({registrantCity: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <Text style={Typography.buttonText}>
+                        Harvested Cultivation Site
+                    </Text>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Harvest Start Date"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestStart: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Harvest End Date"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestEnd: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="County"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestCounty: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Physical Address"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestAddress: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="City"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestCity: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Zip Code"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestZip: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Latitude Coordinates"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestLat: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Longitude Coordinates"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({harvestLong: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Crop Size"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({cropSize: text})}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        />
+                    </View>
+                    <View style={UserInterface.inputBox}>
+                        <TextInput style={UserInterface.inputText}
+                        placeholder="Site Description"
+                        placeholderTextColor="#ffffff"
+                        selectionColor="#ffffff"
+                        value={this.state.cropSize}
+                        onChangeText={(text) => this.setState({siteDescription: text})}
                         autoCapitalize="none"
                         autoCorrect={false}
                         />

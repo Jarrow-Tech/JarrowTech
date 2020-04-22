@@ -15,5 +15,6 @@ export const inputText = {
 };
 
 export const scrollBox = {
-    height: 400,
+    height: 350,
+    marginTop: 32,
 };

@@ -1,6 +1,7 @@
 // All current code was written by Carlton O. Wilcox
 //Carlton O. Wilcox made all of the current comments on 1/29/20
 import 'react-native-gesture-handler';
+import './global';
 
 //This is the main file in which the app will run everything
 //Greyed out text means that its not in use/declared
@@ -15,6 +16,10 @@ const firebaseConfig={
     projectId: "jarrowchain",
     storageBucket: "jarrowchain.appspot.com",
 };
+
+// web3/ethereum api setup
+const Web3 = require('web3');
+
 //The below initilizes firebase and sets variables for the refrencing to the database
 firebase.initializeApp(firebaseConfig);
 const rootRef = firebase.database().ref();

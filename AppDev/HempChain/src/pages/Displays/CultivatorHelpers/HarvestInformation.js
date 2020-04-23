@@ -97,6 +97,7 @@ export default class HarvestInformation extends Component{
                 <Text style={Typography.buttonText}>
                     Enter Harvest Details Below
                 </Text>
+
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Lot #"
                  placeholderTextColor="#ffffff"
@@ -161,6 +162,7 @@ export default class HarvestInformation extends Component{
                   />
                 
                    <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('GPS', {coordinates: this.coordinates})}>
+
                     <Text style={Typography.buttonText}>
                         GPS Coordinates
                     </Text>

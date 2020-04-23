@@ -77,6 +77,12 @@ import LogTransaction from './src/pages/Displays/ProcessManufHelpers/LogTransact
 import Lab from './src/pages/Displays/Lab';
 import LogReport from './src/pages/Displays/LabPageHelpers/LogReport';
 import CultTransaction from './src/pages/Displays/CultivatorHelpers/Transaction';
+import LicenseApplicaton from './src/pages/Registration/LicenseApplication';
+import KeyParticipants from './src/pages/Registration/ApplicationHelpers/KeyParticipants';
+import ProducingAreas from './src/pages/Registration/ApplicationHelpers/ProducingAreas';
+import NotAvailable from './src/pages/Displays/NotAvaliable';
+import GPSCoordinates from './src/pages/Displays/CultivatorHelpers/HarvestHelper/GPSCoordinates';
+import TestResults from './src/pages/Displays/CultivatorHelpers/HarvestHelper/TestCOA';
 
 
 
@@ -150,6 +156,19 @@ export default class App extends Component {
                     <Stack.Screen name="Lab" component={Lab} />
                     <Stack.Screen name="LogReport" component={LogReport} />
                     <Stack.Screen name="CultTransaction" component={CultTransaction} />
+                    <Stack.Screen name="LicenseApplication" component={LicenseApplicaton} />
+                    <Stack.Screen name="KeyParticipants" component={KeyParticipants} />
+                    <Stack.Screen name="ProducingAreas" component={ProducingAreas} />
+                    <Stack.Screen name="NotAvailable" component={NotAvailable} />
+                    <Stack.Screen name="GPS" component={GPSCoordinates} />
+                    <Stack.Screen name="TestResults" component={TestResults} />
+
+
+
+
+
+
+
 
 
 

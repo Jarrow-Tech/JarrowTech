@@ -31,6 +31,7 @@ export default class Cultivator extends Component{
         this.harvest = this.harvest.bind(this);
         this.buy = this.buy.bind(this);
         this.sell = this.sell.bind(this);
+        this.coordinates= this.coordinates.bind(this);
     ;}
 
     //Firebase signout function
@@ -46,7 +47,16 @@ export default class Cultivator extends Component{
     harvest(vals) {
         // this is the function called from the HarvestInformation sub page
         // vals contains all the harvest details gathered from that page
-        console.log("Harvested " + vals.cropSize + " amount of " + vals.cropType);
+        console.log("Variety Name: "+ vals.cropName)
+        console.log("Lot # :" + vals.lotNumb + " was Harvested beginning " + vals.harvestDate + " from " + vals.growingLocation + " location.");
+        console.log("Harvested " + vals.cropSize + " of Hemp " + vals.cropType);
+    }
+
+    coordinates(vals) {
+        // this is the function called from the GPSCoordinates pg
+        // vals contains the logitude and latitude details gathered from that page
+        console.log("Longitude: " + vals.longitude + "Latitude: " + vals.latitude)
+        
     }
 
     buy(vals) {
@@ -67,7 +77,7 @@ export default class Cultivator extends Component{
                 <Text style={Typography.buttonText}>
                     Cultivator Page
                 </Text>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('HarvestInformation', {harvest: this.harvest})}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('HarvestInformation', {harvest: this.harvest},{coordinates: this.coordinates})}>
                     <Text style={Typography.buttonText}>
                         Log Harvest
                     </Text>
@@ -77,14 +87,9 @@ export default class Cultivator extends Component{
                         Log Transaction
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('Buying', {buy: this.buy})}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('NotAvailable')}>
                     <Text style={Typography.buttonText}>
-                        Buy Product
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('Selling', {sell: this.sell})}>
-                    <Text style={Typography.buttonText}>
-                        Sell Product
+                        Marketplace
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.onSignoutPress(this.state.email)}>

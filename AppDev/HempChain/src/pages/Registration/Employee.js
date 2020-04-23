@@ -21,6 +21,7 @@ export default class EmployeeReg extends Component {
     render() {
         return(
             <View style={Spacing.colorContainer}>
+
                 <View style={UserInterface.inputBox}>
                     <TextInput style={UserInterface.inputText}
                     placeholder="Enter Operating State"
@@ -71,6 +72,13 @@ export default class EmployeeReg extends Component {
                     ref={(input) => this.password=input}
                     />
                 </View>
+
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>
+                    <Text style={Typography.buttonText}>
+                        Go Back
+                    </Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity style={Spacing.buttonContainer} onPress={() => this.props.navigation.navigate('Login')}>
                     <Text style={Typography.buttonText}>
                         Finish Registration

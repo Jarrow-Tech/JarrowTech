@@ -16,6 +16,8 @@ import {
 import Prompt from 'react-native-input-prompt'
 import { userRef } from '../../../App';
 
+import Dialog from "react-native-dialog"
+
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 
 let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
@@ -29,7 +31,7 @@ let states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorad
 let agencies = ['Government', 'Law Enforcement', 'Cultivator', 'Processor/Manufacturer', 'Transporter'];
 let agenciesTags = ['Regulator', 'Police/Highway', 'Farmer', 'Factory', 'Trucker'];
 
-export default class buisRegistration extends Component {
+export default class BusinessRegistration extends Component {
 
     constructor(props) {
         super(props)
@@ -46,6 +48,7 @@ export default class buisRegistration extends Component {
             hempCultID: " ",
             isDialogVisibleLaw: false,
             isDialogVisibleCult: false,
+            dialogVisable: false,
     });}
 
     //Adds the user to the firebase db
@@ -87,9 +90,18 @@ export default class buisRegistration extends Component {
         this.setState({agency: itemValue});
         if (itemValue == "Police/Highway") {
             this.setState({isDialogVisibleLaw: true})
+            
+        }else{
+            this.setState({isDialogVisibleLaw: false})
         }
+
         if (itemValue == "Farmer") {
-            this.setState({isDialogVisibleCult: true})
+            this.setState({isDialogVisibleCult: true, dialogVisable: true})
+        }else{
+            this.setState({isDialogVisibleCult: false})
+        }
+        if(itemValue == "Factory"){
+            this.setState({dialogVisable: true})
         }
     }
 
@@ -135,6 +147,15 @@ export default class buisRegistration extends Component {
             }
         });
     }
+    
+    handleNoDialog=()=> {
+        this.props.navigation.navigate('LicenseApplication')
+        this.setState({dialogVisable:false})
+
+
+
+    }
+  
 
     render(){
         return(
@@ -220,82 +241,81 @@ export default class buisRegistration extends Component {
                         <Picker.Item label="Processor/Manufacturer" value="Factory" />
                         <Picker.Item label="Transporter" value="Trucker" />
                     </Picker>
-                }
-                <Prompt
-                    visible={this.state.isDialogVisibleLaw}
-                    title="Please Enter Badge Number"
-                    placeholder="Badge Number"
-                    onCancel={() => this.setState({
-                            isDialogVisibleLaw: !this.state.isDialogVisibleLaw
-                        })
-                    }
-                    onSubmit={text => this.setState({
-                            text: "Badge Number submitted",
-                            isDialogVisibleLaw: !this.state.isDialogVisibleLaw,
-                            badgeID: text,
-                        })
-                    }/>
-                <Prompt
-                    visible={this.state.isDialogVisibleCult}
-                    title="Please Enter Hemp Cultivator ID"
-                    placeholder="ID"
-                    onCancel={() => this.setState({
-                            isDialogVisibleCult: !this.state.isDialogVisibleCult
-                        })
-                    }
-                    onSubmit={text => this.setState({
-                            text: "Hemp ID Submitted",
-                            isDialogVisibleCult: !this.state.isDialogVisibleCult,
-                            hempCultID: text,
-                        })
-                    }/>
-                <View style={UserInterface.inputBox}>
-                    <TextInput style={UserInterface.inputText}
-                    placeholder="City"
+                }                    
+
+                    { (this.state.isDialogVisibleCult)?
+                    <TextInput
+                    style={UserInterface.inputBox}
+                    placeholder="Hemp License #"
                     placeholderTextColor="#ffffff"
-                    ref={(input) => this.city = input}
-                    onChangeText={(city) => this.setState({city})}
+                    ref={(input) => this.hempCultID = input}
+                    onChangeText={(hempCultID) => this.setState({hempCultID})}
                     onSubmitEditing={() => this.firstName.focus()}
-                    />
-                </View>
-                <View style={UserInterface.inputBox}>
-                    <TextInput style={UserInterface.inputText}
-                    placeholder="Admin First Name"
+                   /> : null
+                    }
+                    
+                    {(this.state.isDialogVisibleLaw)?
+                    <TextInput editable={this.state.isDialogVisibleLaw}
+                    style={UserInterface.inputBox}
+                    placeholder="Badge #"
                     placeholderTextColor="#ffffff"
-                    ref={(input) => this.firstName = input}
-                    onChangeText={(firstName) => this.setState({firstName})}
-                    onSubmitEditing={() => this.lastName.focus()}
-                    />
-                </View>
-                <View style={UserInterface.inputBox}>
-                    <TextInput style={UserInterface.inputText}
-                    placeholder="Admin Last Name"
-                    placeholderTextColor="#ffffff"
-                    ref={(input) => this.lastName = input}
-                    onChangeText={(lastName) => this.setState({lastName})}
-                    onSubmitEditing={() => this.adminEmail.focus()}
-                    />
-                </View>
-                <View style={UserInterface.inputBox}>
-                    <TextInput style={UserInterface.inputText}
-                    placeholder="Admin Email"
-                    selectionColor="#ffffff"
-                    keyboardType= 'email-address'
-                    placeholderTextColor="#ffffff"
-                    ref={(input) => this.adminEmail = input}
-                    onChangeText={(email) => this.setState({email})}
-                    onSubmitEditing={() => this.password.focus()}
-                    />
-                </View>
-                <View style={UserInterface.inputBox}>
-                    <TextInput style={UserInterface.inputText}
-                    placeholder="Admin Password"
-                    secureTextEntry= {true}
-                    placeholderTextColor="#ffffff"
-                    onChangeText={(password) => this.setState({password})}
-                    ref={(input) => this.password = input}
-                    />
-                </View>
+                    ref={(input) => this.badgeID = input}
+                    onChangeText={(badgeID) => this.setState({badgeID})}
+                    onSubmitEditing={() => this.firstName.focus()}
+                   />  : null
+                    } 
+
+                <Dialog.Container visible={this.state.dialogVisable}>
+                    <Dialog.Description>
+                     Have you applied with the Wyoming Department of Agircultre for a hemp license?
+                    </Dialog.Description>
+                    <Dialog.Button label="Yes" onPress={() => this.setState({dialogVisable: false})}/>
+                    <Dialog.Button label="No" onPress={() => this.handleNoDialog()}/>
+                </Dialog.Container>     
+
+                  <TextInput style={UserInterface.inputBox}
+                   placeholder="City"
+                   placeholderTextColor="#ffffff"
+                   ref={(input) => this.city = input}
+                   onChangeText={(city) => this.setState({city})}
+                   onSubmitEditing={() => this.firstName.focus()}
+                  />
+                  <TextInput style={UserInterface.inputBox}
+                   placeholder="Admin First Name"
+                   placeholderTextColor="#ffffff"
+                   ref={(input) => this.firstName = input}
+                   onChangeText={(firstName) => this.setState({firstName})}
+                   onSubmitEditing={() => this.lastName.focus()}
+                  />
+                  <TextInput style={UserInterface.inputBox}
+                   placeholder="Admin Last Name"
+                   placeholderTextColor="#ffffff"
+                   ref={(input) => this.lastName = input}
+                   onChangeText={(lastName) => this.setState({lastName})}
+                   onSubmitEditing={() => this.adminEmail.focus()}
+                  />
+                  <TextInput style={UserInterface.inputBox}
+                   placeholder="Admin Email"
+                   selectionColor="#ffffff"
+                   keyboardType= 'email-address'
+                   placeholderTextColor="#ffffff"
+                   ref={(input) => this.adminEmail = input}
+                   onChangeText={(email) => this.setState({email})}
+                   onSubmitEditing={() => this.password.focus()}
+                  />
+                  <TextInput style={UserInterface.inputBox}
+                   placeholder="Admin Password"
+                   secureTextEntry= {true}
+                   placeholderTextColor="#ffffff"
+                   onChangeText={(password) => this.setState({password})}
+                   ref={(input) => this.password = input}
+                  />
+                  <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>
+                    <Text style={Typography.buttonText}>
+                        Go Back
+                    </Text>
+                </TouchableOpacity>
+
                   <TouchableOpacity style={Spacing.buttonContainer} onPress={() => {this.signUpUser(this.state.email,this.state.password)}}>
                         <Text style={Typography.buttonText}>
                             Finish Registration

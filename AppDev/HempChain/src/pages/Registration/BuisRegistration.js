@@ -315,6 +315,7 @@ export default class BusinessRegistration extends Component {
                         Go Back
                     </Text>
                 </TouchableOpacity>
+
                   <TouchableOpacity style={Spacing.buttonContainer} onPress={() => {this.signUpUser(this.state.email,this.state.password)}}>
                         <Text style={Typography.buttonText}>
                             Finish Registration

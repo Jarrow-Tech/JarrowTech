@@ -10,8 +10,8 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import { RNCamera } from 'react-native-camera';
 
+import AppCamera from '../../components/AppCamera'
 import Prompt from 'react-native-input-prompt';
 import Logo from '../../components/Logo';
 import LoginForm from '../../components/LoginForm';
@@ -43,8 +43,9 @@ export default class LawEnforcement extends Component {
         console.log("Searching for serial: " + this.state.serial);
     }
 
-    barcodeRecognized = e => {
-        this.setState({serial: e.data})
+    // callback function to set the serial number from camera
+    getSerial = (serialNumber) => {
+        this.setState({serial: serialNumber})
     }
 
     render(){
@@ -53,24 +54,18 @@ export default class LawEnforcement extends Component {
                 <Text style={Typography.buttonText}>
                     LawEnforcementPage
                 </Text>
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={{
-                        flex: 1,
-                        width: '50%',
-                    }}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-                    flashMode={RNCamera.Constants.FlashMode.on}
-                    onBarCodeRead={this.barcodeRecognized}>
-                </RNCamera>
-                <TextInput style={UserInterface.inputBox}
-                 placeholder="Serial Number"
-                 placeholderTextColor='#ffffff'
-                 ref={(input) => this.serial = input}
-                 onChangeText={(serial) => this.setState({serial})}
-                 value={this.state.serial} />
+                <AppCamera 
+                    setSerial = {this.getSerial}
+                    />
+                <View style={UserInterface.inputBox}>
+                    <TextInput style={UserInterface.inputText}
+                    placeholder="Serial Number"
+                    placeholderTextColor='#ffffff'
+                    ref={(input) => this.serial = input}
+                    onChangeText={(serial) => this.setState({serial})}
+                    value={this.state.serial} 
+                    />
+                </View>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
                     <Text style={Typography.buttonText}>
                         Search Serial

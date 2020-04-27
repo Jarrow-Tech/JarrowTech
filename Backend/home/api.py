@@ -1,8 +1,7 @@
 from flask import jsonify, Blueprint, request
 from flask_cors import cross_origin
 
-import blockchain.blockInterface as block
-import blockchain.validator as validator
+import runners.validator as validator
 
 home_api = Blueprint('home_api', __name__)
 
@@ -37,24 +36,6 @@ def api_all():
 @home_api.route('/api/web/test', methods=['GET', 'POST'])
 @cross_origin()
 def api_test():
-    # print(request.json)
-    # w3 = block.getWeb3Endpoint()
-    # uid1 = 'farmerUID'
-    # uid2 = 'enduserUID'
-    # uid3 = 'technicianUID'
-    # HempContract = block.makeContract()
-    # print('made contract')
-    # block.initialize(HempContract, uid1)
-    # print('initialized')
-    # block.plant(HempContract, uid1)
-    # print('planted')
-    # block.harvest(HempContract, uid1, 100)
-    # print('harvested')
-    # scanResults = block.scan(HempContract, uid2, 'EndUser')
-    # print(scanResults)
-    # block.transferOwner(HempContract, uid1, uid3, 'Technician')
-    # block.testCrop(HempContract, uid3, [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]])
-    # return scanResults
     return jsonify(validator.exists('7W5uarYrR6g669HVbssLBom0ZHH3'))
 
 # call to create a new Hemp contract.

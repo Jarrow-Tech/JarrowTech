@@ -1,6 +1,7 @@
 from flask import jsonify, Blueprint, request
 from flask_cors import cross_origin
 
+import contracts.contractHandler as backend
 import runners.validator as validator
 
 home_api = Blueprint('home_api', __name__)
@@ -45,8 +46,8 @@ def api_test():
 @cross_origin()
 def api_makeContract():
     try:
-        HempContract = block.makeContract()
-        return jsonify(HempContract.address)
+        contract = backend.createNewContract()
+        return jsonify(contract)
     except Exception as e:
         return jsonify(False)
 
@@ -57,10 +58,8 @@ def api_makeContract():
 @cross_origin()
 def api_plant():
     try:
-        HempContract = block.makeContractFromAddress(request.json['address'])
-        block.initialize(HempContract, request.json['uid'])
-        if (validator.farmer(request.json['uid'])):
-            block.plant(HempContract, request.json['uid'], request.json['location'])
+        if validator.contractExists(request.json['address']) and validator.farmer(request.json['uid']):
+            backend.plant(request.json['address'], request.json['uid'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -73,11 +72,9 @@ def api_plant():
 @cross_origin()
 def api_harvest():
     try:
-        HempContract = block.makeContractFromAddress(request.json['address'])
-        block.initialize(HempContract, request.json['uid'])
-        if (validator.farmer(request.json['uid'])):
-            block.plant(HempContract, request.json['uid'])
-            block.harvest(HempContract, request.json['uid'], request.json['cropSize'])
+        if validator.contractExists(request.json['address']) and validator.farmer(request.json['uid']):
+            backend.plant(request.json['address'], request.json['uid'])
+            backend.harvest(request.json['address'], request.json['uid'], request.json['cropSize'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -90,13 +87,8 @@ def api_harvest():
 @cross_origin()
 def api_scan():
     try:
-        if (validator.exists(request.json['uid'])):
-            HempContract = block.makeContractFromAddress(request.json['address'])
-            scanResults = block.scan(HempContract, request.json['uid'], request.json['userTag'])
-            # since we need to fetch individual scan results from emitted events in the blockInterface.py
-            # it has to be jsonified to return to this function. as a result, scanResults is already JSON,
-            # so we can't re-jsonify it. if we are able to return some other object in scanResults, you may need
-            # to add the jsonify call back.
+        if validator.contractExists(request.json['address']) and validator.exists(request.json['uid']):
+            scanResults = backend.scan(request.json['address'], request.json['uid'])
             return scanResults
         return jsonify(False)
     except Exception as e:
@@ -109,9 +101,8 @@ def api_scan():
 @cross_origin()
 def api_transferOwner():
     try:
-        if (validator.exists(request.json['ownerUid']) and validator.exists(request.json['newOwnerUid'])):
-            HempContract = block.makeContractFromAddress(request.json['address'])
-            block.transferOwner(HempContract, request.json['ownerUid'], request.json['newOwnerUid'], request.json['location'] request.json['userTag'])
+        if validator.contractExists(request.json['address']) and validator.exists(request.json['ownerUid']) and validator.exists(request.json['newOwnerUid']):
+            backend.transferOwner(request.json['address'], request.json['ownerUid'], request.json['newOwnerUid'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -124,9 +115,8 @@ def api_transferOwner():
 @cross_origin()
 def api_addCoa():
     try:
-        if (validator.technician(request.json['uid'])):
-            HempContract = block.makeContractFromAddress(request.json['address'])
-            block.testCrop(HempContract, request.json['uid'], request.json['coa'])
+        if validator.contractExists(request.json['address']) and validator.technician(request.json['uid']):
+            backend.testCrop(request.json['address'], request.json['uid'], request.json['coa'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -139,9 +129,8 @@ def api_addCoa():
 @cross_origin()
 def api_validateCoa():
     try:
-        if (validator.technician(request.json['uid'])):
-            HempContract = block.makeContractFromAddress(request.json['address'])
-            block.validateCrop(HempContract, request.json['uid'])
+        if validator.contractExists(request.json['address']) and validator.technician(request.json['uid']):
+            backend.validateCrop(request.json['address'], request.json['uid'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -154,9 +143,8 @@ def api_validateCoa():
 @cross_origin()
 def api_manufacture():
     try:
-        if (validator.manufacturer(request.json['uid'])):
-            HempContract = block.makeContractFromAddress(request.json['address'])
-            block.manufacture(HempContract, request.json['uid'], request.json['hempState'])
+        if validator.contractExists(request.json['address']) and validator.manufacturer(request.json['uid']):
+            backend.manufacture(request.json['address'], request.json['uid'], request.json['hempState'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:

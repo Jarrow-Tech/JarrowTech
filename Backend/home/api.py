@@ -4,6 +4,8 @@ from flask_cors import cross_origin
 import contracts.contractHandler as backend
 import runners.validator as validator
 
+import time
+
 home_api = Blueprint('home_api', __name__)
 
 # REMOVE FOR PROD
@@ -37,7 +39,10 @@ def api_all():
 @home_api.route('/api/web/test', methods=['GET', 'POST'])
 @cross_origin()
 def api_test():
-    return jsonify(validator.exists('7W5uarYrR6g669HVbssLBom0ZHH3'))
+    contract = backend.createNewContract()
+    backend.plant(contract, 'TestUID')
+    backend.harvest(contract, 'TestUID', 5)
+    return jsonify(contract)
 
 # call to create a new Hemp contract.
 # requires nothing

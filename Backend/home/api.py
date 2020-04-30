@@ -42,6 +42,11 @@ def api_test():
     contract = backend.createNewContract()
     backend.plant(contract, 'TestUID')
     backend.harvest(contract, 'TestUID', 5)
+    backend.transferOwner(contract, 'TestUID', 'NewOwnerUid')
+    coa = [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]]
+    backend.addCoa(contract, 'TechnicianUID', coa)
+    backend.validateCoa(contract, 'TechManagerUID')
+    backend.manufacture(contract, 'ManufacturerUID', "Processed into CBD Oil")
     return jsonify(contract)
 
 # call to create a new Hemp contract.

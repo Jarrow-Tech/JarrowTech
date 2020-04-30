@@ -62,63 +62,65 @@ def plant(contractAddress, uid):
             }
         })
         db.child('Contracts').child(contractAddress).update({"objects": objects + 1})
-    generateObjectHash(contractAddress, str(objects - 1))
+    generateObjectHash(contractAddress, str(objects))
     return
 
-# # called to register a harvest event
-# # takes the contract, the UID, and the crop size
-# def harvest(contractAddress, uid, cropSize):
-#     # if not harvested and uid is plantedUid
-#     objects = db.child('Contracts').child(contractAddress).child('objects').get().val()
-#     owner = db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('owner').get().val()
-#     # one of these isn't true
-#     if ((not db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('harvested').get().val()) and (owner == uid)):
-#         db.child('Contracts').child(contractAddress).child(str(objects)).set({
-#             "time": str(datetime.datetime.now()),
-#             "grower": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('grower').get().val()),
-#             "owner": str(uid),
-#             "cropSize": str(cropSize),
-#             "hempState": "None",
-#             "state": {
-#                 "planted": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('planted').get().val(),
-#                 "harvested": True,
-#                 "inTransit": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('inTransit').get().val(),
-#                 "delivered": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('delivered').get().val(),
-#                 "tested": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('tested').get().val(),
-#                 "validated": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('validated').get().val()
-#             }
-#         })
-#         # update the number of objects
-#         db.child('Contracts').child(contractAddress).update({"objects": objects + 1})
-#     generateObjectHash(contractAddress, str(objects - 1))
-#     return
-
+# called to register a harvest event
+# takes the contract, the UID, and the crop size
 def harvest(contractAddress, uid, cropSize):
+    # if not harvested and uid is plantedUid
     objects = db.child('Contracts').child(contractAddress).child('objects').get().val()
-    lastContract = db.child('Contracts').child(contractAddress).child(str(objects -1))
-    print(contractAddress)
-    if True:
-        try:
-            db.child('Contracts').child(contractAddress).child(str(objects)).set({
-                "time": str(datetime.datetime.now()),
-                "grower": str('hello'),
-                "owner": str(uid),
-                "cropSize": 0,
-                "hempState": "Stuff",
-                "state": {
-                    "planted": True,
-                    "harvested": False,
-                    "inTransit": False,
-                    "delivered": False,
-                    "tested": False,
-                    "validated": False
-                }
-            })
-        except Exception as e:
-            print(e)
+    owner = db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('owner').get().val()
+    # one of these isn't true
+    if ((not db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('harvested').get().val()) and (owner == uid)):
+        data = {
+            "time": str(datetime.datetime.now()),
+            "grower": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('grower').get().val()),
+            "owner": str(uid),
+            "cropSize": str(cropSize),
+            "hempState": "None",
+            "state": {
+                "planted": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('planted').get().val(),
+                "harvested": True,
+                "inTransit": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('inTransit').get().val(),
+                "delivered": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('delivered').get().val(),
+                "tested": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('tested').get().val(),
+                "validated": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('validated').get().val()
+            }
+        }
+        db.child('Contracts').child(contractAddress).child(str(objects)).set(data)
+        # update the number of objects
         db.child('Contracts').child(contractAddress).update({"objects": objects + 1})
-    generateObjectHash(contractAddress, str(objects - 1))
+    generateObjectHash(contractAddress, str(objects))
     return
+
+# def harvest(contractAddress, uid, cropSize):
+#     objects = db.child('Contracts').child(contractAddress).child('objects').get().val()
+#     # lastContract = db.child('Contracts').child(contractAddress).child(str(objects -1))
+#     print(contractAddress)
+#     if True:
+#         try:
+#             data = {
+#                 "time": str(datetime.datetime.now()),
+#                 "grower": str('hello'),
+#                 "owner": str(uid),
+#                 "cropSize": 0,
+#                 "hempState": "Stuff",
+#                 "state": {
+#                     "planted": True,
+#                     "harvested": False,
+#                     "inTransit": False,
+#                     "delivered": False,
+#                     "tested": False,
+#                     "validated": False
+#                 }
+#             }
+#             db.child('Contracts').child(contractAddress).child(str(objects)).set(data)
+#         except Exception as e:
+#             print(e)
+#         db.child('Contracts').child(contractAddress).update({"objects": objects + 1})
+#     generateObjectHash(contractAddress, str(objects))
+#     return
 
 # called to scan a contract
 # takes the contract, the UID

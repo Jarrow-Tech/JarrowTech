@@ -11,6 +11,7 @@ import {
   TextInput,
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import QRGenerator from '../../../utility/QRGenerator'
 
 import Prompt from 'react-native-input-prompt';
 
@@ -19,7 +20,7 @@ import { user } from '../../../../App';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../../styles/index';
 
-export default class QRGenerator extends Component{
+export default class TransporterQR extends Component{
     constructor(props) {
         super(props)
         this.state= ({
@@ -50,6 +51,7 @@ export default class QRGenerator extends Component{
                 <Text style={Typography.buttonText}>
                    This page will generate a QR code based off of the entered serial ID
                 </Text>
+                <QRGenerator/>                
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Serial Number"
                  placeholderTextColor='#ffffff'

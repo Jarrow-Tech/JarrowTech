@@ -66,12 +66,13 @@ import SearchTransaction from './src/pages/Displays/RegulatorHelpers/Transaction
 import Hempmap from './src/pages/Displays/RegulatorHelpers/RegulatorMap'
 import Transporter from './src/pages/Displays/Transporter';
 import CheckDestination from './src/pages/Displays/TransporterHelpers/CheckDestination';
-import QRGenerator from './src/pages/Displays/TransporterHelpers/GenerateQRCode';
+import TransporterQR from './src/pages/Displays/TransporterHelpers/GenerateQRCode';
 import LogTransaction from './src/pages/Displays/ProcessManufHelpers/LogTransactions';
 import Lab from './src/pages/Displays/Lab';
 import LogReport from './src/pages/Displays/LabPageHelpers/LogReport';
 import CultTransaction from './src/pages/Displays/CultivatorHelpers/Transaction';
 import TestPage from './src/pages/Displays/TestPage'
+import QRGenerator from './src/utility/QRGenerator'
 
 // this line supresses the firebase timer warning.
 // it is addressed at https://github.com/facebook/react-native/issues/12981
@@ -139,11 +140,14 @@ export default class App extends Component {
                     <Stack.Screen name="ManufacturingProcess" component={ManufacturingProcess} />
                     <Stack.Screen name="Transporter" component={Transporter} />
                     <Stack.Screen name="CheckDestination" component={CheckDestination} />
-                    <Stack.Screen name="QRGenerator" component={QRGenerator} />
+                    <Stack.Screen name="TransporterQR" component={TransporterQR} />
                     <Stack.Screen name="Lab" component={Lab} />
                     <Stack.Screen name="LogReport" component={LogReport} />
                     <Stack.Screen name="CultTransaction" component={CultTransaction} />
                     <Stack.Screen name="TestPage" component={TestPage} />
+                    <Stack.Screen name="QRGenerator" component={QRGenerator}/>
+
+
                 </Stack.Navigator>
             </NavigationContainer>
         )

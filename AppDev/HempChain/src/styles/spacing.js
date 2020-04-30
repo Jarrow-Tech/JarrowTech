@@ -35,3 +35,20 @@ export const signupTextContainer = {
     paddingVertical: Platform.OS === 'ios' ? 55 : 26,
     flexDirection: 'row'
 };
+
+export const table = {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+};
+
+export const tableRow = {
+    flex: 1,
+    alignSelf: 'stretch',
+    flexDirection: 'row'
+};
+
+export const tableCell = {
+    flex: 1,
+    alignSelf: 'stretch',
+};

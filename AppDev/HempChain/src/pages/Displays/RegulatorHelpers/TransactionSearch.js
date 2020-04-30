@@ -61,7 +61,7 @@ export default class SearchTransaction extends Component{
                  autoCapitalize="none"
                  autoCorrect={false}
                   />                
-                <TouchableOpacity style={Buttons.button} onPress={() => this.information()}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("ContractTable")}>
                     <Text style={Typography.buttonText}>
                         Search
                     </Text>

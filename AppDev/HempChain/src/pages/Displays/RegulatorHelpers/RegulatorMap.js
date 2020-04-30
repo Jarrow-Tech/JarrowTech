@@ -36,9 +36,6 @@ export default class Hempmap extends Component{
         this.props.navigation.navigate('Login');
     }
 
-    
-
-
     render() {
         return(
             <View style={Spacing.colorContainer}>

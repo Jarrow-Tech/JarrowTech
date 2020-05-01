@@ -47,7 +47,8 @@ def api_test():
     backend.addCoa(contract, 'TechnicianUID', coa)
     backend.validateCoa(contract, 'TechManagerUID')
     backend.manufacture(contract, 'ManufacturerUID', "Processed into CBD Oil")
-    return jsonify(contract)
+    scanObject = backend.scan(contract, 'TestUID')
+    return jsonify(scanObject)
 
 # call to create a new Hemp contract.
 # requires nothing

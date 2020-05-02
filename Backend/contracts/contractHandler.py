@@ -31,6 +31,7 @@ def createNewContract():
         "cropSize": 0,
         "hempState": "None",
         "coa": [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        "location": "None",
         "state": {
             "planted": False,
             "harvested": False,
@@ -46,7 +47,7 @@ def createNewContract():
 
 # called to register a plant event
 # takes the contract and the UID
-def plant(contractAddress, uid):
+def plant(contractAddress, uid, location):
     # get required data for logic
     objects = db.child('Contracts').child(contractAddress).child('objects').get().val()
     lastContract = db.child('Contracts').child(contractAddress).child(str(objects -1))
@@ -61,6 +62,7 @@ def plant(contractAddress, uid):
             "cropSize": 0,
             "hempState": "None",
             "coa": [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+            "location": str(location),
             "state": {
                 "planted": True,
                 "harvested": False,
@@ -92,6 +94,7 @@ def harvest(contractAddress, uid, cropSize):
             "cropSize": str(cropSize),
             "hempState": "None",
             "coa": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('coa').get().val(),
+            "location": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('location').get().val()),
             "state": {
                 "planted": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('planted').get().val(),
                 "harvested": True,
@@ -123,7 +126,7 @@ def scan(contractAddress, uid):
 
 # called to transfer ownership of a contract from one UID to another
 # takes the contract, the current UID, and the next UID
-def transferOwner(contractAddress, uid, nextUid):
+def transferOwner(contractAddress, uid, nextUid, location):
     # get required data for logic
     objects = db.child('Contracts').child(contractAddress).child('objects').get().val()
     owner = db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('owner').get().val()
@@ -137,6 +140,7 @@ def transferOwner(contractAddress, uid, nextUid):
             "cropSize": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('cropSize').get().val()),
             "hempState": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('hempState').get().val()),
             "coa": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('coa').get().val(),
+            "location": str(location),
             "state": {
                 "planted": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('planted').get().val(),
                 "harvested": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('harvested').get().val(),
@@ -154,7 +158,6 @@ def transferOwner(contractAddress, uid, nextUid):
         # update object count
         db.child('Contracts').child(contractAddress).update({"objects": objects + 1})
 
-    print(str(objects))
     generateObjectHash(contractAddress, str(objects))
     return
 
@@ -174,6 +177,7 @@ def addCoa(contractAddress, uid, coa):
             "cropSize": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('cropSize').get().val()),
             "hempState": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('hempState').get().val()),
             "coa": coa,
+            "location": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('location').get().val()),
             "state": {
                 "planted": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('planted').get().val(),
                 "harvested": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('harvested').get().val(),
@@ -208,6 +212,7 @@ def validateCoa(contractAddress, uid):
             "cropSize": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('cropSize').get().val()),
             "hempState": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('hempState').get().val()),
             "coa": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('coa').get().val(),
+            "location": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('location').get().val()),
             "state": {
                 "planted": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('planted').get().val(),
                 "harvested": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('harvested').get().val(),
@@ -242,6 +247,7 @@ def manufacture(contractAddress, uid, newHempState):
             "cropSize": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('cropSize').get().val()),
             "hempState": str(newHempState),
             "coa": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('coa').get().val(),
+            "location": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('location').get().val()),
             "state": {
                 "planted": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('planted').get().val(),
                 "harvested": db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('harvested').get().val(),
@@ -271,5 +277,7 @@ def generateObjectHash(contract, num):
     o += str(hashableObject['owner'])
     o += str(hashableObject['hempState'])
     o += str(hashableObject['time'])
+    o += str(hashableObject['coa'])
+    o += str(hashableObject['location'])
     db.child('Contracts').child(contract).child('hash' + num).set({"hash": str(hash(o))})
     return

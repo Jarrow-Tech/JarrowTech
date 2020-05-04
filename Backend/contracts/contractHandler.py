@@ -112,9 +112,14 @@ def harvest(contractAddress, uid, cropSize):
 
 # called to scan a contract
 # takes the contract, the UID
-def scan(contract, uid):
+def scan(contractAddress, uid):
     # return a list with each state in the contract [0..n]
-    return
+    objects = db.child('Contracts').child(contractAddress).child('objects').get().val()
+    scanObject = {}
+    for object in range(objects):
+        scanObject[object] = db.child('Contracts').child(contractAddress).child(object).get().val()
+
+    return scanObject
 
 # called to transfer ownership of a contract from one UID to another
 # takes the contract, the current UID, and the next UID

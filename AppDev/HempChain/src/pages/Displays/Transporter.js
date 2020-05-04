@@ -14,9 +14,6 @@ import Prompt from 'react-native-input-prompt';
 import Logo from '../../components/Logo';
 import LoginForm from '../../components/LoginForm';
 
-//See sign-up pg for notes
-import { user } from '../../../App';
-
 // sub pages for Cultivator
 import HarvestInformation from './CultivatorHelpers/HarvestInformation'
 import Buying from './CultivatorHelpers/Buying'
@@ -24,11 +21,15 @@ import Selling from './CultivatorHelpers/Selling'
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 
+import * as webHelp from '../../utility/webHelper';
+
 export default class Transporter extends Component{
     constructor(props) {
         super(props)
-        this.state= ({ })
-       
+        this.state= ({
+            location: 'Scan or Enter a QR code to display the destination address for a shipment.',
+        })
+        this.checkDestination = this.checkDestination.bind(this);
     ;}
 
     //Firebase signout function
@@ -41,13 +42,25 @@ export default class Transporter extends Component{
         this.props.navigation.navigate('Login');
     }
 
+    async checkDestination(serial) {
+        let scanData = await webHelp.sendToServer('http://10.0.2.2:5000/api/web/scan', {
+            address: serial,
+            uid: firebase.auth().currentUser.uid
+        });
+        let eventCount = Object.keys(scanData).length;
+        this.setState({'location': scanData[(eventCount - 1).toString()]['location']});
+    }
+
     render() {
         return(
             <View style={Spacing.colorContainer}>
                 <Text style={Typography.buttonText}>
                     Transporter Page
                 </Text>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('CheckDestination')}>
+                <Text style={Typography.buttonText}>
+                    {"\n"} {this.state.location} {"\n"}
+                </Text>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate('CheckDestination', {checkDestination: this.checkDestination})}>
                     <Text style={Typography.buttonText}>
                         Check Destination
                     </Text>

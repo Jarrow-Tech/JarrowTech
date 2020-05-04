@@ -49,8 +49,8 @@ def exists(uid):
     return False
 
 def contractExists(contract):
-    contracts = db.child('Contracts')
+    contracts = db.child('Contracts').get()
     for each in contracts.each():
-        if each.key == contract:
+        if each.key() == contract:
             return True
     return False

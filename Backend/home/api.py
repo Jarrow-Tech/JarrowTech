@@ -40,9 +40,9 @@ def api_all():
 @cross_origin()
 def api_test():
     contract = backend.createNewContract()
-    backend.plant(contract, 'TestUID')
+    backend.plant(contract, 'TestUID', '456 Field House Rd')
     backend.harvest(contract, 'TestUID', 5)
-    backend.transferOwner(contract, 'TestUID', 'NewOwnerUid')
+    backend.transferOwner(contract, 'TestUID', 'NewOwnerUid', '123 Final Destination St')
     coa = [[0, 0, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]]
     backend.addCoa(contract, 'TechnicianUID', coa)
     backend.validateCoa(contract, 'TechManagerUID')

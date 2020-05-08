@@ -38,7 +38,8 @@ export default class CheckDestination extends Component{
     }
 
     submitSerial = () => {
-        console.log("Searching for serial: " + this.state.serial);
+        this.props.route.params.checkDestination(this.state.serial);
+        this.props.navigation.goBack();
     }
 
     barcodeRecognized = e => {

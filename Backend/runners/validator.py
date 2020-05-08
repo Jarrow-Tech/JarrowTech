@@ -47,3 +47,10 @@ def exists(uid):
         if each.key() == uid:
             return True
     return False
+
+def contractExists(contract):
+    contracts = db.child('Contracts').get()
+    for each in contracts.each():
+        if each.key() == contract:
+            return True
+    return False

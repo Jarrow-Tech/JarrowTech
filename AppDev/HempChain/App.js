@@ -17,9 +17,6 @@ const firebaseConfig={
     storageBucket: "jarrowchain.appspot.com",
 };
 
-// web3/ethereum api setup
-const Web3 = require('web3');
-
 //The below initilizes firebase and sets variables for the refrencing to the database
 firebase.initializeApp(firebaseConfig);
 const rootRef = firebase.database().ref();

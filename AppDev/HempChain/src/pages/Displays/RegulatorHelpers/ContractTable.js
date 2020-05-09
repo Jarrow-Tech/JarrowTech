@@ -67,7 +67,7 @@ export default class ContractTable extends Component {
                 {
                     keys.map(key => (
                         this.renderButton(
-                            'eventType',
+                            this.state.scanData[key]['eventType'],
                             this.state.scanData[key]['grower'],
                             this.state.scanData[key]['owner'],
                             this.state.scanData[key]['cropSize'],

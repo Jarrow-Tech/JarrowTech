@@ -25,6 +25,7 @@ def createNewContract():
     # create the first "blank" contract instance
     db.child('Contracts').child(contractAddress).set({"objects": 1})
     db.child('Contracts').child(contractAddress).child('0').set({
+        "eventType": "New Contract",
         "time": str(createTime),
         "grower": "None",
         "owner": "None",
@@ -56,6 +57,7 @@ def plant(contractAddress, uid, location):
         # add the new contract state
         # this doesn't require pre generating the data -- i think this is because we aren't pulling anything from the DB, but honestly i don't know
         db.child('Contracts').child(contractAddress).child(str(objects)).set({
+            "eventType": "Plant",
             "time": str(datetime.datetime.now()),
             "grower": str(uid),
             "owner": str(uid),
@@ -88,6 +90,7 @@ def harvest(contractAddress, uid, cropSize):
     if ((not db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('state').child('harvested').get().val()) and (owner == uid)):
         # construct data object for new contract event
         data = {
+            "eventType": "Harvest",
             "time": str(datetime.datetime.now()),
             "grower": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('grower').get().val()),
             "owner": str(uid),
@@ -134,6 +137,7 @@ def transferOwner(contractAddress, uid, nextUid, location):
     if owner == uid:
         # construct data object for new contract event
         data = {
+            "eventType": "Transfer Ownership",
             "time": str(datetime.datetime.now()),
             "grower": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('grower').get().val()),
             "owner": str(nextUid),
@@ -171,6 +175,7 @@ def addCoa(contractAddress, uid, coa):
     if (owner == uid) or (uid == 'TechnicianUID'):
         # construct data object for new contract event
         data = {
+            "eventType": "Add CoA",
             "time": str(datetime.datetime.now()),
             "grower": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('grower').get().val()),
             "owner": str(uid),
@@ -206,6 +211,7 @@ def validateCoa(contractAddress, uid):
     if tested:
         # construct data object for new contract event
         data = {
+            "eventType": "Validate CoA",
             "time": str(datetime.datetime.now()),
             "grower": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('grower').get().val()),
             "owner": str(uid),
@@ -241,6 +247,7 @@ def manufacture(contractAddress, uid, newHempState):
     if (owner == uid) or (uid == 'ManufacturerUID'):
         # construct data object for new contract event
         data = {
+            "eventType": "Process Hemp",
             "time": str(datetime.datetime.now()),
             "grower": str(db.child('Contracts').child(contractAddress).child(str(objects - 1)).child('grower').get().val()),
             "owner": str(uid),

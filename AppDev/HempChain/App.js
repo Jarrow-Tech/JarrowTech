@@ -70,6 +70,7 @@ import LogReport from './src/pages/Displays/LabPageHelpers/LogReport';
 import CultTransaction from './src/pages/Displays/CultivatorHelpers/Transaction';
 import TestPage from './src/pages/Displays/TestPage'
 import ContractTable from './src/pages/Displays/RegulatorHelpers/ContractTable';
+import QRScanner from './src/utility/qrScanner';
 
 // this line supresses the firebase timer warning.
 // it is addressed at https://github.com/facebook/react-native/issues/12981
@@ -143,6 +144,7 @@ export default class App extends Component {
                     <Stack.Screen name="CultTransaction" component={CultTransaction} />
                     <Stack.Screen name="TestPage" component={TestPage} />
                     <Stack.Screen name="ContractTable" component={ContractTable} />
+                    <Stack.Screen name="QRScanner" component={QRScanner} />
                 </Stack.Navigator>
             </NavigationContainer>
         )

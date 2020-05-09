@@ -44,11 +44,28 @@ export const table = {
 
 export const tableRow = {
     flex: 1,
+    width: 350,
     alignSelf: 'stretch',
     flexDirection: 'row'
 };
 
 export const tableCell = {
     flex: 1,
+    width: 350,
     alignSelf: 'stretch',
 };
+
+export const eventRow = {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    backgroundColor: '#1c313a',
+    paddingVertical: 20,
+    margin: 20,
+    borderRadius: 25,
+}
+
+export const eventItem = {
+    width: '50%',
+}

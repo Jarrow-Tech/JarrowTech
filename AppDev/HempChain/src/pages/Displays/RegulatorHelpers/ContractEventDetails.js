@@ -21,11 +21,10 @@ import * as webHelp from '../../../utility/webHelper';
 // used to configure scrolling view
 const {height} = Dimensions.get('window');
 
-export default class ContractTable extends Component {
+export default class ContractEventDetails extends Component {
     constructor(props){
         super(props)
         this.state = ({
-            scanData: false,
             screenHeight: height,
         });
     }
@@ -55,57 +54,38 @@ export default class ContractTable extends Component {
         this.setState({screenHeight: contentHeight})
     }
 
-    // top level function for mapping the number of events to the buttons
-    // relies on the eventCount state value to compute the number of data rows to render and then maps
-    // the array `keys` to a button that is full of their data
-    renderScanData() {
-        let keys = [...Array(this.state.eventCount).keys()];
-        keys.shift();
-        console.log('rendering scan data');
-        return (
-            <View style={Spacing.colorContainer}>
-                {
-                    keys.map(key => (
-                        this.renderButton(
-                            this.state.scanData[key]['eventType'],
-                            this.state.scanData[key]['grower'],
-                            this.state.scanData[key]['owner'],
-                            this.state.scanData[key]['cropSize'],
-                            this.state.scanData[key]['time'],
-                            key
-                    )))
-                }
-            </View>
-        )
-    }
-
     // takes all of the data for a data entry and formats it into the button
-    renderButton(eventType, grower, owner, cropSize, time, eventId) {
+    displayDetails(eventDetails) {
         return(
         <View style={Spacing.eventRow}>
             <View style={Spacing.eventItem}>
                 <Text style={Typography.titleText}>
-                    {eventType}
+                    {eventDetails['eventType']}
                 </Text>
                 <Text style={Typography.leftText}>
-                    Crop Size: {cropSize}
+                    Crop Size: {eventDetails['cropSize']}
                 </Text>
                 <Text style={Typography.leftText}>
-                    Time: {time}
+                    Time: {eventDetails['time']}
                 </Text>
                 <Text style={Typography.leftText}>
-                    Grower: {grower}
+                    Grower: {eventDetails['grower']}
                 </Text>
                 <Text style={Typography.leftText}>
-                    Owner: {owner}
+                    Owner: {eventDetails['owner']}
                 </Text>
-            </View>
-            <View style={Spacing.eventItem}>
-                <TouchableOpacity style={Buttons.rowDetailsButton} onPress={() => this.props.navigation.navigate('ContractEventDetails', {eventDetails: this.state.scanData[eventId]})}>
-                    <Text style={Typography.centeredText}>
-                        Full details
-                    </Text>
-                </TouchableOpacity>
+                <Text style={Typography.leftText}>
+                    CoA: {eventDetails['coa'].toString()}
+                </Text>
+                <Text style={Typography.leftText}>
+                    Address: {eventDetails['location']}
+                </Text>
+                <Text style={Typography.leftText}>
+                    Hemp State: {eventDetails['hempState']}
+                </Text>
+                <Text style={Typography.leftText}>
+                    State: {eventDetails['state'].toString()}
+                </Text>
             </View>
         </View>
         );
@@ -122,7 +102,7 @@ export default class ContractTable extends Component {
                     scrollEnabled={scrollEnabled}
                     onContentSizeChange={this.onContentSizeChange}>
                     <View style={Spacing.table}>
-                        { (this.state.scanData != false) ? this.renderScanData() : console.log('no scan data present') }
+                        { this.displayDetails(this.props.route.params.eventDetails) }
                     </View>
                 </ScrollView>
                 <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>

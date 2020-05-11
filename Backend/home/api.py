@@ -60,6 +60,7 @@ def api_makeContract():
         contract = backend.createNewContract()
         return jsonify(contract)
     except Exception as e:
+        print(e)
         return jsonify(False)
 
 # call to plant a contract
@@ -74,6 +75,7 @@ def api_plant():
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
+        print(e)
         return jsonify(False)
 
 # call to harvest a contract
@@ -89,6 +91,7 @@ def api_harvest():
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
+        print(e)
         return jsonify(False)
 
 # call to scan a contract
@@ -103,6 +106,7 @@ def api_scan():
             return scanResults
         return jsonify(False)
     except Exception as e:
+        print(e)
         return jsonify(False)
 
 # call to transfer ownership from one UID to another
@@ -117,6 +121,7 @@ def api_transferOwner():
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
+        print(e)
         return jsonify(False)
 
 # call to add a CoA to the contract
@@ -131,6 +136,7 @@ def api_addCoa():
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
+        print(e)
         return jsonify(False)
 
 # call to validate the CoA of the contract
@@ -145,6 +151,7 @@ def api_validateCoa():
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
+        print(e)
         return jsonify(False)
 
 # call to update what state the hemp is in
@@ -159,4 +166,5 @@ def api_manufacture():
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
+        print(e)
         return jsonify(False)

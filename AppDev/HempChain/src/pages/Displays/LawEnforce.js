@@ -70,7 +70,7 @@ export default class LawEnforcement extends Component {
                     value={this.state.serial} 
                     />
                 </View>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("ContractTable", {contractAddress: this.state.serial})}>
                     <Text style={Typography.buttonText}>
                         Search Serial
                     </Text>

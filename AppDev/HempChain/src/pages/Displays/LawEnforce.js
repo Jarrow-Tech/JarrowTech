@@ -39,10 +39,6 @@ export default class LawEnforcement extends Component {
         this.props.navigation.navigate('Login');
     }
 
-    submitSerial = () => {
-        console.log("Searching for serial: " + this.state.serial);
-    }
-
     barcodeRecognized = e => {
         this.setState({serial: e.data})
     }

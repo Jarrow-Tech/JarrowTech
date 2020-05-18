@@ -24,7 +24,7 @@ export default class SearchTransaction extends Component{
         this.state = ({
             entry: '',
         });
-        this.information = this.information.bind(this);
+        this.submitSerial = this.submitSerial.bind(this);
     }
 
     //Firebase signout function
@@ -37,9 +37,9 @@ export default class SearchTransaction extends Component{
         this.props.navigation.navigate('Login');
     }
 
-    information() {
-        console.log("Searching for "+ this.state.entry)
-        this.props.navigation.goBack();
+    submitSerial(serial) {
+        console.log(serial);
+        this.setState({entry: serial});
     }
 
 
@@ -60,8 +60,13 @@ export default class SearchTransaction extends Component{
                  onChangeText={(text) => this.setState({entry: text})}
                  autoCapitalize="none"
                  autoCorrect={false}
-                  />                
-                <TouchableOpacity style={Buttons.button} onPress={() => this.information()}>
+                />
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("QRScanner", {submitSerial: this.submitSerial})}>
+                    <Text style={Typography.buttonText}>
+                        Scan QR Code
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("ContractTable", {contractAddress: this.state.entry})}>
                     <Text style={Typography.buttonText}>
                         Search
                     </Text>

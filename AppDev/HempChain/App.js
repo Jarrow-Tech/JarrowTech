@@ -67,8 +67,8 @@ import Lab from './src/pages/LabWorker/LabWorker';
 import LogReport from './src/pages/LabWorker/LogReport';
 import CultTransaction from './src/pages/Cultivator/Transaction';
 import TestPage from './src/pages/TestPage'
-import ContractTable from './src/pages/Regulator/ContractTable';
-import ContractEventDetails from './src/pages/Regulator/ContractEventDetails';
+import ContractOverview from './src/pages/ContractDetails/ContractOverview';
+import ContractEventDetails from './src/pages/ContractDetails/ContractEventDetails';
 import QRScanner from './src/utility/qrScanner';
 
 // this line supresses the firebase timer warning.
@@ -142,7 +142,7 @@ export default class App extends Component {
                     <Stack.Screen name="LogReport" component={LogReport} />
                     <Stack.Screen name="CultTransaction" component={CultTransaction} />
                     <Stack.Screen name="TestPage" component={TestPage} />
-                    <Stack.Screen name="ContractTable" component={ContractTable} />
+                    <Stack.Screen name="ContractOverview" component={ContractOverview} />
                     <Stack.Screen name="ContractEventDetails" component={ContractEventDetails} />
                     <Stack.Screen name="QRScanner" component={QRScanner} />
                 </Stack.Navigator>

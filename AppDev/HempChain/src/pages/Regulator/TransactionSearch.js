@@ -66,7 +66,7 @@ export default class SearchTransaction extends Component{
                         Scan QR Code
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("ContractTable", {contractAddress: this.state.entry})}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("ContractOverview", {contractAddress: this.state.entry})}>
                     <Text style={Typography.buttonText}>
                         Search
                     </Text>

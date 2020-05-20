@@ -21,7 +21,7 @@ import * as webHelp from '../../utility/webHelper';
 // used to configure scrolling view
 const {height} = Dimensions.get('window');
 
-export default class ContractTable extends Component {
+export default class ContractOverview extends Component {
     constructor(props){
         super(props)
         this.state = ({

@@ -36,41 +36,39 @@ import {
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { navigationRef } from './src/RootNavigation';
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 //provides app with data
 import { Provider } from 'react-redux';
-import { store } from './src/redux/Appredux';
 
 //Routes allows us to navigate to different pages much easier than using the standard react-navigation tools
 // react-navigation tools are built into the react-native-router-flux github that is downloaded
-import Dashboard from './src/pages/Displays/FinishedReg';
-import LawEnforcement from './src/pages/Displays/LawEnforce';
-import Cultivator from './src/pages/Displays/Cultivator';
-import ManufacturingProcess from './src/pages/Displays/ProcessManuf';
+import Dashboard from './src/pages/Authentication/FinishedRegistration';
+import LawEnforcement from './src/pages/LawEnforcement/LawEnforcement';
+import Cultivator from './src/pages/Cultivator/Cultivator';
+import ManufacturingProcess from './src/pages/Manufacturer/Manufacturer';
 import Login from './src/pages/Authentication/Login';
-import Signup from './src/pages/Authentication/Sign-Up';
+import Signup from './src/pages/Authentication/SignUp';
 import ForgotPassword from './src/pages/Authentication/ForgotPassword';
-import BusinessRegistration from './src/pages/Registration/BuisRegistration';
-import EmployeeRegistration from './src/pages/Registration/Employee';
-import HarvestInformation from './src/pages/Displays/CultivatorHelpers/HarvestInformation';
-import Selling from './src/pages/Displays/CultivatorHelpers/Selling';
-import Buying from './src/pages/Displays/CultivatorHelpers/Buying';
-import Regulator from './src/pages/Displays/RegulatorGov';
-import SearchTransaction from './src/pages/Displays/RegulatorHelpers/TransactionSearch';
-import Hempmap from './src/pages/Displays/RegulatorHelpers/RegulatorMap'
-import Transporter from './src/pages/Displays/Transporter';
-import CheckDestination from './src/pages/Displays/TransporterHelpers/CheckDestination';
-import QRGenerator from './src/pages/Displays/TransporterHelpers/GenerateQRCode';
-import LogTransaction from './src/pages/Displays/ProcessManufHelpers/LogTransactions';
-import Lab from './src/pages/Displays/Lab';
-import LogReport from './src/pages/Displays/LabPageHelpers/LogReport';
-import CultTransaction from './src/pages/Displays/CultivatorHelpers/Transaction';
-import TestPage from './src/pages/Displays/TestPage'
-import ContractTable from './src/pages/Displays/RegulatorHelpers/ContractTable';
-import ContractEventDetails from './src/pages/Displays/RegulatorHelpers/ContractEventDetails';
+import BusinessRegistration from './src/pages/Authentication/BuisinessRegistration';
+import EmployeeRegistration from './src/pages/Authentication/Employee';
+import HarvestInformation from './src/pages/Cultivator/HarvestInformation';
+import Selling from './src/pages/Cultivator/Selling';
+import Buying from './src/pages/Cultivator/Buying';
+import Regulator from './src/pages/Regulator/Regulator';
+import SearchTransaction from './src/pages/Regulator/TransactionSearch';
+import Hempmap from './src/pages/Regulator/RegulatorMap'
+import Transporter from './src/pages/Transporter/Transporter';
+import CheckDestination from './src/pages/Transporter/CheckDestination';
+import QRGenerator from './src/pages/Transporter/GenerateQRCode';
+import LogTransaction from './src/pages/Manufacturer/LogTransactions';
+import Lab from './src/pages/LabWorker/LabWorker';
+import LogReport from './src/pages/LabWorker/LogReport';
+import CultTransaction from './src/pages/Cultivator/Transaction';
+import TestPage from './src/pages/TestPage'
+import ContractTable from './src/pages/Regulator/ContractTable';
+import ContractEventDetails from './src/pages/Regulator/ContractEventDetails';
 import QRScanner from './src/utility/qrScanner';
 
 // this line supresses the firebase timer warning.
@@ -120,7 +118,7 @@ export default class App extends Component {
     // pages accessible without logging in
     render() {
         return(
-            <NavigationContainer ref={navigationRef}>
+            <NavigationContainer>
                 <Stack.Navigator headerMode="none">
                     <Stack.Screen name="Login" component={Login} />
                     <Stack.Screen name="SignUp" component={Signup} />

@@ -20,7 +20,9 @@ export default class LawEnforcement extends Component {
             email: '',
             isOpen: false,
             serial: '',
-    });}
+        });
+        this.submitSerial = this.submitSerial.bind(this);
+    }
 
     onSignoutPress = () => {
         firebase.auth().signOut().then(() => {
@@ -32,7 +34,11 @@ export default class LawEnforcement extends Component {
     }
 
     barcodeRecognized = e => {
-        this.setState({serial: e.data})
+        this.setState({serial: e.data});
+    }
+
+    submitSerial(s) {
+        this.setState({serial: s});
     }
 
     render(){
@@ -41,18 +47,11 @@ export default class LawEnforcement extends Component {
                 <Text style={Typography.buttonText}>
                     LawEnforcementPage
                 </Text>
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={{
-                        flex: 1,
-                        width: '50%',
-                    }}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-                    flashMode={RNCamera.Constants.FlashMode.on}
-                    onBarCodeRead={this.barcodeRecognized}>
-                </RNCamera>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("QRScanner", {submitSerial: this.submitSerial})}>
+                    <Text style={Typography.buttonText}>
+                        Scan QR Code
+                    </Text>
+                </TouchableOpacity>
                 <View style={UserInterface.inputBox}>
                     <TextInput style={UserInterface.inputText}
                     placeholder="Serial Number"

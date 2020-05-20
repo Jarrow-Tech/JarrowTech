@@ -9,7 +9,6 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import { RNCamera } from 'react-native-camera';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 
@@ -19,7 +18,9 @@ export default class ManufProcs extends Component {
         this.state= ({
             email: '',
             isOpen: false,
-    });}
+        });
+        this.submitSerial = this.submitSerial.bind(this);
+    }
 
     onSignoutPress = () => {
         firebase.auth().signOut().then(() => {
@@ -30,7 +31,11 @@ export default class ManufProcs extends Component {
         this.props.navigation.navigate('Login');
     }
 
-    submitSerial = () => {
+    submitSerial = (s) => {
+        this.setState({serial: s})
+    }
+
+    searchSerial = () => {
         console.log("[ProcessManuf] Searching for serial: " + this.state.serial);
     }
 
@@ -45,19 +50,11 @@ export default class ManufProcs extends Component {
                     Process/Manufacturer Page
                 </Text>
 
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={{
-                        flex: 1,
-                        width: '50%',
-                        transform: [{ rotate: '180deg'}],
-                    }}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-                    flashMode={RNCamera.Constants.FlashMode.on}
-                    onBarCodeRead={this.barcodeRecognized}>
-                </RNCamera>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("QRScanner", {submitSerial: this.submitSerial})}>
+                    <Text style={Typography.buttonText}>
+                        Scan QR Code
+                    </Text>
+                </TouchableOpacity>
                 <View style={UserInterface.inputBox}>
                     <TextInput style={UserInterface.inputText}
                     placeholder="Serial Number"
@@ -68,7 +65,7 @@ export default class ManufProcs extends Component {
                     captureAudio={false} 
                     />
                 </View>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.searchSerial()}>
                     <Text style={Typography.buttonText}>
                         Search Serial
                     </Text>

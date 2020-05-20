@@ -19,7 +19,9 @@ export default class CheckDestination extends Component{
         this.state= ({
             email: '',
             serial: '',
-    });}
+        });
+        this.submitSerial = this.submitSerial.bind(this);
+    }
 
     onSignoutPress = () => {
         firebase.auth().signOut().then(() => {
@@ -30,9 +32,13 @@ export default class CheckDestination extends Component{
         this.props.navigation.navigate('Login');
     }
 
-    submitSerial = () => {
+    searchSerial = () => {
         this.props.route.params.checkDestination(this.state.serial);
         this.props.navigation.goBack();
+    }
+
+    submitSerial(s) {
+        this.setState({serial: s});
     }
 
     barcodeRecognized = e => {
@@ -45,25 +51,18 @@ export default class CheckDestination extends Component{
                 <Text style={Typography.buttonText}>
                     LawEnforcementPage
                 </Text>
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={{
-                        flex: 1,
-                        width: '50%',
-                    }}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-                    flashMode={RNCamera.Constants.FlashMode.on}
-                    onBarCodeRead={this.barcodeRecognized}>
-                </RNCamera>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("QRScanner", {submitSerial: this.submitSerial})}>
+                    <Text style={Typography.buttonText}>
+                        Scan QR Code
+                    </Text>
+                </TouchableOpacity>
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Serial Number"
                  placeholderTextColor='#ffffff'
                  ref={(input) => this.serial = input}
                  onChangeText={(serial) => this.setState({serial})}
                  value={this.state.serial} />
-                <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.searchSerial()}>
                     <Text style={Typography.buttonText}>
                         Search Serial
                     </Text>

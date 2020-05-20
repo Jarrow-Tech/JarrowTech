@@ -38,7 +38,7 @@ export default class EmployeeReg extends Component {
             return;
         }
 
-        //
+        // pass the entered information to Firebase - for now output it to console
         console.log("Operating State: " + this.state.operatingState)
         console.log("Company Name: " + this.state.companyName)
         console.log("First Name: " + this.state.firstName)

@@ -4,14 +4,12 @@
 import React, { Component } from 'react';
 
 import {
-    StyleSheet,
     View,
     Text,
-    TextInput,
     TouchableOpacity,
 } from 'react-native';
 
-import { Typography, Spacing, UserInterface, Buttons } from '../../../styles/index';
+import { Typography, Spacing, Buttons } from '../../../styles/index';
 
 export default class RegisterForm extends Component {
 

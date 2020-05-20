@@ -1,15 +1,11 @@
 //this is the page where an employee of any agency will be able to register an account
 import React,{Component} from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   TextInput,
   TouchableOpacity,
-  Picker,
 } from 'react-native';
-
-import Logo from './components/Logo';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 

@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
@@ -14,7 +13,7 @@ import {
 import Logo from './components/Logo';
 import LoginForm from './components/LoginForm';
 
-import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+import { Typography, Spacing, Buttons } from '../../styles/index';
 
 export default class Login extends Component {
 

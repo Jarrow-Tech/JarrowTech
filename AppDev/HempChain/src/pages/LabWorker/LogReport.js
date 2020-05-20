@@ -4,18 +4,12 @@ import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
   Alert,
   TextInput,
 } from 'react-native';
-
-import Prompt from 'react-native-input-prompt';
-
-//See sign-up pg for notes
-import { user } from '../../../App';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 

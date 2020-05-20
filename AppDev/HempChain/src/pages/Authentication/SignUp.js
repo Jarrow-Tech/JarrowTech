@@ -4,17 +4,15 @@
 import React, { Component } from 'react';
 
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
 } from 'react-native';
 
 import Logo from './components/Logo';
-import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterHome';
 
-import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+import { Typography, Spacing, Buttons } from '../../styles/index';
 
 export default class SignUp extends Component {
 

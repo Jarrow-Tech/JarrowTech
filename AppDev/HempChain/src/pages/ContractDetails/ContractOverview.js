@@ -4,13 +4,9 @@ import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
 import {
-    Button,
-    StyleSheet,
     View,
     Text,
     TouchableOpacity,
-    Alert,
-    TextInput,
     Image,
     ScrollView,
     Dimensions

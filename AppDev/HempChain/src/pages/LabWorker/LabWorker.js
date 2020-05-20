@@ -4,28 +4,19 @@ import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 
-import Prompt from 'react-native-input-prompt';
-import Logo from '../Authentication/components/Logo';
-import LoginForm from '../Authentication/components/LoginForm';
-
-//See sign-up pg for notes
-import { user } from '../../../App';
-
-import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+import { Typography, Spacing, Buttons } from '../../styles/index';
 
 export default class Lab extends Component {
     constructor(props) {
         super(props)
-        this.state= ({
-            
-    });}
+        this.state= ({ });
+    }
 
     onSignoutPress = () => {
         firebase.auth().signOut().then(() => {

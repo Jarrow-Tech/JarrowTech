@@ -25,13 +25,6 @@ export var user = firebase.auth().currentUser;
 
 import React, { Component } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Alert,
   YellowBox,
 } from 'react-native';
 
@@ -39,12 +32,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
-//provides app with data
-import { Provider } from 'react-redux';
-
 //Routes allows us to navigate to different pages much easier than using the standard react-navigation tools
 // react-navigation tools are built into the react-native-router-flux github that is downloaded
-import Dashboard from './src/pages/Authentication/FinishedRegistration';
 import LawEnforcement from './src/pages/LawEnforcement/LawEnforcement';
 import Cultivator from './src/pages/Cultivator/Cultivator';
 import ManufacturingProcess from './src/pages/Manufacturer/Manufacturer';

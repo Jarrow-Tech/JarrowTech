@@ -6,17 +6,12 @@ import * as firebase from 'firebase';
 
 import React,{Component} from 'react';
 import {
-    StyleSheet,
     View,
     Text,
     TextInput,
     TouchableOpacity,
     Alert
 } from 'react-native';
-
-import { CommonActions } from '@react-navigation/native';
-
-import { user } from '../../../../App';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../../styles/index';
 

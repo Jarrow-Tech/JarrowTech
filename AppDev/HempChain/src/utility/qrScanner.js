@@ -3,16 +3,12 @@ import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
-  Alert,
   TextInput,
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-
-import Prompt from 'react-native-input-prompt';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
 

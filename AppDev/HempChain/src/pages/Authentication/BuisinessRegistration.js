@@ -3,18 +3,15 @@ import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   TextInput,
   TouchableOpacity,
   Picker,
   Alert,
-  Button,
   ActionSheetIOS,
 } from 'react-native';
 import Prompt from 'react-native-input-prompt'
-import { userRef } from '../../../App';
 
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 

@@ -3,22 +3,15 @@
 import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
+// I'm leaving Alert in here for easier debuggin in the future --Andey
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 
-import Prompt from 'react-native-input-prompt';
-import Logo from './Authentication/components/Logo';
-import LoginForm from './Authentication/components/LoginForm';
-
-//See sign-up pg for notes
-import { user } from '../../App';
-
-import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
+import { Typography, Spacing, Buttons } from '../styles/index';
 
 import * as webHelp from '../utility/webHelper';
 

@@ -3,7 +3,6 @@ import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
@@ -12,11 +11,6 @@ import {
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
-import Prompt from 'react-native-input-prompt';
-
-//See sign-up pg for notes
-import { user } from '../../../App';
-
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 
 export default class CheckDestination extends Component{
@@ -24,7 +18,6 @@ export default class CheckDestination extends Component{
         super(props)
         this.state= ({
             email: '',
-            isOpen: false,
             serial: '',
     });}
 

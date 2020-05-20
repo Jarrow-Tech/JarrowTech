@@ -3,23 +3,13 @@ import * as firebase from 'firebase';
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
   Alert
 } from 'react-native';
 
-import Prompt from 'react-native-input-prompt';
-import Logo from '../Authentication/components/Logo';
-import LoginForm from '../Authentication/components/LoginForm';
-
-// sub pages for Cultivator
-import HarvestInformation from '../Cultivator/HarvestInformation'
-import Buying from '../Cultivator/Buying'
-import Selling from '../Cultivator/Selling'
-
-import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+import { Typography, Spacing, Buttons } from '../../styles/index';
 
 import * as webHelp from '../../utility/webHelper';
 

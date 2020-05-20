@@ -134,6 +134,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        minSdkVersion 16
+        targetSdkVersion 29
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -183,6 +186,8 @@ dependencies {
     implementation project(':react-native-randombytes')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    def multidex_version = "2.0.1"
+    implementation 'androidx.multidex:multidex:$multidex_version'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

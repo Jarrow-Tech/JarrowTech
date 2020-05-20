@@ -39,10 +39,6 @@ export default class LawEnforcement extends Component {
         this.props.navigation.navigate('Login');
     }
 
-    submitSerial = () => {
-        console.log("Searching for serial: " + this.state.serial);
-    }
-
     barcodeRecognized = e => {
         this.setState({serial: e.data})
     }
@@ -74,7 +70,7 @@ export default class LawEnforcement extends Component {
                     value={this.state.serial} 
                     />
                 </View>
-                <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("ContractTable", {contractAddress: this.state.serial})}>
                     <Text style={Typography.buttonText}>
                         Search Serial
                     </Text>

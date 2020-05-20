@@ -21,7 +21,7 @@ export default class RegisterForm extends Component {
             <View style={Spacing.container}>
                 <TouchableOpacity style={Buttons.buttonRegister} onPress={() => this.props.navigation.navigate('BusinessRegistration')}>
                     <Text style={Typography.buttonText}>
-                        Register as a Buisness/Department
+                        Register as a Business/Department
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={Buttons.buttonRegister} onPress={() => this.props.navigation.navigate('EmployeeRegistration')}>

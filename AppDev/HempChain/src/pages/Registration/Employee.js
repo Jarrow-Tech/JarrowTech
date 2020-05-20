@@ -14,9 +14,39 @@ import Logo from '../../components/Logo';
 import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 
 export default class EmployeeReg extends Component {
-  finishReg() {
-    Actions.finish();
-  }
+
+    constructor(props) {
+        super(props)
+        this.state = ({
+            companyName: " ",
+            email: " ",
+            firstName: " ",
+            lastName: " ",
+            operatingState: " ",
+            password: " ",
+        });
+    }
+
+    finishReg() {
+        Actions.finish();
+    }
+
+    // adds the user to the Firebase db 
+    signUpUser = (email, password) => {
+        if (this.state.password.length < 8) {
+            alert("Please enter at least 8 characters for the password")
+            return;
+        }
+
+        //
+        console.log("Operating State: " + this.state.operatingState)
+        console.log("Company Name: " + this.state.companyName)
+        console.log("First Name: " + this.state.firstName)
+        console.log("Last Name: " + this.state.lastName)
+        console.log("Email: " + this.state.email)
+
+        this.props.navigation.navigate("Login")
+    }
 
     render() {
         return(
@@ -26,6 +56,7 @@ export default class EmployeeReg extends Component {
                     placeholder="Enter Operating State"
                     placeholderTextColor="#ffffff"
                     ref={(input) => this.opState = input}
+                    onChangeText={(operatingState) => this.setState({operatingState})}
                     onSubmitEditing={() => this.firstName.focus()}
                     />
                 </View>
@@ -34,6 +65,7 @@ export default class EmployeeReg extends Component {
                     placeholder="Enter Company Name"
                     placeholderTextColor="#ffffff"
                     ref={(input) => this.firstName = input}
+                    onChangeText={(companyName) => this.setState({companyName})}
                     onSubmitEditing={() => this.lastName.focus()}
                     />
                 </View>
@@ -42,6 +74,7 @@ export default class EmployeeReg extends Component {
                     placeholder="Employee First Name"
                     placeholderTextColor="#ffffff"
                     ref={(input) => this.lastName = input}
+                    onChangeText={(firstName) => this.setState({firstName})}
                     onSubmitEditing={() => this.adminEmail.focus()}
                     />
                 </View>
@@ -50,6 +83,7 @@ export default class EmployeeReg extends Component {
                     placeholder="Employee Last Name"
                     placeholderTextColor="#ffffff"
                     ref={(input) => this.lastName = input}
+                    onChangeText={(lastName) => this.setState({lastName})}
                     onSubmitEditing={() => this.adminEmail.focus()}
                     />
                 </View>
@@ -60,6 +94,7 @@ export default class EmployeeReg extends Component {
                     keyboardType='email-address'
                     placeholderTextColor="#ffffff"
                     ref={(input) => this.adminEmail=input}
+                    onChangeText={(email) => this.setState({email})}
                     onSubmitEditing={() => this.password.focus()}
                     />
                 </View>
@@ -69,9 +104,10 @@ export default class EmployeeReg extends Component {
                     secureTextEntry={true}
                     placeholderTextColor="#ffffff"
                     ref={(input) => this.password=input}
+                    onChangeText={(password) => this.setState({password})}
                     />
                 </View>
-                <TouchableOpacity style={Spacing.buttonContainer} onPress={() => this.props.navigation.navigate('Login')}>
+                <TouchableOpacity style={Spacing.buttonContainer} onPress={() => this.signUpUser(this.state.email, this.state.password)}>
                     <Text style={Typography.buttonText}>
                         Finish Registration
                     </Text>

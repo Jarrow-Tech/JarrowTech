@@ -8,32 +8,13 @@ import time
 
 home_api = Blueprint('home_api', __name__)
 
-# REMOVE FOR PROD
-books = [
-    {'id': 0,
-     'title': 'A Fire Upon the Deep',
-     'author': 'Vernor Vinge',
-     'first_sentence': 'The coldsleep itself was dreamless.',
-     'year_published': '1992'},
-    {'id': 1,
-     'title': 'The Ones Who Walk Away From Omelas',
-     'author': 'Ursula K. Le Guin',
-     'first_sentence': 'With a clamor of bells that set the swallows soaring, the Festival of Summer came to the city Omelas, bright-towered by the sea.',
-     'published': '1973'},
-    {'id': 2,
-     'title': 'Dhalgren',
-     'author': 'Samuel R. Delany',
-     'first_sentence': 'to wound the autumnal city.',
-     'published': '1975'}
-]
-
-# REMOVE FOR PROD
-# a bare bones api call that returns a JSON object. purely for testing
-@home_api.route('/api/books')
-@cross_origin()
-def api_all():
-    return jsonify(books)
-
+###############################################
+###############################################
+#
+#  WEB CONTRACT
+#
+###############################################
+###############################################
 # REMOVE FOR PROD
 # a simple test route to demonstrate all of the required methods for the API
 @home_api.route('/api/web/test', methods=['GET', 'POST'])
@@ -71,7 +52,7 @@ def api_makeContract():
 def api_plant():
     try:
         if validator.contractExists(request.json['address']) and validator.farmer(request.json['uid']):
-            backend.plant(request.json['address'], request.json['uid'])
+            backend.plant(request.json['address'], request.json['uid'], request.json['location'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -86,7 +67,7 @@ def api_plant():
 def api_harvest():
     try:
         if validator.contractExists(request.json['address']) and validator.farmer(request.json['uid']):
-            backend.plant(request.json['address'], request.json['uid'])
+            backend.plant(request.json['address'], request.json['uid'], request.json['location'])
             backend.harvest(request.json['address'], request.json['uid'], request.json['cropSize'])
             return jsonify(True)
         return jsonify(False)
@@ -117,7 +98,7 @@ def api_scan():
 def api_transferOwner():
     try:
         if validator.contractExists(request.json['address']) and validator.exists(request.json['ownerUid']) and validator.exists(request.json['newOwnerUid']):
-            backend.transferOwner(request.json['address'], request.json['ownerUid'], request.json['newOwnerUid'])
+            backend.transferOwner(request.json['address'], request.json['ownerUid'], request.json['newOwnerUid'], request.json['location'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -132,7 +113,7 @@ def api_transferOwner():
 def api_addCoa():
     try:
         if validator.contractExists(request.json['address']) and validator.technician(request.json['uid']):
-            backend.testCrop(request.json['address'], request.json['uid'], request.json['coa'])
+            backend.addCoa(request.json['address'], request.json['uid'], request.json['coa'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -147,7 +128,7 @@ def api_addCoa():
 def api_validateCoa():
     try:
         if validator.contractExists(request.json['address']) and validator.technician(request.json['uid']):
-            backend.validateCrop(request.json['address'], request.json['uid'])
+            backend.validateCoa(request.json['address'], request.json['uid'])
             return jsonify(True)
         return jsonify(False)
     except Exception as e:
@@ -165,6 +146,26 @@ def api_manufacture():
             backend.manufacture(request.json['address'], request.json['uid'], request.json['hempState'])
             return jsonify(True)
         return jsonify(False)
+    except Exception as e:
+        print(e)
+        return jsonify(False)
+
+###############################################
+###############################################
+#
+#  QR SCANNING
+#
+###############################################
+###############################################
+# call to validate the value in a qr code
+# requires a contract ID (from a qr code) and the uid of the scanning user
+# returns True if successful and False otherwise
+@home_api.route('/api/qr/scanned', methods=['GET', 'POST'])
+@cross_origin()
+def api_scanned():
+    try:
+        if validator.contractExists(request.json['address']) and validator.exists(request.json['uid']):
+            return jsonify(True)
     except Exception as e:
         print(e)
         return jsonify(False)

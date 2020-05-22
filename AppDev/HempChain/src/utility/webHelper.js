@@ -12,7 +12,3 @@ export async function sendToServer(url, message) {
         })
     return resp;
 }
-
-export async function getFullTransactionLog(address){
-    
-}

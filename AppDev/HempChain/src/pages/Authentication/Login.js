@@ -5,16 +5,15 @@
 import React, { Component } from 'react';
 
 import {
-  StyleSheet,
   View,
   Text,
   TouchableOpacity,
 } from 'react-native';
 
-import Logo from '../../components/Logo';
-import LoginForm from '../../components/LoginForm';
+import Logo from './components/Logo';
+import LoginForm from './components/LoginForm';
 
-import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
+import { Typography, Spacing, Buttons } from '../../styles/index';
 
 export default class Login extends Component {
 

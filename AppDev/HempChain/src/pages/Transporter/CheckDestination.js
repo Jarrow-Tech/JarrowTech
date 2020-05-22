@@ -6,22 +6,39 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Alert,
   TextInput,
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
-import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
+import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 
 export default class CheckDestination extends Component{
     constructor(props) {
         super(props)
         this.state= ({
+            email: '',
             serial: '',
-    });}
+        });
+        this.submitSerial = this.submitSerial.bind(this);
+    }
 
-    submitSerial = () => {
-        this.props.route.params.submitSerial(this.state.serial);
+    onSignoutPress = () => {
+        firebase.auth().signOut().then(() => {
+            Alert.alert("Successfully signed out")
+        }, (error) => {
+            Alert.alert(error.message);
+        });
+        this.props.navigation.navigate('Login');
+    }
+
+    searchSerial = () => {
+        this.props.route.params.checkDestination(this.state.serial);
         this.props.navigation.goBack();
+    }
+
+    submitSerial(s) {
+        this.setState({serial: s});
     }
 
     barcodeRecognized = e => {
@@ -31,25 +48,21 @@ export default class CheckDestination extends Component{
     render(){
         return(
             <View style={Spacing.colorContainer}>
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={{
-                        flex: 1,
-                        width: '50%',
-                    }}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-                    flashMode={RNCamera.Constants.FlashMode.on}
-                    onBarCodeRead={this.barcodeRecognized}>
-                </RNCamera>
+                <Text style={Typography.buttonText}>
+                    LawEnforcementPage
+                </Text>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.navigate("QRScanner", {submitSerial: this.submitSerial})}>
+                    <Text style={Typography.buttonText}>
+                        Scan QR Code
+                    </Text>
+                </TouchableOpacity>
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Serial Number"
                  placeholderTextColor='#ffffff'
                  ref={(input) => this.serial = input}
                  onChangeText={(serial) => this.setState({serial})}
                  value={this.state.serial} />
-                <TouchableOpacity style={Buttons.button} onPress={() => this.submitSerial()}>
+                <TouchableOpacity style={Buttons.button} onPress={() => this.searchSerial()}>
                     <Text style={Typography.buttonText}>
                         Search Serial
                     </Text>
@@ -57,6 +70,11 @@ export default class CheckDestination extends Component{
                 <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>
                     <Text style={Typography.buttonText}>
                         Go Back
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={()=>this.onSignoutPress(this.state.email)}>
+                    <Text style={Typography.buttonText}>
+                        Sign Out
                     </Text>
                 </TouchableOpacity>
             </View>

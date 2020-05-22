@@ -6,43 +6,43 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Alert,
   TextInput,
 } from 'react-native';
-import { RNCamera } from 'react-native-camera';
 
-import { Typography, Spacing, UserInterface, Buttons } from '../styles/index';
+import { Typography, Spacing, UserInterface, Buttons } from '../../styles/index';
 
-export default class CheckDestination extends Component{
+export default class QRGenerator extends Component{
     constructor(props) {
         super(props)
         this.state= ({
+            email: '',
+            isOpen: false,
             serial: '',
     });}
 
-    submitSerial = () => {
-        this.props.route.params.submitSerial(this.state.serial);
-        this.props.navigation.goBack();
+    onSignoutPress = () => {
+        firebase.auth().signOut().then(() => {
+            Alert.alert("Successfully signed out")
+        }, (error) => {
+            Alert.alert(error.message);
+        });
+        this.props.navigation.navigate('Login');
     }
 
-    barcodeRecognized = e => {
-        this.setState({serial: e.data})
+    submitSerial = () => {
+        console.log("Searching for serial: " + this.state.serial);
+        console.log("Creating QR Code for serial #: "+this.state.serial)
     }
+
+    
 
     render(){
         return(
             <View style={Spacing.colorContainer}>
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={{
-                        flex: 1,
-                        width: '50%',
-                    }}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-                    flashMode={RNCamera.Constants.FlashMode.on}
-                    onBarCodeRead={this.barcodeRecognized}>
-                </RNCamera>
+                <Text style={Typography.buttonText}>
+                   This page will generate a QR code based off of the entered serial ID
+                </Text>
                 <TextInput style={UserInterface.inputBox}
                  placeholder="Serial Number"
                  placeholderTextColor='#ffffff'
@@ -57,6 +57,11 @@ export default class CheckDestination extends Component{
                 <TouchableOpacity style={Buttons.button} onPress={() => this.props.navigation.goBack()}>
                     <Text style={Typography.buttonText}>
                         Go Back
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Buttons.button} onPress={()=>this.onSignoutPress(this.state.email)}>
+                    <Text style={Typography.buttonText}>
+                        Sign Out
                     </Text>
                 </TouchableOpacity>
             </View>

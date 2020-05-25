@@ -3,6 +3,7 @@ from flask_cors import cross_origin
 
 import contracts.contractHandler as backend
 import runners.validator as validator
+import pdfs.generator as pdfGenerator
 
 import time
 
@@ -166,6 +167,27 @@ def api_scanned():
     try:
         if validator.contractExists(request.json['address']) and validator.exists(request.json['uid']):
             return jsonify(True)
+    except Exception as e:
+        print(e)
+        return jsonify(False)
+
+###############################################
+###############################################
+#
+#  PDF GENERATION
+#
+###############################################
+###############################################
+# call to generate a wyoming liscense pdf
+# requires a user id of the cultivator and all of the data to go in the pdf
+# return the pdf if successful and false otherwise
+@home_api.route('/api/pdf/generate', methods=['GET', 'POST'])
+@cross_origin()
+def api_generateWyomingPdf():
+    try:
+        # if validator.exists(request.json['uid']):
+        pdf = pdfGenerator.generateWyomingLiscense()
+        return pdf
     except Exception as e:
         print(e)
         return jsonify(False)

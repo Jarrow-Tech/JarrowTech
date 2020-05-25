@@ -2,8 +2,60 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import Regulator from "./pages/Regulator/Regulator";
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
+
+export default function App() {
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            {/* The display */}
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/regulator">Regulator Home</Link>
+            </li>
+            <li>
+              <Link to="/timer">Timer</Link>
+            </li>
+          </ul>
+        </nav>
+        {/* Route switching. This needs to go from most specific and then
+            cascade down to least specific. The first path that matches
+            is where it will route */}
+        <Switch>
+          <Route path="/regulator">
+            <Regulator />
+          </Route>
+          <Route path="/timer">
+            <Timer />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
+}
+
+function Home() {
+  return(
+    <h1>You're on the home page</h1>
+  )
+}
+
+
+function Timer() {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
@@ -32,5 +84,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

@@ -8,6 +8,11 @@ import time
 
 home_api = Blueprint('home_api', __name__)
 
+@home_api.route('/api/time', methods=['GET'])
+@cross_origin()
+def api_time():
+    return {'time': time.time()}
+
 ###############################################
 ###############################################
 #

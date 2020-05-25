@@ -67,3 +67,5 @@ chaindata/
 __pycache__/
 
 Backend/runners/pass.txt
+
+.vscode

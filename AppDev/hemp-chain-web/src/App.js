@@ -1,82 +1,67 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import * as firebase from 'firebase';
 import './App.css';
 
-import Regulator from "./pages/Regulator/Regulator";
-import ContractOverview from "./pages/ContractDetails/ContractOverview";
+import MenuBar from './pages/Navigation/MenuBar';
+import Login from './pages/Authentication/Login';
+import Cultivator from './pages/Cultivator/Cultivator';
+import LabWorker from './pages/LabWorker/LabWorker';
+import LawEnforcement from './pages/LawEnforcement/LawEnforcement';
+import Manufacturer from './pages/Manufacturer/Manufacturer';
+import Regulator from './pages/Regulator/Regulator';
+import Transporter from './pages/Transporter/Transporter';
+import ContractOverview from './pages/ContractDetails/ContractOverview';
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Switch,
+    Route
 } from "react-router-dom"
 
+const firebaseConfig={
+    apiKey: "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
+    authDomain: "jarrowchain.firebaseapp.com",
+    databaseURL: "https://jarrowchain.firebaseio.com",
+    projectId: "jarrowchain",
+    storageBucket: "jarrowchain.appspot.com",
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  export const auth = firebase.auth();
+  export const dbRef = firebase.database().ref();
+
 export default function App() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            {/* The display */}
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/regulator">Regulator Home</Link>
-            </li>
-            <li>
-              <Link to="/timer">Timer</Link>
-            </li>
-          </ul>
-        </nav>
-        {/* Route switching. This needs to go from most specific and then
-            cascade down to least specific. The first path that matches
-            is where it will route */}
-        <Switch>
-          <Route path="/regulator/details/:uid/:address" component={ContractOverview} />
-          <Route path="/regulator" component={Regulator} />
-          <Route path="/timer" component={Timer} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </div>
-    </Router>
-  )
+    return (
+        <Router>
+            <div>
+                <MenuBar />
+                {/* Route switching. This needs to go from most specific and then
+                    cascade down to least specific. The first path that matches
+                    is where it will route */}
+                <Switch>
+                    <Route path="/cultivator" component={Cultivator} />
+
+                    <Route path="/labworker" component={LabWorker} />
+
+                    <Route path="/lawenforcement" component={LawEnforcement} />
+
+                    <Route path="/manufacturer" component={Manufacturer} />
+
+                    <Route path="/regulator" component={Regulator} />
+
+                    <Route path="/transporter" component={Transporter} />
+
+                    <Route path="/contract/:uid/:address" component={ContractOverview} />
+
+                    <Route path="/" component={Login} />
+                </Switch>
+            </div>
+        </Router>
+    )
 }
 
 function Home() {
-  return(
-    <h1>You're on the home page</h1>
-  )
-}
-
-
-function Timer() {
-  const [currentTime, setCurrentTime] = useState(0);
-
-  useEffect(() => {
-    fetch('/api/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    });
-  }, [])
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>The current time is {currentTime}.</p>
-      </header>
-    </div>
-  );
+    return(
+        <h1>You're on the home page</h1>
+    )
 }

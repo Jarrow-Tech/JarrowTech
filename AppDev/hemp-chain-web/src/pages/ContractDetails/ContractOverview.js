@@ -43,7 +43,7 @@ class ContractOverview extends React.Component {
                         this.state.scanData[key]['time'],
                         key
                 )))
-               }
+            }
             </div>
             
         )

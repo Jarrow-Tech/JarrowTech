@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Regulator from "./pages/Regulator/Regulator";
+import ContractOverview from "./pages/ContractDetails/ContractOverview";
 
 import {
   BrowserRouter as Router,
@@ -33,15 +34,10 @@ export default function App() {
             cascade down to least specific. The first path that matches
             is where it will route */}
         <Switch>
-          <Route path="/regulator">
-            <Regulator />
-          </Route>
-          <Route path="/timer">
-            <Timer />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/regulator/details/:uid/:address" component={ContractOverview} />
+          <Route path="/regulator" component={Regulator} />
+          <Route path="/timer" component={Timer} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     </Router>

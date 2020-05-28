@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as firebase from 'firebase';
 import './App.css';
 
@@ -57,11 +57,5 @@ export default function App() {
                 </Switch>
             </div>
         </Router>
-    )
-}
-
-function Home() {
-    return(
-        <h1>You're on the home page</h1>
     )
 }

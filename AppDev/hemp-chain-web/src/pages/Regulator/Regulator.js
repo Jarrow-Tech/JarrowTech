@@ -1,6 +1,5 @@
 import React from 'react';
 import './../../App.css';
-import * as webHelper from './../../utility/webHelper';
 import { withRouter } from 'react-router-dom';
 
 class Regulator extends React.Component {

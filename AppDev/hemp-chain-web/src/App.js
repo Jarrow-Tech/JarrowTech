@@ -1,5 +1,4 @@
 import React from 'react';
-import * as firebase from 'firebase';
 import './App.css';
 
 import MenuBar from './pages/Navigation/MenuBar';
@@ -16,46 +15,37 @@ import {
     BrowserRouter as Router,
     Switch,
     Route
-} from "react-router-dom"
+} from "react-router-dom";
 
-const firebaseConfig={
-    apiKey: "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
-    authDomain: "jarrowchain.firebaseapp.com",
-    databaseURL: "https://jarrowchain.firebaseio.com",
-    projectId: "jarrowchain",
-    storageBucket: "jarrowchain.appspot.com",
-  };
+import { withAuthentication } from './components/session';
 
-  firebase.initializeApp(firebaseConfig);
-  export const auth = firebase.auth();
-  export const dbRef = firebase.database().ref();
+const App = () => (
+    <Router>
+        <div>
+            <MenuBar />
+            <hr />
+            {/* Route switching. This needs to go from most specific and then
+                cascade down to least specific. The first path that matches
+                is where it will route */}
+            <Switch>
+                <Route path="/cultivator" component={Cultivator} />
 
-export default function App() {
-    return (
-        <Router>
-            <div>
-                <MenuBar />
-                {/* Route switching. This needs to go from most specific and then
-                    cascade down to least specific. The first path that matches
-                    is where it will route */}
-                <Switch>
-                    <Route path="/cultivator" component={Cultivator} />
+                <Route path="/labworker" component={LabWorker} />
 
-                    <Route path="/labworker" component={LabWorker} />
+                <Route path="/lawenforcement" component={LawEnforcement} />
 
-                    <Route path="/lawenforcement" component={LawEnforcement} />
+                <Route path="/manufacturer" component={Manufacturer} />
 
-                    <Route path="/manufacturer" component={Manufacturer} />
+                <Route path="/regulator" component={Regulator} />
 
-                    <Route path="/regulator" component={Regulator} />
+                <Route path="/transporter" component={Transporter} />
 
-                    <Route path="/transporter" component={Transporter} />
+                <Route path="/contract/:uid/:address" component={ContractOverview} />
 
-                    <Route path="/contract/:uid/:address" component={ContractOverview} />
+                <Route path="/" component={Login} />
+            </Switch>
+        </div>
+    </Router>
+)
 
-                    <Route path="/" component={Login} />
-                </Switch>
-            </div>
-        </Router>
-    )
-}
+export default withAuthentication(App);

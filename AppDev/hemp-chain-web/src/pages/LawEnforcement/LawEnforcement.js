@@ -1,6 +1,6 @@
 import React from 'react';
 import './../../App.css';
-import { withRouter } from 'react-router-dom';
+import { withAuthorization } from '../../components/session';
 
 class LawEnforcement extends React.Component {
 
@@ -18,4 +18,6 @@ class LawEnforcement extends React.Component {
     }
 }
 
-export default withRouter(LawEnforcement);
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition) (LawEnforcement);

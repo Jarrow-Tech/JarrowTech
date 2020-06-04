@@ -86,13 +86,15 @@ def api_harvest():
 @home_api.route('/api/web/scan', methods=['GET', 'POST'])
 @cross_origin()
 def api_scan():
+    print(request.json['uid'])
     try:
+        
         if validator.contractExists(request.json['address']) and validator.exists(request.json['uid']):
             scanResults = backend.scan(request.json['address'], request.json['uid'])
             return scanResults
         return jsonify(False)
     except Exception as e:
-        print(e)
+        print('Err: ' + str(e))
         return jsonify(False)
 
 # call to transfer ownership from one UID to another

@@ -1,6 +1,6 @@
 import React from 'react';
 import './../../App.css';
-import { withRouter } from 'react-router-dom';
+import { withAuthorization } from '../../components/session';
 
 class LabWorker extends React.Component {
 
@@ -18,4 +18,6 @@ class LabWorker extends React.Component {
     }
 }
 
-export default withRouter(LabWorker);
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition) (LabWorker);

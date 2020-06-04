@@ -2,6 +2,7 @@ import React from 'react';
 import './../../App.css';
 import * as webHelper from './../../utility/webHelper';
 import { withRouter } from 'react-router-dom';
+import { withAuthorization } from '../../components/session';
 
 class ContractOverview extends React.Component {
 
@@ -88,4 +89,6 @@ class ContractOverview extends React.Component {
     }
 }
 
-export default withRouter(ContractOverview);
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition) (ContractOverview);

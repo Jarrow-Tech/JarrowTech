@@ -1,6 +1,6 @@
 import React from 'react';
 import './../../App.css';
-import { withRouter } from 'react-router-dom';
+import { withAuthorization } from '../../components/session';
 
 class Regulator extends React.Component {
 
@@ -34,4 +34,6 @@ class Regulator extends React.Component {
     }
 }
 
-export default withRouter(Regulator);
+const condition = authUser => !!authUser
+
+export default withAuthorization(condition) (Regulator);

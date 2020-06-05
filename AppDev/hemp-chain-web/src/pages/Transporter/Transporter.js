@@ -3,6 +3,8 @@ import './../../App.css';
 import * as webHelper from './../../utility/webHelper';
 import { withAuthorization } from '../../components/session';
 
+import * as ROLES from '../../constants/roles';
+
 class Transporter extends React.Component {
 
     constructor(props) {
@@ -43,6 +45,6 @@ class Transporter extends React.Component {
     }
 }
 
-const condition = authUser => !!authUser;
+const condition = authUser => authUser && (authUser.agency === ROLES.TRANSPORTER || authUser.agency === ROLES.GOD);
 
 export default withAuthorization(condition) (Transporter);

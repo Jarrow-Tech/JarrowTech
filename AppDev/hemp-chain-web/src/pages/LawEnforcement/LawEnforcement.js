@@ -2,6 +2,8 @@ import React from 'react';
 import './../../App.css';
 import { withAuthorization } from '../../components/session';
 
+import * as ROLES from '../../constants/roles';
+
 class LawEnforcement extends React.Component {
 
     constructor(props) {
@@ -18,6 +20,6 @@ class LawEnforcement extends React.Component {
     }
 }
 
-const condition = authUser => !!authUser;
+const condition = authUser => authUser && (authUser.agency === ROLES.LAWENFORCEMENT || authUser.agency === ROLES.GOD);
 
 export default withAuthorization(condition) (LawEnforcement);

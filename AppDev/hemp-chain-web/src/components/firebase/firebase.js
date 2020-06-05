@@ -44,11 +44,39 @@ class Firebase {
     //
     // user database api hookups
     //
-    user = uid => this.db.ref(`users/${uid}`);
+    user = uid => this.db.ref(`Users/${uid}`);
 
-    userRole = uid => this.db.ref(`users/${uid}/agency`);
+    users = () => this.db.ref('Users');
 
-    users = () => this.db.ref('users');
+    //
+    // merge auth and db user api
+    //
+    
+    onAuthUserListener = (next, fallback) =>
+        this.auth.onAuthStateChanged(authUser => {
+            if (authUser) {
+                this.user(authUser.uid)
+                    .once('value')
+                    .then(snapshot => {
+                        const dbUser = snapshot.val();
+
+                        //default create blank agency
+                        if (!dbUser.agency) {
+                            dbUser.agency = {};
+                        }
+
+                        authUser = {
+                            uid: authUser.uid,
+                            email: authUser.email,
+                            ...dbUser,
+                        };
+
+                        next(authUser);
+                    });
+            } else {
+                fallback();
+            }
+        });
 }
 
 export default Firebase;

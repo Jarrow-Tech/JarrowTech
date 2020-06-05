@@ -1,7 +1,6 @@
 import React from 'react';
 import './../../App.css';
 import * as webHelper from './../../utility/webHelper';
-import { withRouter } from 'react-router-dom';
 import { withAuthorization } from '../../components/session';
 
 class ContractOverview extends React.Component {

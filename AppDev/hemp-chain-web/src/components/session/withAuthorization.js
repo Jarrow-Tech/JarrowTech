@@ -7,12 +7,13 @@ import { withFirebase } from '../firebase';
 const withAuthorization = condition => Component => {
     class WithAuthorization extends React.Component {
         componentDidMount() {
-            this.listener = this.props.firebase.auth.onAuthStateChanged(
+            this.listener = this.props.firebase.onAuthUserListener(
                 authUser => {
                     if (!condition(authUser)) {
                         this.props.history.push('/');
                     }
-                }
+                },
+                () => this.props.history.push('/'),
             )
         }
 

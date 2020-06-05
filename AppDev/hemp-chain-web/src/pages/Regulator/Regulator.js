@@ -2,6 +2,7 @@ import React from 'react';
 import './../../App.css';
 import { withAuthorization } from '../../components/session';
 
+import * as ROLES from '../../constants/roles';
 class Regulator extends React.Component {
 
     //TODO: Set uid and address to empty strings once testing is done
@@ -34,6 +35,6 @@ class Regulator extends React.Component {
     }
 }
 
-const condition = authUser => !!authUser
+const condition = authUser => authUser && (authUser.agency === ROLES.REGULATOR || authUser.agency === ROLES.GOD);
 
 export default withAuthorization(condition) (Regulator);

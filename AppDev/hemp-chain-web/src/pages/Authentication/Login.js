@@ -3,6 +3,8 @@ import * as firebase from 'firebase';
 import './../../App.css';
 import { withRouter } from 'react-router-dom';
 
+import * as ROUTES from '../../constants/routes';
+
 class Login extends React.Component {
 
     constructor(props) {
@@ -19,20 +21,20 @@ class Login extends React.Component {
             } else if (firebase.auth().currentUser.emailVerified === true) {
                 firebase.database().ref("Users/" + firebase.auth().currentUser.uid + "/agency").once('value').then((snapshot) => {
                     if(snapshot.val() === 'LabTester') {
-                        this.props.history.push('/Lab');
+                        this.props.history.push(ROUTES.LABTECH);
                     } else if(snapshot.val() === 'Trucker') {
-                        this.props.history.push('/Transporter');
+                        this.props.history.push(ROUTES.TRANSPORTER);
                     } else if(snapshot.val() === 'Regulator') {
-                        this.props.history.push('/Regulator');
+                        this.props.history.push(ROUTES.REGULATOR);
                     } else if (snapshot.val() === 'Police/Highway') {
-                        this.props.history.push('/LawEnforcement');
+                        this.props.history.push(ROUTES.LAWENFORCEMENT);
                     } else if (snapshot.val() === 'Farmer') {
-                        this.props.history.push('/Cultivator');
+                        this.props.history.push(ROUTES.CULTIVATOR);
                     } else if (snapshot.val() === 'Factory') {
-                        this.props.history.push('/Manufacturer');
+                        this.props.history.push(ROUTES.MANUFACTURER);
                     } else {
                         Alert.alert("Something has gone wrong. Please log in again. If the problem persists, contact our Help Center.");
-                        this.props.navigation.navigate('Login');
+                        this.props.navigation.navigate(ROUTES.LANDING);
                     }
                 })
             }

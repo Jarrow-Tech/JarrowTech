@@ -3,6 +3,7 @@ import './../../App.css';
 import { withAuthorization } from '../../components/session';
 
 import * as ROLES from '../../constants/roles';
+import * as ROUTES from '../../constants/routes';
 class Regulator extends React.Component {
 
     //TODO: Set uid and address to empty strings once testing is done
@@ -27,7 +28,7 @@ class Regulator extends React.Component {
                         Address:  <input type="text" defaultValue="" onChange={(e) => this.setState({'address': e.target.value})} />
                     </label>
                 </form>
-                <button onClick={() => this.props.history.push('/contract/' + this.state.uid + '/' + this.state.address)}>
+                <button onClick={() => this.props.history.push(`${ROUTES.CONTRACT}/${this.state.uid}/${this.state.address}`)}>
                     Go to Contract Details
                 </button>
             </div>

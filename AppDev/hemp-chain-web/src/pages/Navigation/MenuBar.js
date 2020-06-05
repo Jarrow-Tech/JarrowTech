@@ -5,6 +5,7 @@ import { AuthUserContext } from '../../components/session';
 import SignOutButton from '../Authentication/Signout';
 
 import * as ROLES from '../../constants/roles';
+import * as ROUTES from '../../constants/routes';
 
 const MenuBar = () => (
     <div>
@@ -20,36 +21,36 @@ const NavigationAuth = ({ authUser }) => (
     <div>
         <ul>
             <li>
-                <Link to="/">Home</Link>
+                <Link to={ROUTES.LANDING}>Home</Link>
             </li>
             {(authUser.agency === ROLES.REGULATOR || authUser.agency === ROLES.GOD) && (
                 <li>
-                    <Link to="/regulator">Regulator Home</Link>
+                    <Link to={ROUTES.REGULATOR}>Regulator Home</Link>
                 </li>
             )}
             {(authUser.agency === ROLES.CULTIVATOR || authUser.agency === ROLES.GOD) && (
                 <li>
-                    <Link to="/cultivator">Cultivator Home</Link>
+                    <Link to={ROUTES.CULTIVATOR}>Cultivator Home</Link>
                 </li>
             )}
             {(authUser.agency === ROLES.LABTECH || authUser.agency === ROLES.GOD) && (
                 <li>
-                    <Link to="/labworker">Law Worker Home</Link>
+                    <Link to={ROUTES.LABTECH}>Law Worker Home</Link>
                 </li>
             )}
             {(authUser.agency === ROLES.LAWENFORCEMENT || authUser.agency === ROLES.GOD) && (
                 <li>
-                    <Link to="/lawenforcement">Law Enforcement Home</Link>
+                    <Link to={ROUTES.LAWENFORCEMENT}>Law Enforcement Home</Link>
                 </li>
             )}
             {(authUser.agency === ROLES.MANUFACTURER || authUser.agency === ROLES.GOD) && (
                 <li>
-                    <Link to="/manufacturer">Manufacturer Home</Link>
+                    <Link to={ROUTES.MANUFACTURER}>Manufacturer Home</Link>
                 </li>
             )}
             {(authUser.agency === ROLES.TRANSPORTER || authUser.agency === ROLES.GOD) && (
                 <li>
-                    <Link to="/transporter">Transporter Home</Link>
+                    <Link to={ROUTES.TRANSPORTER}>Transporter Home</Link>
                 </li>
             )}
             <li>
@@ -62,7 +63,7 @@ const NavigationAuth = ({ authUser }) => (
 const NavigationNonAuth = () => (
     <ul>
         <li>
-            <Link to="/">Home</Link>
+            <Link to={ROUTES.LANDING}>Home</Link>
         </li>
     </ul>
 );

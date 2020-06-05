@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 
 import { withAuthentication } from './components/session';
+import * as ROUTES from './constants/routes';
 
 const App = () => (
     <Router>
@@ -28,21 +29,21 @@ const App = () => (
                 cascade down to least specific. The first path that matches
                 is where it will route */}
             <Switch>
-                <Route path="/cultivator" component={Cultivator} />
+                <Route path={ROUTES.CULTIVATOR} component={Cultivator} />
 
-                <Route path="/labworker" component={LabWorker} />
+                <Route path={ROUTES.LABTECH} component={LabWorker} />
 
-                <Route path="/lawenforcement" component={LawEnforcement} />
+                <Route path={ROUTES.LAWENFORCEMENT} component={LawEnforcement} />
 
-                <Route path="/manufacturer" component={Manufacturer} />
+                <Route path={ROUTES.MANUFACTURER} component={Manufacturer} />
 
-                <Route path="/regulator" component={Regulator} />
+                <Route path={ROUTES.REGULATOR} component={Regulator} />
 
-                <Route path="/transporter" component={Transporter} />
+                <Route path={ROUTES.TRANSPORTER} component={Transporter} />
 
-                <Route path="/contract/:uid/:address" component={ContractOverview} />
+                <Route path={`${ROUTES.CONTRACT}${ROUTES.SUFFIX_UID}${ROUTES.SUFFIX_ADDRESS}`} component={ContractOverview} />
 
-                <Route path="/" component={Login} />
+                <Route path={ROUTES.LANDING} component={Login} />
             </Switch>
         </div>
     </Router>

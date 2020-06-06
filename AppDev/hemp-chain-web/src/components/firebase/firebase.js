@@ -48,6 +48,8 @@ class Firebase {
 
     users = () => this.db.ref('Users');
 
+    getUid = () => { return(this.auth.currentUser.uid.toString()); }
+
     //
     // merge auth and db user api
     //

@@ -5,6 +5,9 @@ import { withRouter } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
 
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
+
 class Login extends React.Component {
 
     constructor(props) {
@@ -32,6 +35,8 @@ class Login extends React.Component {
                         this.props.history.push(ROUTES.CULTIVATOR);
                     } else if (snapshot.val() === 'Factory') {
                         this.props.history.push(ROUTES.MANUFACTURER);
+                    } else if (snapshot.val() === 'GodMode') {
+                        this.props.history.push(ROUTES.REGULATOR);
                     } else {
                         Alert.alert("Something has gone wrong. Please log in again. If the problem persists, contact our Help Center.");
                         this.props.navigation.navigate(ROUTES.LANDING);
@@ -47,18 +52,20 @@ class Login extends React.Component {
         return(
             <div>
                 <h1>Login Page</h1>
-                <form>
-                    <label>
+                <InputGroup className="mb-3" style={{padding: 10}}>
+                    <label style={{padding: 10}}>
                         Email: <input type="text" defaultValue="" onChange={(e) => this.setState({'email': e.target.value})} />
                     </label>
                     <br/>
-                    <label>
+                    <label style={{padding: 10}}>
                         Password: <input type="password" defaultValue="" onChange={(e) => this.setState({'password': e.target.value})} />
                     </label>
-                </form>
-                <button onClick={() => this.loginUser(this.state.email, this.state.password)}>
-                    Login
-                </button>
+                    <div style={{padding: 10, position: 'relative', top: -4}}>
+                        <Button onClick={() => this.loginUser(this.state.email, this.state.password)}>
+                            Login
+                        </Button>
+                    </div>
+                </InputGroup>
             </div>
         )
     }

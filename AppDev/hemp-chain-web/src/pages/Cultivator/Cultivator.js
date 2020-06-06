@@ -13,6 +13,9 @@ class Cultivator extends React.Component {
         };
     }
 
+    //TODO: Add API pass to register a lab event
+
+
     render() {
         return(
             <h1>Cultivator Page</h1>

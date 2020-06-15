@@ -10,7 +10,7 @@ import * as firebase from 'firebase';
 //Here is our Firebase initilization
 //NOTHING HERE HAS TO CHANGE JUST YET S
 const firebaseConfig={
-  apiKey: "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
+    apiKey: "AIzaSyCW8jXAWYtTZetKkMo8w7XEZGMlXyQkh-g",
     authDomain: "jarrowchain.firebaseapp.com",
     databaseURL: "https://jarrowchain.firebaseio.com",
     projectId: "jarrowchain",
